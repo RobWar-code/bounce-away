@@ -1,0 +1,17 @@
+/* NavBar */
+.nav {
+    width: 100%!important;
+    background-color: #e4b373;
+}
+
+/* Score Bar */
+.currentScore {
+    color: #605000;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Game Stage */
+.gameStage {
+    background-color: #d0d060
+}
