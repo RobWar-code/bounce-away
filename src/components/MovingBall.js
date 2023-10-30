@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Sprite, useApp } from '@pixi/react';
+import GLOBALS from "../constants";
 import ball from '../assets/images/fastball.png';
 
 function MovingBall( {newBall, setNewBall, stageWidth, stageHeight} ) {
@@ -10,12 +11,12 @@ function MovingBall( {newBall, setNewBall, stageWidth, stageHeight} ) {
   const [vy, setVy] = useState(0);
   const [ballMoved, setBallMoved] = useState(0);
   const ballRef = useRef();
-  const ballRadius = 15;
+  const ballRadius = GLOBALS.ballDiameter / 2;
 
   // Determine velocity and initial position (pixels per 60th/second - ticker)
   useEffect (() => {
     if (newBall === 1) {
-      let v = Math.sqrt(2) * stageWidth / (60 * 3.5);
+      let v = Math.sqrt(2) * stageWidth / (60 * GLOBALS.fastBallTraverseTime);
       let ratioX = Math.random() * 0.5 + 0.25;
       let startVy = 0;
       Math.random() < 0.5 ? startVy = (-(1 - ratioX) * v) : startVy = ((1 - ratioX) * v);
@@ -62,7 +63,7 @@ function MovingBall( {newBall, setNewBall, stageWidth, stageHeight} ) {
         app.ticker.remove(moveBall);
       }
     };
-  }, [app, app.ticker, newBall, ballMoved, x, y, vx, vy, stageWidth, stageHeight, setBallMoved]);
+  }, [app, app.ticker, newBall, ballMoved, ballRadius, x, y, vx, vy, stageWidth, stageHeight, setBallMoved]);
 
   return <Sprite ref={ballRef} x={x} y={y} image={ball} anchor={{x:0.5, y:0.5}}/>;
 }
