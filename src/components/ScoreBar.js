@@ -1,11 +1,16 @@
 import {Container, Row, Col} from 'react-bootstrap';
 
-function ScoreBar( { currentScore, ballCount } ) {
+function ScoreBar( { currentScore, ballCount, gameOver } ) {
     return (
         <Container>
             <Row>
                 <Col className="text-center">
-                    <p className="currentScore">Balls Remaining: {ballCount} Current-Score: {currentScore}</p>
+                    { !gameOver ? (
+                        <p className="currentScore">Balls Remaining: {ballCount} Current-Score: {currentScore}</p>
+                    ) :
+                    ( 
+                        <p className="currentScore">Game Over! --- Final Score: {currentScore} </p>
+                    )}
                 </Col>
             </Row>
         </Container>
