@@ -10,6 +10,7 @@ export default function GamePage() {
     const [scoreDone, setScoreDone] = useState(0);
     const [scoreTable, setScoreTable] = useState([]);
     const [gameOver, setGameOver] = useState(0);
+    const [startGame, setStartGame] = useState(0);
 
     useEffect ( () => {
         if (ballCount <= 0) {
@@ -20,7 +21,14 @@ export default function GamePage() {
 
     return (
         <>
-            <ScoreBar currentScore={currentScore} ballCount={ballCount} gameOver={gameOver} />
+            <ScoreBar 
+                currentScore={currentScore} 
+                ballCount={ballCount} 
+                gameOver={gameOver} 
+                setGameOver={setGameOver}
+                startGame={startGame} 
+                setStartGame={setStartGame}
+            />
             <Container>
                 <Row>
                     {/* Note the use of camel case for css styles */}
@@ -32,6 +40,8 @@ export default function GamePage() {
                             setCurrentScore={setCurrentScore}
                             ballCount={ballCount}
                             setBallCount={setBallCount}
+                            startGame={startGame}
+                            setStartGame={setStartGame}
                         />
                     </Col>
                 </Row>

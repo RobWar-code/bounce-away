@@ -14,20 +14,21 @@ export default function Bat( {
     batX, 
     setBatX, 
     batY, 
-    setBatY} ) {
+    setBatY,
+    startGame} ) {
 
     const [batStep, setBatStep] = useState(0);
 
     // Initial Position
     useEffect(() => {
         // Set initial position etc.
-        if (!batMoved) {
+        if (startGame || !batMoved) {
             console.log("stageWidth", stageWidth);
             setBatX(0.5 * stageWidth);
-            setBatY(stageHeight - 0.5 * GLOBALS.batHeight - 180);
+            setBatY(0.5 * stageHeight);
             setBatStep(determineBatStep(GLOBALS.batTraverseTime, stageWidth));
         }
-    }, [batMoved, stageWidth, stageHeight, setBatX, setBatY, setBatStep])
+    }, [startGame, batMoved, stageWidth, stageHeight, setBatX, setBatY, setBatStep])
 
     return (
         <Sprite

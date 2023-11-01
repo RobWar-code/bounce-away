@@ -7,7 +7,7 @@ const GLOBALS = {
     basketWidth: 70,
     basketHeight: 70,
     ballDiameter: 30,
-    ballsPerGame: 10
+    ballsPerGame: 2
 };
 
 export default GLOBALS;

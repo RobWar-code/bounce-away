@@ -1,6 +1,11 @@
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container, Row, Col, Button} from 'react-bootstrap';
 
-function ScoreBar( { currentScore, ballCount, gameOver } ) {
+function ScoreBar( { currentScore, ballCount, gameOver, setGameOver, startGame, setStartGame } ) {
+    const handleStartGame = () => {
+        setStartGame(1);
+        setGameOver(0);
+    }
+
     return (
         <Container>
             <Row>
@@ -9,7 +14,9 @@ function ScoreBar( { currentScore, ballCount, gameOver } ) {
                         <p className="currentScore">Balls Remaining: {ballCount} Current-Score: {currentScore}</p>
                     ) :
                     ( 
-                        <p className="currentScore">Game Over! --- Final Score: {currentScore} </p>
+                        <p className="currentScore">Game Over! --- Final Score: {currentScore} &emsp; &emsp;
+                          <Button variant="success" onClick={handleStartGame}>Start Game</Button>
+                        </p>
                     )}
                 </Col>
             </Row>

@@ -13,7 +13,9 @@ function MovingBall( {
   currentScore,
   setCurrentScore,
   ballCount,
-  setBallCount} ){
+  setBallCount,
+  startGame,
+  setStartGame} ){
   const app = useApp();
   const [x, setX] = useState(GLOBALS.ballDiameter / 2 + 1);
   const [y, setY] = useState(stageHeight / 2);
@@ -26,7 +28,11 @@ function MovingBall( {
 
   // Determine velocity and initial position (pixels per 60th/second - ticker)
   useEffect (() => {
-    if (newBall === 1) {
+    if (startGame) {
+      setBallCount(GLOBALS.ballsPerGame);
+    }
+
+    if (startGame === 1 || newBall === 1) {
       let v = Math.sqrt(2) * stageWidth / (60 * GLOBALS.fastBallTraverseTime);
       let ratioX = Math.random() * 0.5 + 0.25;
       let startVy = 0;
@@ -35,13 +41,16 @@ function MovingBall( {
       setVx(startVx);
       setVy(startVy);
       console.log("startVx:", startVx, "startVy:", startVy);
+      ballRef.current.visible = true;
       setNewBall(0);
     }
-  }, [newBall, stageWidth, setNewBall]);
+  }, [newBall, stageWidth, setNewBall, startGame, setStartGame, setBallCount]);
 
   useEffect(() => {
     const moveBall = () => {
-      if (ballRef.current) {
+      if (ballRef.current.visible) {
+        console.log("MoveBall");
+        if (startGame) setStartGame(0);
         let newX = x + vx; // vx is the speed, adjust as necessary
         let newY = y + vy;
 
@@ -181,6 +190,7 @@ function MovingBall( {
       return [newX, newY];
     }
 
+    console.log("Start ball")
     app.ticker.add(moveBall);
 
     // Cleanup on unmount
@@ -209,7 +219,9 @@ function MovingBall( {
     currentScore,
     setCurrentScore,
     ballCount,
-    setBallCount
+    setBallCount,
+    startGame,
+    setStartGame
   ]);
 
   return <Sprite ref={ballRef} x={x} y={y} image={ball} anchor={{x:0.5, y:0.5}}/>;

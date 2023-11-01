@@ -4,7 +4,16 @@ import MovingBall from './MovingBall'
 import Basket from '../assets/images/basket.png';
 import Bat from './Bat';
 
-function GameStage( {scoreDone, setScoreDone, currentScore, setCurrentScore, ballCount, setBallCount} ) {
+function GameStage( {
+    scoreDone, 
+    setScoreDone, 
+    currentScore, 
+    setCurrentScore, 
+    ballCount, 
+    setBallCount, 
+    startGame, 
+    setStartGame
+} ) {
     const maxStageWidth = 1200;
     const stageHeight = 400;
     const [stageWidth, setStageWidth] = useState(maxStageWidth);
@@ -50,6 +59,7 @@ function GameStage( {scoreDone, setScoreDone, currentScore, setCurrentScore, bal
                     setBatX={setBatX} 
                     batY={batY} 
                     setBatY={setBatY}
+                    startGame={startGame}
             />
             <MovingBall 
                 newBall={newBall} 
@@ -62,6 +72,8 @@ function GameStage( {scoreDone, setScoreDone, currentScore, setCurrentScore, bal
                 setCurrentScore={setCurrentScore}
                 ballCount={ballCount}
                 setBallCount={setBallCount}
+                startGame={startGame}
+                setStartGame={setStartGame}
             />
         </Stage>
     )
