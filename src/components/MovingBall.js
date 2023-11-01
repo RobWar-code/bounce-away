@@ -3,13 +3,24 @@ import { Sprite, useApp } from '@pixi/react';
 import GLOBALS from "../constants";
 import ball from '../assets/images/fastball.png';
 
-function MovingBall( {newBall, setNewBall, stageWidth, stageHeight} ) {
+function MovingBall( {
+  newBall, 
+  setNewBall, 
+  batX, 
+  batY, 
+  stageWidth, 
+  stageHeight,
+  currentScore,
+  setCurrentScore,
+  ballCount,
+  setBallCount} ){
   const app = useApp();
-  const [x, setX] = useState(0);
+  const [x, setX] = useState(GLOBALS.ballDiameter / 2 + 1);
   const [y, setY] = useState(stageHeight / 2);
   const [vx, setVx] = useState(0);
   const [vy, setVy] = useState(0);
   const [ballMoved, setBallMoved] = useState(0);
+  const [bounced, setBounced] = useState(0);
   const ballRef = useRef();
   const ballRadius = GLOBALS.ballDiameter / 2;
 
@@ -31,29 +42,144 @@ function MovingBall( {newBall, setNewBall, stageWidth, stageHeight} ) {
   useEffect(() => {
     const moveBall = () => {
       if (ballRef.current) {
-        const newX = x + vx; // vx is the speed, adjust as necessary
-        const newY = y + vy;
-        if ((newY - ballRadius) <= 0 || (newY + ballRadius) >= stageHeight - 1) {
-          setVy(-vy);
-        }
-        else if ((newX - ballRadius) <= 0 && ballMoved) {
-          setVx(-vx);
-        }
+        let newX = x + vx; // vx is the speed, adjust as necessary
+        let newY = y + vy;
+
+        // Check for bounces
+        [newX, newY] = doBounce(newX, newY);
 
         setX(newX);
         setY(newY);
-        if (x > ballRadius && !ballMoved) {
-          setBallMoved(1);
+
+        // Check for ball in basket
+        if (
+          (newX >= stageWidth - GLOBALS.basketWidth) &&
+          (newX <= stageWidth) &&
+          (newY + ballRadius >= 0.5 * stageHeight - 0.5 * GLOBALS.basketHeight) &&
+          (newY <= 0.5 * stageHeight)
+        ) {
+          let newScore = currentScore + 10;
+          setCurrentScore(newScore);
+          setX(ballRadius + 1);
+          setY(stageHeight / 2);
+          let bCount = ballCount - 1;
+          setBallCount(bCount);
+          setBallMoved(0);
+          // app.ticker.remove(moveBall);
+          // ballRef.current.visible = false;
         }
+
 
         // Stop the ticker and hide the ball when it goes off the screen
         if (newX > stageWidth) {
           setBallMoved(0);
+          let bCount = ballCount - 1;
+          setX(ballRadius + 1);
+          setY(stageHeight / 2);
+          setBallCount(bCount);
+          setBallMoved(0);
+          // app.ticker.remove(moveBall);
+          // ballRef.current.visible = false;
+        }
+
+        if (ballCount <= 0) {
           app.ticker.remove(moveBall);
           ballRef.current.visible = false;
         }
       }
     };
+
+    const doBounce = (newX, newY) => {
+
+      if (bounced) {
+        setBounced(0);
+        return [newX, newY];
+      }
+
+      // Top Edge
+      if ((newX >= batX - 0.5 * GLOBALS.batWidth) && 
+        (newX <= batX + 0.5 * GLOBALS.batWidth) && 
+        (newY + ballRadius >= batY - 0.5 * GLOBALS.batHeight) &&
+        (newY + ballRadius <= batY - 1)
+      ) {
+        setVy(-vy);
+        setBounced(1);
+        newY = batY - 0.5 * GLOBALS.batHeight - ballRadius;
+      }
+      // Bottom Edge
+      else if (
+        (newX >= batX - 0.5 * GLOBALS.batWidth) && 
+        (newX <= batX + 0.5 * GLOBALS.batWidth) &&
+        (newY - ballRadius <= batY + 0.5 * GLOBALS.batHeight) &&
+        (newY - ballRadius >= batY + 1)
+      ) {
+        setVy(-vy);
+        setBounced(1);
+        newY = batY + 0.5 * GLOBALS.batHeight + ballRadius;
+      }
+      // Left Edge
+      else if (
+        (newY >= batY - 0.5 * GLOBALS.batHeight) &&
+        (newY <= batY + 0.5 * GLOBALS.batHeight) &&
+        (newX + 0.5 * ballRadius >= batX - 0.5 * GLOBALS.batWidth) &&
+        (newX + 0.5 * ballRadius <= batX - 1)
+      ) {
+        setVx(-vx);
+        setBounced(1);
+        newX = batX - 0.5 * GLOBALS.batWidth - ballRadius;
+      }
+      // Right Edge
+      else if (
+        (newY >= batY - 0.5 * GLOBALS.batHeight) &&
+        (newY <= batY + 0.5 * GLOBALS.batHeight) &&
+        (newX - 0.5 * ballRadius <= batX + 0.5 * GLOBALS.batWidth) &&
+        (newX - 0.5 * ballRadius >= batX + 1)
+      ) {
+        setVx(-vx);
+        setBounced(1);
+        newX = batX + 0.5 * GLOBALS.batWidth + ballRadius;
+      }
+      // Basket
+      else if (
+        // Left Edge
+        (newY >= 0.5 * stageHeight - 0.5 * GLOBALS.basketHeight) &&
+        (newY <= 0.5 * stageHeight + 0.5 * GLOBALS.basketHeight) &&
+        (newX + ballRadius >= stageWidth - GLOBALS.basketWidth) &&
+        (newX + ballRadius <= stageWidth - 0.5 * GLOBALS.basketWidth) 
+      ){
+        setVx(-vx);
+        setBounced(1);
+        newX = stageWidth - GLOBALS.basketWidth - ballRadius;
+      }
+      else if (
+        (newX >= stageWidth - GLOBALS.basketWidth) &&
+        (newX <= stageWidth) &&
+        (newY - ballRadius <= 0.5 * stageHeight + 0.5 * GLOBALS.basketHeight) &&
+        (newY - ballRadius >= 0.5 * stageHeight + 1)
+      ) {
+        // Bottom Edge
+        setVy(-vy);
+        setBounced(1);
+        newY = 0.5 * stageHeight + GLOBALS.basketHeight + ballRadius;
+      }
+      // Stage Edges
+      else {
+        if ((newY - ballRadius) <= 0) { 
+          setVy(-vy);
+          newY = ballRadius;
+        }
+        else if ((newY + ballRadius) >= stageHeight - 1) {
+          setVy(-vy);
+          newY = stageHeight - ballRadius;
+        }
+        else if ((newX - ballRadius) <= 0) {
+          setVx(-vx);
+          newX = ballRadius;
+        }
+      }
+
+      return [newX, newY];
+    }
 
     app.ticker.add(moveBall);
 
@@ -63,7 +189,28 @@ function MovingBall( {newBall, setNewBall, stageWidth, stageHeight} ) {
         app.ticker.remove(moveBall);
       }
     };
-  }, [app, app.ticker, newBall, ballMoved, ballRadius, x, y, vx, vy, stageWidth, stageHeight, setBallMoved]);
+  }, [
+    app, 
+    app.ticker, 
+    newBall, 
+    ballMoved, 
+    ballRadius, 
+    bounced,
+    setBounced,
+    x, 
+    y, 
+    vx, 
+    vy, 
+    batX, 
+    batY, 
+    stageWidth, 
+    stageHeight, 
+    setBallMoved,
+    currentScore,
+    setCurrentScore,
+    ballCount,
+    setBallCount
+  ]);
 
   return <Sprite ref={ballRef} x={x} y={y} image={ball} anchor={{x:0.5, y:0.5}}/>;
 }

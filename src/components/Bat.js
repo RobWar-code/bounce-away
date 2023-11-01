@@ -24,7 +24,7 @@ export default function Bat( {
         if (!batMoved) {
             console.log("stageWidth", stageWidth);
             setBatX(0.5 * stageWidth);
-            setBatY(stageHeight - 0.5 * GLOBALS.batHeight);
+            setBatY(stageHeight - 0.5 * GLOBALS.batHeight - 180);
             setBatStep(determineBatStep(GLOBALS.batTraverseTime, stageWidth));
         }
     }, [batMoved, stageWidth, stageHeight, setBatX, setBatY, setBatStep])

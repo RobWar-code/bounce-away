@@ -4,7 +4,7 @@ import MovingBall from './MovingBall'
 import Basket from '../assets/images/basket.png';
 import Bat from './Bat';
 
-function GameStage( {scoreDone, setScoreDone, setCurrentScore} ) {
+function GameStage( {scoreDone, setScoreDone, currentScore, setCurrentScore, ballCount, setBallCount} ) {
     const maxStageWidth = 1200;
     const stageHeight = 400;
     const [stageWidth, setStageWidth] = useState(maxStageWidth);
@@ -14,13 +14,6 @@ function GameStage( {scoreDone, setScoreDone, setCurrentScore} ) {
     const [doMove, setDoMove] = useState(0);
     const [batMoved, setBatMoved] = useState(0);
     const [motionDirection, setMotionDirection] = useState(0);
-
-    useEffect(() => {
-        if (scoreDone === 0) {
-            setCurrentScore(20);
-            setScoreDone(1);
-        }
-    }, [scoreDone, setCurrentScore, setScoreDone]);
 
     useEffect(() => {
         const handleResize = () => {
@@ -60,9 +53,15 @@ function GameStage( {scoreDone, setScoreDone, setCurrentScore} ) {
             />
             <MovingBall 
                 newBall={newBall} 
-                setNewBall={setNewBall} 
+                setNewBall={setNewBall}
+                batX={batX}
+                batY={batY}
                 stageWidth={stageWidth} 
                 stageHeight={stageHeight} 
+                currentScore={currentScore}
+                setCurrentScore={setCurrentScore}
+                ballCount={ballCount}
+                setBallCount={setBallCount}
             />
         </Stage>
     )

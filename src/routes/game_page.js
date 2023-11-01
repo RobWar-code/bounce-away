@@ -5,11 +5,12 @@ import GameStage from '../components/GameStage';
 
 export default function GamePage() {
     const [currentScore, setCurrentScore] = useState(0);
+    const [ballCount, setBallCount] = useState(5);
     const [scoreDone, setScoreDone] = useState(0);
 
     return (
         <>
-            <ScoreBar currentScore={currentScore}/>
+            <ScoreBar currentScore={currentScore} ballCount={ballCount}/>
             <Container>
                 <Row>
                     {/* Note the use of camel case for css styles */}
@@ -17,7 +18,10 @@ export default function GamePage() {
                         <GameStage
                             scoreDone={scoreDone}
                             setScoreDone={setScoreDone}
+                            currentScore={currentScore}
                             setCurrentScore={setCurrentScore}
+                            ballCount={ballCount}
+                            setBallCount={setBallCount}
                         />
                     </Col>
                 </Row>
