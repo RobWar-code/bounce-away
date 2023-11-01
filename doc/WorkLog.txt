@@ -6,6 +6,10 @@ Work Log
 
 <h1>Work Due
     Bat Move Controls
+        * Draw Bat Control Buttons
+        Change batMoved to batButtonClicked
+        Replace batMoved in GameStage
+
     Game End Updates
         * Display Game End Message
         * New Game Button

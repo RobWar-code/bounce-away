@@ -15,3 +15,11 @@
 .gameStage {
     background-color: #d0d060
 }
+
+/* Bat Control */
+.batControl {
+    padding: 0;
+    width: 43px;
+    height: 43px;
+    border-style: 1px solid black;
+}

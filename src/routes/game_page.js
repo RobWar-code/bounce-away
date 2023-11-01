@@ -3,6 +3,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import GLOBALS from '../constants';
 import ScoreBar from '../components/ScoreBar';
 import GameStage from '../components/GameStage';
+import BatControl from '../components/BatControl';
 
 export default function GamePage() {
     const [currentScore, setCurrentScore] = useState(0);
@@ -11,6 +12,11 @@ export default function GamePage() {
     const [scoreTable, setScoreTable] = useState([]);
     const [gameOver, setGameOver] = useState(0);
     const [startGame, setStartGame] = useState(0);
+    const [batStep, setBatStep] = useState(2);
+    const [batDirection, setBatDirection] = useState("UP");
+    const [batMoved, setBatMoved] = useState(0);
+    const [stageWidth, setStageWidth] = useState(1200);
+
 
     useEffect ( () => {
         if (ballCount <= 0) {
@@ -42,9 +48,21 @@ export default function GamePage() {
                             setBallCount={setBallCount}
                             startGame={startGame}
                             setStartGame={setStartGame}
+                            stageWidth={stageWidth}
+                            setStageWidth={setStageWidth}
+                            batStep={batStep}
+                            batDirection={batDirection}
+                            batMoved={batMoved}
+                            setBatMoved={setBatMoved}
                         />
                     </Col>
                 </Row>
+                <BatControl 
+                    setBatMoved={setBatMoved} 
+                    setBatStep={setBatStep} 
+                    setBatDirection={setBatDirection} 
+                    stageWidth={stageWidth}
+                />
             </Container>
         </>
     )

@@ -12,17 +12,19 @@ function GameStage( {
     ballCount, 
     setBallCount, 
     startGame, 
-    setStartGame
+    setStartGame,
+    stageWidth,
+    setStageWidth,
+    batStep,
+    batDirection,
+    batMoved,
+    setBatMoved
 } ) {
     const maxStageWidth = 1200;
     const stageHeight = 400;
-    const [stageWidth, setStageWidth] = useState(maxStageWidth);
     const [newBall, setNewBall] = useState(1);
     const [batX, setBatX] = useState(0);
     const [batY, setBatY] = useState(0);
-    const [doMove, setDoMove] = useState(0);
-    const [batMoved, setBatMoved] = useState(0);
-    const [motionDirection, setMotionDirection] = useState(0);
 
     useEffect(() => {
         const handleResize = () => {
@@ -42,7 +44,7 @@ function GameStage( {
             window.removeEventListener('resize', handleResize);
         };
 
-    }, [maxStageWidth]);
+    }, [maxStageWidth, setStageWidth]);
 
     return (
         <Stage width={stageWidth} height={stageHeight} options={{backgroundColor: 0xd0d060}}>
@@ -52,9 +54,6 @@ function GameStage( {
                     stageHeight={stageHeight}
                     batMoved={batMoved}
                     setBatMoved={setBatMoved}
-                    doMove={doMove} 
-                    setDoMove={setDoMove} 
-                    motionDirection={motionDirection} 
                     batX={batX} 
                     setBatX={setBatX} 
                     batY={batY} 
