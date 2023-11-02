@@ -18,7 +18,9 @@ function GameStage( {
     batStep,
     batDirection,
     batMoved,
-    setBatMoved
+    setBatMoved,
+    batClicked,
+    setBatClicked
 } ) {
     const maxStageWidth = 1200;
     const stageHeight = 400;
@@ -54,6 +56,10 @@ function GameStage( {
                     stageHeight={stageHeight}
                     batMoved={batMoved}
                     setBatMoved={setBatMoved}
+                    batClicked={batClicked}
+                    setBatClicked={setBatClicked}
+                    batStep={batStep}
+                    batDirection={batDirection}
                     batX={batX} 
                     setBatX={setBatX} 
                     batY={batY} 

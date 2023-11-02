@@ -9,11 +9,17 @@ Work Log
         * Draw Bat Control Buttons
         Change batMoved to batButtonClicked
         Replace batMoved in GameStage
+        Allow for button hold
 
     Game End Updates
         * Display Game End Message
         * New Game Button
     Game Scores Table
         * Scores List State 
+
+    Check for dynamic resize effects
+    
+    Tidy-up event/state management
+
 
 <h1>Work Done

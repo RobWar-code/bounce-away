@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
+import {AppProvider} from '@pixi/react';
 import GLOBALS from '../constants';
 import ScoreBar from '../components/ScoreBar';
 import GameStage from '../components/GameStage';
@@ -15,6 +16,7 @@ export default function GamePage() {
     const [batStep, setBatStep] = useState(2);
     const [batDirection, setBatDirection] = useState("UP");
     const [batMoved, setBatMoved] = useState(0);
+    const [batClicked, setBatClicked] = useState(0);
     const [stageWidth, setStageWidth] = useState(1200);
 
 
@@ -50,19 +52,23 @@ export default function GamePage() {
                             setStartGame={setStartGame}
                             stageWidth={stageWidth}
                             setStageWidth={setStageWidth}
-                            batStep={batStep}
-                            batDirection={batDirection}
+                            batClicked={batClicked}
+                            setBatClicked={setBatClicked}
                             batMoved={batMoved}
                             setBatMoved={setBatMoved}
+                            batDirection={batDirection}
+                            batStep={batStep}
                         />
                     </Col>
                 </Row>
+                <AppProvider>
                 <BatControl 
-                    setBatMoved={setBatMoved} 
+                    setBatClicked={setBatClicked} 
                     setBatStep={setBatStep} 
                     setBatDirection={setBatDirection} 
                     stageWidth={stageWidth}
                 />
+                </AppProvider>
             </Container>
         </>
     )
