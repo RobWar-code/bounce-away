@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
-import {AppProvider} from '@pixi/react';
 import GLOBALS from '../constants';
 import ScoreBar from '../components/ScoreBar';
 import GameStage from '../components/GameStage';
@@ -61,14 +60,12 @@ export default function GamePage() {
                         />
                     </Col>
                 </Row>
-                <AppProvider>
                 <BatControl 
                     setBatClicked={setBatClicked} 
                     setBatStep={setBatStep} 
                     setBatDirection={setBatDirection} 
                     stageWidth={stageWidth}
                 />
-                </AppProvider>
             </Container>
         </>
     )

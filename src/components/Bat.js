@@ -60,8 +60,9 @@ export default function Bat( {
                 newX = stageWidth - GLOBALS.batWidth - 1;
             }
             else if (
-                newY + GLOBALS.batHeight * 0.5 >= stageHeight * 0.5 + GLOBALS.basketHeight * 0.5 &&
-                newY - GLOBALS.batHeight * 0.5 <= stageHeight * 0.5 - GLOBALS.basketHeight * 0.5 &&
+                batDirection === "RIGHT" &&
+                newY + GLOBALS.batHeight * 0.5 >= stageHeight * 0.5 - GLOBALS.basketHeight * 0.5 &&
+                newY - GLOBALS.batHeight * 0.5 <= stageHeight * 0.5 + GLOBALS.basketHeight * 0.5 &&
                 newX + GLOBALS.batWidth * 0.5 >= stageWidth - GLOBALS.basketWidth
             ) {
                 newX = stageWidth - GLOBALS.basketWidth - 0.5 * GLOBALS.batWidth;
@@ -79,16 +80,18 @@ export default function Bat( {
                 newX + 0.5 * GLOBALS.batWidth >= stageWidth - GLOBALS.basketWidth
             ) {
                 if (
-                    newY + GLOBALS.batHeight * 0.5 >= stageHeight * 0.5 - GLOBALS.basketHeight * 0.5 &&
+                    batDirection === "DOWN" &&
+                    newY + GLOBALS.batHeight * 0.5 >= stageHeight * 0.5 - GLOBALS.basketHeight * 0.5 - 1 &&
                     newY + GLOBALS.batHeight * 0.5 <= stageHeight * 0.5
                 ) {
-                    newY = stageHeight * 0.5 - GLOBALS.basketHeight * 0.5 - GLOBALS.batHeight - 0.5;
+                    newY = stageHeight * 0.5 - GLOBALS.basketHeight * 0.5 - GLOBALS.batHeight * 0.5 - 1;
                 }
                 else if (
-                    newY - GLOBALS.batHeight * 0.5 <= stageHeight * 0.5 + GLOBALS.basketHeight * 0.5 &&
+                    batDirection === "UP" &&
+                    newY - GLOBALS.batHeight * 0.5 <= stageHeight * 0.5 + GLOBALS.basketHeight * 0.5 + 1 &&
                     newY - GLOBALS.batHeight * 0.5 >= stageHeight * 0.5
                 ) {
-                    newY = stageHeight * 0.5 + GLOBALS.basketHeight * 0.5 + GLOBALS.batHeight * 0.5;
+                    newY = stageHeight * 0.5 + GLOBALS.basketHeight * 0.5 + GLOBALS.batHeight * 0.5 + 1;
                 }
             }
             setBatX(newX);
