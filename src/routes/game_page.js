@@ -31,6 +31,7 @@ export default function GamePage() {
         <>
             <ScoreBar 
                 currentScore={currentScore} 
+                setCurrentScore={currentScore}
                 ballCount={ballCount} 
                 gameOver={gameOver} 
                 setGameOver={setGameOver}

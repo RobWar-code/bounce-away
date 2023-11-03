@@ -1,13 +1,25 @@
 import {Container, Row, Col, Button} from 'react-bootstrap';
 
-function ScoreBar( { justLaunched, setJustLaunched, currentScore, ballCount, gameOver, setGameOver, startGame, setStartGame } ) {
+function ScoreBar( { 
+    justLaunched, 
+    setJustLaunched, 
+    currentScore, 
+    setCurrentScore, 
+    ballCount, 
+    gameOver, 
+    setGameOver, 
+    startGame, 
+    setStartGame } ) {
+        
     const handleJustLaunched = () => {
         setJustLaunched(0);
         setStartGame(1);
     }
+
     const handleStartGame = () => {
         setStartGame(1);
         setGameOver(0);
+        setCurrentScore(0);
     }
 
     return (

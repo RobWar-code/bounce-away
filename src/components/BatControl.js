@@ -11,6 +11,14 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
     const [buttonDown, setButtonDown] = useState(0);
     const intervalId = useRef(null);
 
+    const handleSingleClick = (event) => {
+        const batD = event.currentTarget.getAttribute("data-batDirection");
+        setBatDirection(batD);
+        const batS = stageWidth / (GLOBALS.batTraverseTime * GLOBALS.batStepsPerSecond);
+        setBatStep(batS);
+        setBatClicked(1);
+    }
+
     const startBatHoldDown = (event) => {
         const batD = event.currentTarget.getAttribute("data-batDirection");
         setBatDirection(batD);
@@ -42,6 +50,7 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
                 <button 
                     className="batControl" 
                     data-batDirection="LEFT" 
+                    onClick={handleSingleClick}
                     onMouseDown={startBatHoldDown}
                     onTouchStart={startBatHoldDown}
                     onMouseLeave={stopBatHoldDown}
@@ -53,6 +62,7 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
                 <button 
                     className="batControl" 
                     data-batDirection="RIGHT"
+                    onClick={handleSingleClick}
                     onMouseDown={startBatHoldDown}
                     onTouchStart={startBatHoldDown}
                     onMouseLeave={stopBatHoldDown}
@@ -64,6 +74,7 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
                 <button 
                     className="batControl" 
                     data-batDirection="UP"
+                    onClick={handleSingleClick}
                     onMouseDown={startBatHoldDown}
                     onTouchStart={startBatHoldDown}
                     onMouseLeave={stopBatHoldDown}
@@ -75,6 +86,7 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
                 <button 
                     className="batControl" 
                     data-batDirection="DOWN"
+                    onClick={handleSingleClick}
                     onMouseDown={startBatHoldDown}
                     onTouchStart={startBatHoldDown}
                     onMouseLeave={stopBatHoldDown}

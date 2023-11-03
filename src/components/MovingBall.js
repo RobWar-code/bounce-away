@@ -74,8 +74,7 @@ function MovingBall( {
           let bCount = ballCount - 1;
           setBallCount(bCount);
           setBallMoved(0);
-          // app.ticker.remove(moveBall);
-          // ballRef.current.visible = false;
+          setNewBall(1);
         }
 
 
@@ -87,8 +86,7 @@ function MovingBall( {
           setY(stageHeight / 2);
           setBallCount(bCount);
           setBallMoved(0);
-          // app.ticker.remove(moveBall);
-          // ballRef.current.visible = false;
+          setNewBall(1);
         }
 
         if (ballCount <= 0) {
@@ -202,7 +200,8 @@ function MovingBall( {
   }, [
     app, 
     app.ticker, 
-    newBall, 
+    newBall,
+    setNewBall, 
     ballMoved, 
     ballRadius, 
     bounced,
