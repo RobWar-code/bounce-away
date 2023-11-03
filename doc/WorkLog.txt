@@ -5,12 +5,13 @@ Work Log
         Work Done
 
 <h1>Work Due
-    Change Game Page at page load - different message.
+    * Change Game Page at page load - different message.
     
     Bat Move Controls
         * Draw Bat Control Buttons
         * Activate move batButtonClicked
         * Allow for button hold
+        Allow for short click on bat move button
 
     Game End Updates
         * Display Game End Message

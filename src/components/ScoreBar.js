@@ -1,6 +1,10 @@
 import {Container, Row, Col, Button} from 'react-bootstrap';
 
-function ScoreBar( { currentScore, ballCount, gameOver, setGameOver, startGame, setStartGame } ) {
+function ScoreBar( { justLaunched, setJustLaunched, currentScore, ballCount, gameOver, setGameOver, startGame, setStartGame } ) {
+    const handleJustLaunched = () => {
+        setJustLaunched(0);
+        setStartGame(1);
+    }
     const handleStartGame = () => {
         setStartGame(1);
         setGameOver(0);
@@ -10,7 +14,13 @@ function ScoreBar( { currentScore, ballCount, gameOver, setGameOver, startGame, 
         <Container>
             <Row>
                 <Col className="text-center">
-                    { !gameOver ? (
+                    { justLaunched ? (
+                        <p className="currentScore">
+                            Bounce Away! &emsp;&emsp;
+                            <Button variant="success" onClick={handleJustLaunched}>Start Game</Button>
+                        </p>
+                    ) :
+                    !gameOver ? (
                         <p className="currentScore">Balls Remaining: {ballCount} Current-Score: {currentScore}</p>
                     ) :
                     ( 

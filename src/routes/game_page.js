@@ -6,6 +6,7 @@ import GameStage from '../components/GameStage';
 import BatControl from '../components/BatControl';
 
 export default function GamePage() {
+    const [justLaunched, setJustLaunched] = useState(1);
     const [currentScore, setCurrentScore] = useState(0);
     const [ballCount, setBallCount] = useState(GLOBALS.ballsPerGame);
     const [scoreDone, setScoreDone] = useState(0);
@@ -33,6 +34,8 @@ export default function GamePage() {
                 ballCount={ballCount} 
                 gameOver={gameOver} 
                 setGameOver={setGameOver}
+                justLaunched={justLaunched}
+                setJustLaunched={setJustLaunched}
                 startGame={startGame} 
                 setStartGame={setStartGame}
             />

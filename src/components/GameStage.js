@@ -24,7 +24,7 @@ function GameStage( {
 } ) {
     const maxStageWidth = 1200;
     const stageHeight = 400;
-    const [newBall, setNewBall] = useState(1);
+    const [newBall, setNewBall] = useState(0);
     const [batX, setBatX] = useState(0);
     const [batY, setBatY] = useState(0);
 
