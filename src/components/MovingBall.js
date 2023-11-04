@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Sprite, useApp } from '@pixi/react';
+import dingSound from '../assets/sounds/ding.mp3';
 import GLOBALS from "../constants";
 import ball from '../assets/images/fastball.png';
 
@@ -26,6 +27,7 @@ function MovingBall( {
   const ballRef = useRef();
   const ballRadius = GLOBALS.ballDiameter / 2;
 
+ 
   // Determine velocity and initial position (pixels per 60th/second - ticker)
   useEffect (() => {
     if (startGame) {
@@ -48,6 +50,8 @@ function MovingBall( {
 
   useEffect(() => {
     const moveBall = () => {
+      const ding = new Audio(dingSound);
+
       if (ballRef.current.visible) {
         console.log("MoveBall");
         if (startGame) setStartGame(0);
@@ -75,6 +79,7 @@ function MovingBall( {
           setBallCount(bCount);
           setBallMoved(0);
           setNewBall(1);
+          ding.play();
         }
 
 

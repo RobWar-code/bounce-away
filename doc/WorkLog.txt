@@ -12,7 +12,7 @@ Work Log
         * Activate move batButtonClicked
         * Allow for button hold
         * Allow for short click on bat move button
-        Allow for bat drag
+        * Allow for bat drag/drop
 
     Game End Updates
         * Display Game End Message

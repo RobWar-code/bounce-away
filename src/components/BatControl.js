@@ -12,7 +12,7 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
     const intervalId = useRef(null);
 
     const handleSingleClick = (event) => {
-        const batD = event.currentTarget.getAttribute("data-batDirection");
+        const batD = event.currentTarget.getAttribute("data-batdirection");
         setBatDirection(batD);
         const batS = stageWidth / (GLOBALS.batTraverseTime * GLOBALS.batStepsPerSecond);
         setBatStep(batS);
@@ -20,7 +20,7 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
     }
 
     const startBatHoldDown = (event) => {
-        const batD = event.currentTarget.getAttribute("data-batDirection");
+        const batD = event.currentTarget.getAttribute("data-batdirection");
         setBatDirection(batD);
         const batS = stageWidth / (GLOBALS.batTraverseTime * GLOBALS.batStepsPerSecond);
         setBatStep(batS);
@@ -47,9 +47,10 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
     return (
         <Row>
             <Col className="text-center">
+                <span>Use these buttons or drag and drop to move the bat &emsp;</span>
                 <button 
                     className="batControl" 
-                    data-batDirection="LEFT" 
+                    data-batdirection="LEFT" 
                     onClick={handleSingleClick}
                     onMouseDown={startBatHoldDown}
                     onTouchStart={startBatHoldDown}
@@ -61,7 +62,7 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
                 </button>
                 <button 
                     className="batControl" 
-                    data-batDirection="RIGHT"
+                    data-batdirection="RIGHT"
                     onClick={handleSingleClick}
                     onMouseDown={startBatHoldDown}
                     onTouchStart={startBatHoldDown}
@@ -73,7 +74,7 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
                 </button>
                 <button 
                     className="batControl" 
-                    data-batDirection="UP"
+                    data-batdirection="UP"
                     onClick={handleSingleClick}
                     onMouseDown={startBatHoldDown}
                     onTouchStart={startBatHoldDown}
@@ -85,7 +86,7 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
                 </button>
                 <button 
                     className="batControl" 
-                    data-batDirection="DOWN"
+                    data-batdirection="DOWN"
                     onClick={handleSingleClick}
                     onMouseDown={startBatHoldDown}
                     onTouchStart={startBatHoldDown}

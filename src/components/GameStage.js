@@ -1,4 +1,5 @@
 import {Stage, Sprite} from '@pixi/react';
+import '@pixi/events';
 import {useState, useEffect} from 'react';
 import MovingBall from './MovingBall'
 import Basket from '../assets/images/basket.png';
@@ -49,22 +50,22 @@ function GameStage( {
     }, [maxStageWidth, setStageWidth]);
 
     return (
-        <Stage width={stageWidth} height={stageHeight} options={{backgroundColor: 0xd0d060}}>
+        <Stage width={stageWidth} height={stageHeight} options={{backgroundColor: 0xd0d060}} interactive>
             <BasketSprite stageWidth={stageWidth} stageHeight={stageHeight} />
             <Bat 
-                    stageWidth={stageWidth} 
-                    stageHeight={stageHeight}
-                    batMoved={batMoved}
-                    setBatMoved={setBatMoved}
-                    batClicked={batClicked}
-                    setBatClicked={setBatClicked}
-                    batStep={batStep}
-                    batDirection={batDirection}
-                    batX={batX} 
-                    setBatX={setBatX} 
-                    batY={batY} 
-                    setBatY={setBatY}
-                    startGame={startGame}
+                stageWidth={stageWidth} 
+                stageHeight={stageHeight}
+                batMoved={batMoved}
+                setBatMoved={setBatMoved}
+                batClicked={batClicked}
+                setBatClicked={setBatClicked}
+                batStep={batStep}
+                batDirection={batDirection}
+                batX={batX} 
+                setBatX={setBatX} 
+                batY={batY} 
+                setBatY={setBatY}
+                startGame={startGame}
             />
             <MovingBall 
                 newBall={newBall} 

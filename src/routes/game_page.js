@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
-import GLOBALS from '../constants';
 import ScoreBar from '../components/ScoreBar';
 import GameStage from '../components/GameStage';
 import BatControl from '../components/BatControl';
@@ -8,7 +7,7 @@ import BatControl from '../components/BatControl';
 export default function GamePage() {
     const [justLaunched, setJustLaunched] = useState(1);
     const [currentScore, setCurrentScore] = useState(0);
-    const [ballCount, setBallCount] = useState(GLOBALS.ballsPerGame);
+    const [ballCount, setBallCount] = useState(0);
     const [scoreDone, setScoreDone] = useState(0);
     const [scoreTable, setScoreTable] = useState([]);
     const [gameOver, setGameOver] = useState(0);
@@ -31,7 +30,7 @@ export default function GamePage() {
         <>
             <ScoreBar 
                 currentScore={currentScore} 
-                setCurrentScore={currentScore}
+                setCurrentScore={setCurrentScore}
                 ballCount={ballCount} 
                 gameOver={gameOver} 
                 setGameOver={setGameOver}

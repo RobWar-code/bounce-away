@@ -14,6 +14,7 @@ function ScoreBar( {
     const handleJustLaunched = () => {
         setJustLaunched(0);
         setStartGame(1);
+        setGameOver(0);
     }
 
     const handleStartGame = () => {
