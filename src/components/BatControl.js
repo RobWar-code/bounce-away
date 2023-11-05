@@ -1,5 +1,6 @@
 import {useRef, useState, useEffect} from 'react';
 import {Row, Col} from 'react-bootstrap';
+import SoundToggle from './SoundToggle';
 import GLOBALS from '../constants';
 import btnLeft from '../assets/images/btnLeft.png';
 import btnRight from '../assets/images/btnRight.png';
@@ -47,7 +48,8 @@ export default function BatControl( {setBatClicked, setBatDirection, setBatStep,
     return (
         <Row>
             <Col className="text-center">
-                <span>Use these buttons or drag and drop to move the bat &emsp;</span>
+                <SoundToggle />
+                <span>&emsp; Use these buttons or drag and drop to move the bat &emsp;</span>
                 <button 
                     className="batControl" 
                     data-batdirection="LEFT" 

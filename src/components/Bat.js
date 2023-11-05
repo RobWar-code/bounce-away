@@ -26,7 +26,6 @@ export default function Bat( {
     useEffect(() => {
         // Set initial position etc.
         if (startGame || !batMoved) {
-            console.log("stageWidth", stageWidth);
             setBatX(0.5 * stageWidth);
             setBatY(0.5 * stageHeight);
         }
@@ -109,7 +108,6 @@ export default function Bat( {
 
     // Start dragging
     function onDragStart(event) {
-        console.log("Got to drag start");
         const sprite = spriteRef.current;
         if (sprite && sprite.containsPoint(event.data.global)) {
             setIsDragging(true);
@@ -149,7 +147,7 @@ export default function Bat( {
           x={batX} 
           y={batY}
           anchor={0.5}
-          interactive
+          eventMode={'dynamic'}
           pointerdown={onDragStart}
           pointerup={onDragEnd}
           pointerupoutside={onDragEnd}

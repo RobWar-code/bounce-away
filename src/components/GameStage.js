@@ -35,7 +35,6 @@ function GameStage( {
             if (innerWidth < 1400) {
                 let newWidth = (innerWidth/1400) * maxStageWidth;
                 setStageWidth(newWidth);
-                console.log("newWidth:", newWidth);
             }
             else {
                 setStageWidth(maxStageWidth);
@@ -50,7 +49,7 @@ function GameStage( {
     }, [maxStageWidth, setStageWidth]);
 
     return (
-        <Stage width={stageWidth} height={stageHeight} options={{backgroundColor: 0xd0d060}} interactive>
+        <Stage width={stageWidth} height={stageHeight} options={{backgroundColor: 0xd0d060}}>
             <BasketSprite stageWidth={stageWidth} stageHeight={stageHeight} />
             <Bat 
                 stageWidth={stageWidth} 

@@ -1,6 +1,7 @@
-import {Container, Row, Col} from 'react-bootstrap'
+import {Container, Row, Col} from 'react-bootstrap';
+import ScoreTable from '../components/ScoreTable.js';
 
-export default function FrontPage() {
+export default function ScorePage( {scoreTable}) {
     return (
         <Container>
             <Row>
@@ -9,6 +10,7 @@ export default function FrontPage() {
                     <h1>Score Page</h1>
                 </Col>
             </Row>
+            <ScoreTable />
         </Container>
     )
 }

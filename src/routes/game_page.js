@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import {useOutletContext} from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
 import ScoreBar from '../components/ScoreBar';
 import GameStage from '../components/GameStage';
@@ -9,29 +10,29 @@ export default function GamePage() {
     const [currentScore, setCurrentScore] = useState(0);
     const [ballCount, setBallCount] = useState(0);
     const [scoreDone, setScoreDone] = useState(0);
-    const [scoreTable, setScoreTable] = useState([]);
-    const [gameOver, setGameOver] = useState(0);
+    const [gameOver, setGameOver] = useState(1);
     const [startGame, setStartGame] = useState(0);
     const [batStep, setBatStep] = useState(2);
     const [batDirection, setBatDirection] = useState("UP");
     const [batMoved, setBatMoved] = useState(0);
     const [batClicked, setBatClicked] = useState(0);
     const [stageWidth, setStageWidth] = useState(1200);
-
+    const [, setScoreTable] = useOutletContext();
 
     useEffect ( () => {
-        if (ballCount <= 0) {
+        if (ballCount <= 0 && !gameOver && !justLaunched) {
             setGameOver(1);
             setScoreTable(prevScoreTable => [...prevScoreTable, currentScore]);
         }
-    }, [ballCount, setGameOver, currentScore])
+    }, [ballCount, gameOver, setGameOver, currentScore, justLaunched, setScoreTable])
 
     return (
         <>
-            <ScoreBar 
+            <ScoreBar
                 currentScore={currentScore} 
                 setCurrentScore={setCurrentScore}
                 ballCount={ballCount} 
+                setBallCount={setBallCount}
                 gameOver={gameOver} 
                 setGameOver={setGameOver}
                 justLaunched={justLaunched}

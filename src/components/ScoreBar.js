@@ -1,4 +1,5 @@
 import {Container, Row, Col, Button} from 'react-bootstrap';
+import GLOBALS from '../constants';
 
 function ScoreBar( { 
     justLaunched, 
@@ -6,18 +7,21 @@ function ScoreBar( {
     currentScore, 
     setCurrentScore, 
     ballCount, 
+    setBallCount,
     gameOver, 
     setGameOver, 
     startGame, 
     setStartGame } ) {
         
     const handleJustLaunched = () => {
+        setBallCount(GLOBALS.ballsPerGame)
         setJustLaunched(0);
         setStartGame(1);
         setGameOver(0);
     }
 
     const handleStartGame = () => {
+        setBallCount(GLOBALS.ballsPerGame)
         setStartGame(1);
         setGameOver(0);
         setCurrentScore(0);

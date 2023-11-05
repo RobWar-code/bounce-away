@@ -5,6 +5,20 @@ Work Log
         Work Done
 
 <h1>Work Due
+    * Change balls per game to 15
+
+    * Remove console logging
+
+    * Consider how to receive only the required Outlet properties
+
+    Make the score page look more handsome
+
+    Note the highest score on the score table
+
+    Improve the bat graphic
+
+    Deal with the deprecation warnings for interactive use eventMode={'auto'}
+
     * Change Game Page at page load - different message.
     
     Bat Move Controls
@@ -20,11 +34,8 @@ Work Log
 
     Game Scores Table
         * Scores List State 
-        Game Scores Page
+        * Game Scores Page
 
     Check for dynamic resize effects
-    
-    Tidy-up event/state management
-
 
 <h1>Work Done

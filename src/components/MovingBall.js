@@ -16,7 +16,8 @@ function MovingBall( {
   ballCount,
   setBallCount,
   startGame,
-  setStartGame} ){
+  setStartGame
+  } ){
   const app = useApp();
   const [x, setX] = useState(GLOBALS.ballDiameter / 2 + 1);
   const [y, setY] = useState(stageHeight / 2);
@@ -30,9 +31,6 @@ function MovingBall( {
  
   // Determine velocity and initial position (pixels per 60th/second - ticker)
   useEffect (() => {
-    if (startGame) {
-      setBallCount(GLOBALS.ballsPerGame);
-    }
 
     if (startGame === 1 || newBall === 1) {
       let v = Math.sqrt(2) * stageWidth / (60 * GLOBALS.fastBallTraverseTime);
@@ -42,7 +40,6 @@ function MovingBall( {
       let startVx = (ratioX * v);
       setVx(startVx);
       setVy(startVy);
-      console.log("startVx:", startVx, "startVy:", startVy);
       ballRef.current.visible = true;
       setNewBall(0);
     }
@@ -50,10 +47,8 @@ function MovingBall( {
 
   useEffect(() => {
     const moveBall = () => {
-      const ding = new Audio(dingSound);
 
       if (ballRef.current.visible) {
-        console.log("MoveBall");
         if (startGame) setStartGame(0);
         let newX = x + vx; // vx is the speed, adjust as necessary
         let newY = y + vy;
@@ -79,9 +74,9 @@ function MovingBall( {
           setBallCount(bCount);
           setBallMoved(0);
           setNewBall(1);
+          let ding = new Audio(dingSound);
           ding.play();
         }
-
 
         // Stop the ticker and hide the ball when it goes off the screen
         if (newX > stageWidth) {
@@ -193,7 +188,6 @@ function MovingBall( {
       return [newX, newY];
     }
 
-    console.log("Start ball")
     app.ticker.add(moveBall);
 
     // Cleanup on unmount

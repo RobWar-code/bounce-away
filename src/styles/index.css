@@ -23,3 +23,13 @@
     height: 43px;
     border-style: 1px solid black;
 }
+
+/* Score Table */
+.scoreHeading {
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.scoreTable {
+    font-size: 24px;
+}
