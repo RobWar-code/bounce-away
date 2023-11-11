@@ -17,11 +17,21 @@
 }
 
 /* Bat Control */
+.buttonRow {
+    margin: 0;
+    padding: 0;
+}
+
 .batControl {
     padding: 0;
     width: 43px;
     height: 43px;
     border-style: 1px solid black;
+}
+
+.buttonImg {
+    width: 95%;
+    height: auto;
 }
 
 /* Score Table */

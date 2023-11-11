@@ -70,16 +70,18 @@ Development Times (man-days):
 
 | Item                          | Hand-Code (est.) | Actual |
 | ------------------------------| ---------------- | ------ |
-| Navbar                        | 0.5              |        |
-| Ball Images (to draft)        | 0.5              |        |
-| Basket Image                  | 0.2              |        |
-| Bat image                     | 0.2              |        |
-| Stage Layout                  | 0.3              |        |
-| Motion and Physics of balls   | 8.0              |        |
-| Motion and interaction of bat | 6.0              |        |
-| Ball into basket              | 5.0              |        |
-| Scoring                       | 2.0              |        |
-| Game Scores Page              | 2.0              |        |
+| Navbar                        | 0.5              |   1.0  |
+| Ball Images (to draft)        | 0.5              |   0.2  |
+| Basket Image                  | 0.2              |   0.2  |
+| Bat image                     | 0.2              |   0.5  |
+| Stage Layout                  | 0.3              |   0.3  |
+| Motion and Physics of balls   | 8.0              |   5.0  |
+| Motion and interaction of bat | 6.0              |   5.0  |
+| Ball into basket              | 5.0              |   0.5  |
+| Scoring                       | 2.0              |   1.0  |
+| Game Scores Page              | 2.0              |   1.0  |
+| TOTALS                        | 26.7             |   14.7 |
+Completion Date: Monday 6th November.
 
 Documentation:   Est. 2.0
 Systems Testing: Est. 3.0

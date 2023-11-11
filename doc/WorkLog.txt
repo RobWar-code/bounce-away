@@ -11,13 +11,13 @@ Work Log
 
     * Consider how to receive only the required Outlet properties
 
-    Make the score page look more handsome
+    * Make the score page look more handsome
 
-    Note the highest score on the score table
+    * Note the highest score on the score table
 
     Improve the bat graphic
 
-    Deal with the deprecation warnings for interactive use eventMode={'auto'}
+    * Deal with the deprecation warnings for interactive use eventMode={'dynamic'}
 
     * Change Game Page at page load - different message.
     
@@ -37,5 +37,13 @@ Work Log
         * Game Scores Page
 
     Check for dynamic resize effects
+
+<h2>Suggested Further Developments
+
+    An animated hand to throw the ball on
+
+    An animated hand to catch the ball, rather than a net
+
+    Multiple players taking turns (+ changes to score sheet)
 
 <h1>Work Done

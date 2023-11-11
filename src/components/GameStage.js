@@ -6,8 +6,6 @@ import Basket from '../assets/images/basket.png';
 import Bat from './Bat';
 
 function GameStage( {
-    scoreDone, 
-    setScoreDone, 
     currentScore, 
     setCurrentScore, 
     ballCount, 
@@ -16,12 +14,8 @@ function GameStage( {
     setStartGame,
     stageWidth,
     setStageWidth,
-    batStep,
-    batDirection,
     batMoved,
-    setBatMoved,
-    batClicked,
-    setBatClicked
+    setBatMoved
 } ) {
     const maxStageWidth = 1200;
     const stageHeight = 400;
@@ -48,18 +42,28 @@ function GameStage( {
 
     }, [maxStageWidth, setStageWidth]);
 
+    const stageClicked = (event) => {
+        let cursorX = event.clientX;
+        let cursorY = event.clientY;
+        let offsetX = Math.floor(event.target.getBoundingClientRect().left) + 2;
+        let offsetY = Math.floor(event.target.getBoundingClientRect().top) + 2;
+        setBatX(cursorX - offsetX);
+        setBatY(cursorY - offsetY);
+    }
+    
     return (
-        <Stage width={stageWidth} height={stageHeight} options={{backgroundColor: 0xd0d060}}>
+        <Stage 
+            width={stageWidth} 
+            height={stageHeight} 
+            options={{backgroundColor: 0xd0d060}} 
+            onMouseDown={stageClicked}
+        >
             <BasketSprite stageWidth={stageWidth} stageHeight={stageHeight} />
             <Bat 
                 stageWidth={stageWidth} 
                 stageHeight={stageHeight}
                 batMoved={batMoved}
                 setBatMoved={setBatMoved}
-                batClicked={batClicked}
-                setBatClicked={setBatClicked}
-                batStep={batStep}
-                batDirection={batDirection}
                 batX={batX} 
                 setBatX={setBatX} 
                 batY={batY} 

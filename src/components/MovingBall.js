@@ -103,6 +103,15 @@ function MovingBall( {
         return [newX, newY];
       }
 
+      // Check for curved corner bounces
+      let [nx, ny] = doCornerBounce(newX, newY);
+      newX = nx;
+      newY = ny;
+      if (bounced) {
+        return [newX, newY];
+      }
+    
+
       // Top Edge
       if ((newX >= batX - 0.5 * GLOBALS.batWidth) && 
         (newX <= batX + 0.5 * GLOBALS.batWidth) && 
@@ -188,6 +197,79 @@ function MovingBall( {
       return [newX, newY];
     }
 
+    const doCornerBounce = (newX, newY) => {
+
+      // top left corner of bat
+      const arcRadius = 0.25 * GLOBALS.batHeight;
+      const cornerArcX = batX - 0.5 * GLOBALS.batWidth + 0.25 * GLOBALS.batHeight;
+      const cornerArcY = batY - 0.25 * GLOBALS.batHeight;
+
+      // Get distance between centres of ball and arc
+      const dx = cornerArcX - newX;
+      const dy = cornerArcY - newY;
+      const dl = Math.sqrt((dx * dx) + (dy * dy));
+      // Check whether there is a point of contact
+      if (
+        dl <= (GLOBALS.ballRadius + arcRadius) &&
+        dl >= (GLOBALS.ballRadius + arcRadius) * 0.9 &&
+        dx > 0 && dy > 0
+      ) {
+        console.log("Got corner hit")
+          // Calculate the corner bounce
+        let [nx, ny] = calculateReflection(dx, dy, cornerArcX, cornerArcY, arcRadius, newX, newY);
+        setBounced(1);
+        newX = nx;
+        newY = ny;
+      }
+      else {
+        setBounced(0);
+      }
+
+      let nx = newX;
+      let ny = newY;
+      return [nx, ny];
+    }
+
+    const calculateReflection = (dx, dy, cornerArcX, cornerArcY, arcRadius, newX, newY) => {
+      const bx = vx;
+      const by = vy;
+      console.log("Velocities:", bx, by);
+
+      // Normalize the normal vector
+      const length = Math.sqrt(dx * dx + dy * dy);
+      const Nx = dx / length;
+      const Ny = dy / length;
+    
+      // Calculate the dot product
+      const dotProduct = bx * Nx + by * Ny;
+    
+      // Calculate the reflection vector
+      const Rx = bx - 2 * dotProduct * Nx;
+      const Ry = by - 2 * dotProduct * Ny;
+
+      console.log("New Velocities:", Rx, Ry)
+    
+      setVx(Rx);
+      setVy(Ry);
+
+      // Move the ball to the point contact
+      let [nx, ny] = findBallContactCentre(cornerArcX, cornerArcY, arcRadius, newX, newY, GLOBALS.ballRadius);
+      console.log("OldBall position:", newX, newY);
+      console.log("NewBall position:", nx, ny);
+      return [nx, ny];
+    }
+
+    const findBallContactCentre = (ax, ay, ar, bx, by, br) => {
+      const dx = ax - bx;
+      const dy = ay - by;
+      const dl = Math.sqrt((dx * dx) + (dy * dy));
+      const vectorRatio = (ar + br) / dl;
+      let contactCentreX = bx - dx * vectorRatio;
+      let contactCentreY = by - dy * vectorRatio;
+      return [ contactCentreX, contactCentreY ];
+    }
+    
+    
     app.ticker.add(moveBall);
 
     // Cleanup on unmount

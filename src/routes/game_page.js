@@ -3,19 +3,15 @@ import {useOutletContext} from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
 import ScoreBar from '../components/ScoreBar';
 import GameStage from '../components/GameStage';
-import BatControl from '../components/BatControl';
+import Tools from '../components/Tools';
 
 export default function GamePage() {
     const [justLaunched, setJustLaunched] = useState(1);
     const [currentScore, setCurrentScore] = useState(0);
     const [ballCount, setBallCount] = useState(0);
-    const [scoreDone, setScoreDone] = useState(0);
     const [gameOver, setGameOver] = useState(1);
     const [startGame, setStartGame] = useState(0);
-    const [batStep, setBatStep] = useState(2);
-    const [batDirection, setBatDirection] = useState("UP");
     const [batMoved, setBatMoved] = useState(0);
-    const [batClicked, setBatClicked] = useState(0);
     const [stageWidth, setStageWidth] = useState(1200);
     const [, setScoreTable] = useOutletContext();
 
@@ -45,8 +41,6 @@ export default function GamePage() {
                     {/* Note the use of camel case for css styles */}
                     <Col style={ {textAlign: 'center'} }>
                         <GameStage
-                            scoreDone={scoreDone}
-                            setScoreDone={setScoreDone}
                             currentScore={currentScore}
                             setCurrentScore={setCurrentScore}
                             ballCount={ballCount}
@@ -55,21 +49,12 @@ export default function GamePage() {
                             setStartGame={setStartGame}
                             stageWidth={stageWidth}
                             setStageWidth={setStageWidth}
-                            batClicked={batClicked}
-                            setBatClicked={setBatClicked}
                             batMoved={batMoved}
                             setBatMoved={setBatMoved}
-                            batDirection={batDirection}
-                            batStep={batStep}
                         />
                     </Col>
                 </Row>
-                <BatControl 
-                    setBatClicked={setBatClicked} 
-                    setBatStep={setBatStep} 
-                    setBatDirection={setBatDirection} 
-                    stageWidth={stageWidth}
-                />
+                <Tools />
             </Container>
         </>
     )
