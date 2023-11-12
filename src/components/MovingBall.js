@@ -64,7 +64,8 @@ function MovingBall( {
           (newX >= stageWidth - GLOBALS.basketWidth) &&
           (newX <= stageWidth) &&
           (newY + ballRadius >= 0.5 * stageHeight - 0.5 * GLOBALS.basketHeight) &&
-          (newY <= 0.5 * stageHeight)
+          (newY <= 0.5 * stageHeight) &&
+          vy > 0
         ) {
           let newScore = currentScore + 10;
           setCurrentScore(newScore);
@@ -199,30 +200,55 @@ function MovingBall( {
 
     const doCornerBounce = (newX, newY) => {
 
-      // top left corner of bat
+      setBounced(0);
       const arcRadius = 0.25 * GLOBALS.batHeight;
-      const cornerArcX = batX - 0.5 * GLOBALS.batWidth + 0.25 * GLOBALS.batHeight;
-      const cornerArcY = batY - 0.25 * GLOBALS.batHeight;
 
-      // Get distance between centres of ball and arc
-      const dx = cornerArcX - newX;
-      const dy = cornerArcY - newY;
-      const dl = Math.sqrt((dx * dx) + (dy * dy));
-      // Check whether there is a point of contact
-      if (
-        dl <= (GLOBALS.ballRadius + arcRadius) &&
-        dl >= (GLOBALS.ballRadius + arcRadius) * 0.9 &&
-        dx > 0 && dy > 0
-      ) {
-        console.log("Got corner hit")
-          // Calculate the corner bounce
-        let [nx, ny] = calculateReflection(dx, dy, cornerArcX, cornerArcY, arcRadius, newX, newY);
-        setBounced(1);
-        newX = nx;
-        newY = ny;
-      }
-      else {
-        setBounced(0);
+      let corner = 0;
+      while (corner < 4 && !bounced) {
+        let cornerArcX;
+        let cornerArcY;
+        switch (corner) {
+          case 0:
+            // top left corner of bat
+            cornerArcX = batX - 0.5 * GLOBALS.batWidth + 0.25 * GLOBALS.batHeight;
+            cornerArcY = batY - 0.25 * GLOBALS.batHeight;
+            break;
+          case 1:
+            // top right
+            cornerArcX = batX + 0.5 * GLOBALS.batWidth - 0.25 * GLOBALS.batHeight;
+            cornerArcY = batY - 0.25 * GLOBALS.batHeight;
+            break;
+          case 2:
+            // bottom right
+            cornerArcX = batX + 0.5 * GLOBALS.batWidth - 0.25 * GLOBALS.batHeight;
+            cornerArcY = batY + 0.25 * GLOBALS.batHeight;
+            break;
+          case 3:
+            // bottom left
+            cornerArcX = batX - 0.5 * GLOBALS.batWidth + 0.25 * GLOBALS.batHeight;
+            cornerArcY = batY + 0.25 * GLOBALS.batHeight;
+            break;
+          default:
+            break;
+        }
+
+        // Get distance between centres of ball and arc
+        const dx = cornerArcX - newX;
+        const dy = cornerArcY - newY;
+        const dl = Math.sqrt((dx * dx) + (dy * dy));
+        // Check whether there is a point of contact
+        if (
+            dl <= (GLOBALS.ballRadius + arcRadius) &&
+            dl >= (GLOBALS.ballRadius + arcRadius) * 0.9
+        ) {
+          console.log("Got corner hit")
+            // Calculate the corner bounce
+          let [nx, ny] = calculateReflection(dx, dy, cornerArcX, cornerArcY, arcRadius, newX, newY);
+          setBounced(1);
+          newX = nx;
+          newY = ny;
+        }
+        ++corner;
       }
 
       let nx = newX;
@@ -252,14 +278,18 @@ function MovingBall( {
       setVx(Rx);
       setVy(Ry);
 
-      // Move the ball to the point contact
-      let [nx, ny] = findBallContactCentre(cornerArcX, cornerArcY, arcRadius, newX, newY, GLOBALS.ballRadius);
+      // Move the ball to the point of contact
+      let [nx, ny] = adjustBallOnBounce(Rx, Ry, newX, newY);
       console.log("OldBall position:", newX, newY);
       console.log("NewBall position:", nx, ny);
       return [nx, ny];
     }
 
-    const findBallContactCentre = (ax, ay, ar, bx, by, br) => {
+    const adjustBallOnBounce = (rvx, rvy, newX, newY) => {
+      let nx = newX + 4 * rvx;
+      let ny = newY + 4 * rvy;
+      return [nx, ny];
+      /*
       const dx = ax - bx;
       const dy = ay - by;
       const dl = Math.sqrt((dx * dx) + (dy * dy));
@@ -267,6 +297,7 @@ function MovingBall( {
       let contactCentreX = bx - dx * vectorRatio;
       let contactCentreY = by - dy * vectorRatio;
       return [ contactCentreX, contactCentreY ];
+      */
     }
     
     
