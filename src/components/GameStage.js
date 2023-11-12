@@ -1,6 +1,7 @@
 import {Stage, Sprite} from '@pixi/react';
 import '@pixi/events';
 import {useState, useEffect} from 'react';
+import GLOBALS from '../constants';
 import MovingBall from './MovingBall'
 import Basket from '../assets/images/basket.png';
 import Bat from './Bat';
@@ -47,8 +48,56 @@ function GameStage( {
         let cursorY = event.clientY;
         let offsetX = Math.floor(event.target.getBoundingClientRect().left) + 2;
         let offsetY = Math.floor(event.target.getBoundingClientRect().top) + 2;
-        setBatX(cursorX - offsetX);
-        setBatY(cursorY - offsetY);
+        let bx = cursorX - offsetX;
+        let by = cursorY - offsetY;
+
+        // Check whether on edge
+        // Left
+        if (bx - GLOBALS.batWidth * 0.5 < 0) {
+            bx = GLOBALS.batWidth * 0.5;
+        }
+        // Top
+        if (by - GLOBALS.batHeight * 0.5 < 0) {
+            by = GLOBALS.batHeight * 0.5;
+        }
+        // Bottom
+        if (by + GLOBALS.batHeight * 0.5 > stageHeight) {
+            by = stageHeight - GLOBALS.batHeight * 0.5;
+        }
+        // Right
+        if (bx + GLOBALS.batWidth * 0.5 > stageWidth) {
+            bx = stageWidth - GLOBALS.batWidth * 0.5;
+        }
+        // Basket
+        const basketTop = 0.5 * stageHeight - 0.5 * GLOBALS.basketHeight;
+        const basketBottom = 0.5 * stageHeight + 0.5 * GLOBALS.basketHeight;
+        const basketLeft = stageWidth - GLOBALS.basketWidth;
+
+        // Left of Basket
+        if (by + 0.5 * GLOBALS.batHeight > basketTop &&
+            by - 0.5 * GLOBALS.batHeight < basketBottom &&
+            bx + 0.5 * GLOBALS.batWidth > basketLeft &&
+            bx < basketLeft + 0.5 * GLOBALS.basketWidth)
+        {
+            bx = basketLeft - 0.5 * GLOBALS.basketWidth;
+        }
+
+        // Top of Basket
+        else if (by + 0.5 * GLOBALS.batHeight > basketTop && 
+            by < basketTop + GLOBALS.basketHeight * 0.5 &&
+            bx > basketLeft) {
+            by = basketTop - 0.5 * GLOBALS.batHeight;
+        }
+
+        // Bottom of Basket
+        else if (by - 0.5 * GLOBALS.batHeight < basketBottom &&
+            by > basketBottom - GLOBALS.basketHeight * 0.5 &&
+            bx > basketLeft) {
+            by = basketBottom + 0.5 * GLOBALS.batHeight;
+        }
+
+        setBatX(bx);
+        setBatY(by);
     }
     
     return (

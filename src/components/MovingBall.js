@@ -112,16 +112,18 @@ function MovingBall( {
         return [newX, newY];
       }
     
-
-      // Top Edge
+      let newV;
+      // Bat - Top Edge
       if ((newX >= batX - 0.5 * GLOBALS.batWidth) && 
         (newX <= batX + 0.5 * GLOBALS.batWidth) && 
         (newY + ballRadius >= batY - 0.5 * GLOBALS.batHeight) &&
         (newY + ballRadius <= batY - 1)
       ) {
-        setVy(-vy);
+        newV = -vy;
+        setVy(newV);
         setBounced(1);
-        newY = batY - 0.5 * GLOBALS.batHeight - ballRadius;
+        newY = newY + newV * 2;
+        newX = newX + vx * 2;
       }
       // Bottom Edge
       else if (
@@ -130,9 +132,11 @@ function MovingBall( {
         (newY - ballRadius <= batY + 0.5 * GLOBALS.batHeight) &&
         (newY - ballRadius >= batY + 1)
       ) {
-        setVy(-vy);
+        newV = -vy;
+        setVy(newV);
         setBounced(1);
-        newY = batY + 0.5 * GLOBALS.batHeight + ballRadius;
+        newY = newY + newV * 2;
+        newX = newX + vx * 2;
       }
       // Left Edge
       else if (
@@ -141,9 +145,11 @@ function MovingBall( {
         (newX + 0.5 * ballRadius >= batX - 0.5 * GLOBALS.batWidth) &&
         (newX + 0.5 * ballRadius <= batX - 1)
       ) {
-        setVx(-vx);
+        newV = -vx;
+        setVx(newV);
         setBounced(1);
-        newX = batX - 0.5 * GLOBALS.batWidth - ballRadius;
+        newX = newX + 2 * newV;
+        newY = newY + 2 * vy;
       }
       // Right Edge
       else if (
@@ -154,7 +160,8 @@ function MovingBall( {
       ) {
         setVx(-vx);
         setBounced(1);
-        newX = batX + 0.5 * GLOBALS.batWidth + ballRadius;
+        newX = newX + 2 * newV;
+        newY = newY + 2 * vy;
       }
       // Basket
       else if (

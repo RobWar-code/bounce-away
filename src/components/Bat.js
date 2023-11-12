@@ -2,6 +2,7 @@ import {useEffect, useState, useRef} from "react";
 import {Sprite} from '@pixi/react';
 import '@pixi/events';
 import bat from '../assets/images/bat.png';
+import GLOBALS from '../constants';
 
 export default function Bat( {
     stageWidth, 
@@ -54,15 +55,49 @@ export default function Bat( {
     // Handle dragging
     function onDragMove() {
         if (isDragging) {
-        const sprite = spriteRef.current;
-        if (sprite && sprite.dragging) {
-            const newPosition = sprite.data.getLocalPosition(sprite.parent);
-            setBatX(newPosition.x);
-            setBatY(newPosition.y);
-        }
+            const sprite = spriteRef.current;
+            if (sprite && sprite.dragging) {
+                const newPosition = sprite.data.getLocalPosition(sprite.parent);
+                let bx = newPosition.x;
+                let by = newPosition.y;
+                let [bx1, by1] = checkInBasket(bx,by);
+                setBatX(bx1);
+                setBatY(by1);
+            }
         }
     }
 
+    function checkInBasket(bx, by) {
+        // Basket
+        const basketTop = 0.5 * stageHeight - 0.5 * GLOBALS.basketHeight;
+        const basketBottom = 0.5 * stageHeight + 0.5 * GLOBALS.basketHeight;
+        const basketLeft = stageWidth - GLOBALS.basketWidth;
+
+        // Left of Basket
+        if (by + 0.5 * GLOBALS.batHeight > basketTop &&
+            by - 0.5 * GLOBALS.batHeight < basketBottom &&
+            bx + 0.5 * GLOBALS.batWidth > basketLeft &&
+            bx < basketLeft + 0.5 * GLOBALS.basketWidth)
+        {
+            bx = basketLeft - 0.5 * GLOBALS.basketWidth;
+        }
+
+        // Top of Basket
+        else if (by + 0.5 * GLOBALS.batHeight > basketTop && 
+            by < basketTop + GLOBALS.basketHeight * 0.5 &&
+            bx > basketLeft) {
+            by = basketTop - 0.5 * GLOBALS.batHeight;
+        }
+
+        // Bottom of Basket
+        else if (by - 0.5 * GLOBALS.batHeight < basketBottom &&
+            by > basketBottom - GLOBALS.basketHeight * 0.5 &&
+            bx > basketLeft) {
+            by = basketBottom + 0.5 * GLOBALS.batHeight;
+        }
+
+        return [bx, by];
+    }
 
     return (
         <Sprite
