@@ -16,22 +16,10 @@
     background-color: #d0d060
 }
 
-/* Bat Control */
-.buttonRow {
-    margin: 0;
-    padding: 0;
-}
-
-.batControl {
-    padding: 0;
-    width: 43px;
-    height: 43px;
-    border-style: 1px solid black;
-}
-
-.buttonImg {
-    width: 95%;
-    height: auto;
+/* Speed Slider */
+.speedSlider {
+    width: 50%;
+    background-color: #40a040;
 }
 
 /* Score Table */

@@ -1,7 +1,6 @@
 import {Stage, Sprite} from '@pixi/react';
 import '@pixi/events';
 import {useState, useEffect} from 'react';
-import GLOBALS from '../constants';
 import MovingBall from './MovingBall'
 import Basket from '../assets/images/basket.png';
 import Bat from './Bat';
@@ -10,7 +9,8 @@ function GameStage( {
     currentScore, 
     setCurrentScore, 
     ballCount, 
-    setBallCount, 
+    setBallCount,
+    ballTraverseTime, 
     startGame, 
     setStartGame,
     stageWidth,
@@ -23,10 +23,20 @@ function GameStage( {
     const [newBall, setNewBall] = useState(0);
     const [batX, setBatX] = useState(0);
     const [batY, setBatY] = useState(0);
+    const [batStageClicked, setBatStageClicked] = useState(0);
+    const [batCursorX, setBatCursorX] = useState(0);
+    const [batCursorY, setBatCursorY] = useState(0);
+    const [isBatDragging, setIsBatDragging] = useState(0);
+    const [batVectorX, setBatVectorX] = useState(0);
+    const [batVectorY, setBatVectorY] = useState(0);
+    const [oldStageWidth, setOldStageWidth] = useState(1200);
+    const [stageWidthAdjusted, setStageWidthAdjusted] = useState(0);
 
     useEffect(() => {
         const handleResize = () => {
             const {innerWidth} = window;
+            setOldStageWidth(stageWidth);
+            setStageWidthAdjusted(1);
             if (innerWidth < 1400) {
                 let newWidth = (innerWidth/1400) * maxStageWidth;
                 setStageWidth(newWidth);
@@ -41,7 +51,7 @@ function GameStage( {
             window.removeEventListener('resize', handleResize);
         };
 
-    }, [maxStageWidth, setStageWidth]);
+    }, [maxStageWidth, stageWidth, setStageWidth, setOldStageWidth, setStageWidthAdjusted]);
 
     const stageClicked = (event) => {
         let cursorX = event.clientX;
@@ -51,53 +61,9 @@ function GameStage( {
         let bx = cursorX - offsetX;
         let by = cursorY - offsetY;
 
-        // Check whether on edge
-        // Left
-        if (bx - GLOBALS.batWidth * 0.5 < 0) {
-            bx = GLOBALS.batWidth * 0.5;
-        }
-        // Top
-        if (by - GLOBALS.batHeight * 0.5 < 0) {
-            by = GLOBALS.batHeight * 0.5;
-        }
-        // Bottom
-        if (by + GLOBALS.batHeight * 0.5 > stageHeight) {
-            by = stageHeight - GLOBALS.batHeight * 0.5;
-        }
-        // Right
-        if (bx + GLOBALS.batWidth * 0.5 > stageWidth) {
-            bx = stageWidth - GLOBALS.batWidth * 0.5;
-        }
-        // Basket
-        const basketTop = 0.5 * stageHeight - 0.5 * GLOBALS.basketHeight;
-        const basketBottom = 0.5 * stageHeight + 0.5 * GLOBALS.basketHeight;
-        const basketLeft = stageWidth - GLOBALS.basketWidth;
-
-        // Left of Basket
-        if (by + 0.5 * GLOBALS.batHeight > basketTop &&
-            by - 0.5 * GLOBALS.batHeight < basketBottom &&
-            bx + 0.5 * GLOBALS.batWidth > basketLeft &&
-            bx < basketLeft + 0.5 * GLOBALS.basketWidth)
-        {
-            bx = basketLeft - 0.5 * GLOBALS.basketWidth;
-        }
-
-        // Top of Basket
-        else if (by + 0.5 * GLOBALS.batHeight > basketTop && 
-            by < basketTop + GLOBALS.basketHeight * 0.5 &&
-            bx > basketLeft) {
-            by = basketTop - 0.5 * GLOBALS.batHeight;
-        }
-
-        // Bottom of Basket
-        else if (by - 0.5 * GLOBALS.batHeight < basketBottom &&
-            by > basketBottom - GLOBALS.basketHeight * 0.5 &&
-            bx > basketLeft) {
-            by = basketBottom + 0.5 * GLOBALS.batHeight;
-        }
-
-        setBatX(bx);
-        setBatY(by);
+        setBatStageClicked(1);
+        setBatCursorX(bx);
+        setBatCursorY(by);
     }
     
     return (
@@ -111,12 +77,25 @@ function GameStage( {
             <Bat 
                 stageWidth={stageWidth} 
                 stageHeight={stageHeight}
+                oldStageWidth={oldStageWidth}
+                stageWidthAdjusted={stageWidthAdjusted}
+                setStageWidthAdjusted={setStageWidthAdjusted}
                 batMoved={batMoved}
                 setBatMoved={setBatMoved}
+                batStageClicked={batStageClicked}
+                setBatStageClicked={setBatStageClicked}
+                batCursorX={batCursorX}
+                batCursorY={batCursorY}
                 batX={batX} 
                 setBatX={setBatX} 
                 batY={batY} 
                 setBatY={setBatY}
+                isBatDragging={isBatDragging}
+                setIsBatDragging={setIsBatDragging}
+                batVectorX={batVectorX}
+                setBatVectorX={setBatVectorX}
+                batVectorY={batVectorY}
+                setBatVectorY={setBatVectorY}
                 startGame={startGame}
             />
             <MovingBall 
@@ -124,12 +103,16 @@ function GameStage( {
                 setNewBall={setNewBall}
                 batX={batX}
                 batY={batY}
+                isBatDragging={isBatDragging}
+                batVectorX={batVectorX}
+                batVectorY={batVectorY}
                 stageWidth={stageWidth} 
                 stageHeight={stageHeight} 
                 currentScore={currentScore}
                 setCurrentScore={setCurrentScore}
                 ballCount={ballCount}
                 setBallCount={setBallCount}
+                ballTraverseTime={ballTraverseTime}
                 startGame={startGame}
                 setStartGame={setStartGame}
             />

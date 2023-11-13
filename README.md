@@ -51,6 +51,14 @@ Once the game is complete (ie: when the last ball is off the stage), the score-l
 
 Note that the graphics are stored in src/images.
 
+#### Details of Ball and Bat Interaction
+
+The bat is rectangular and has 4 orthogonal direct reflective surfaces. In addition the 4 corners of the bat are circular arcs being 0.25 of the bat height in radius. These produce a bounce that is the sum of the incoming vector of the ball relative to the vector angle toward the centre of the arc.
+
+This approach works fine until we have to take account of the motion of the bat as well as of the ball (ie: if the bat is moving) in this case, the motion of the bat may have a double effect on the ball (as if it were struck twice), reversing the vectors inappropriately. To overcome this we can use a state to indicate that the bat is moving, then when the ball is recorded as striking the bat we can add the vector of motion of the bat to add to the vector of motion of the ball.
+
+The velocity of the bat depends upon the drag rate of the user and so is measured as the bat moves. This is sampled 10 times per second, as opposed to the ball, whose base velocity is based on the frame rate of 60 samples per second. So the bat velocity needs to be scaled accordingly.
+
 ### Score Page
 
 The score page has the title "Game Scores" at the top. If no games have been played, the line below states "No Games Played Yet"

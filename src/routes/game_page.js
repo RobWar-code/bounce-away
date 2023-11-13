@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import {useOutletContext} from 'react-router-dom';
 import {Container, Row, Col} from 'react-bootstrap';
+import GLOBALS from '../constants';
 import ScoreBar from '../components/ScoreBar';
 import GameStage from '../components/GameStage';
 import Tools from '../components/Tools';
@@ -14,6 +15,7 @@ export default function GamePage() {
     const [batMoved, setBatMoved] = useState(0);
     const [stageWidth, setStageWidth] = useState(1200);
     const [, setScoreTable] = useOutletContext();
+    const [ballTraverseTime, setBallTraverseTime] = useState(GLOBALS.fastBallTraverseTime);
 
     useEffect ( () => {
         if (ballCount <= 0 && !gameOver && !justLaunched) {
@@ -51,10 +53,14 @@ export default function GamePage() {
                             setStageWidth={setStageWidth}
                             batMoved={batMoved}
                             setBatMoved={setBatMoved}
+                            ballTraverseTime={ballTraverseTime}
                         />
                     </Col>
                 </Row>
-                <Tools />
+                <Tools 
+                    ballTraverseTime={ballTraverseTime}
+                    setBallTraverseTime={setBallTraverseTime}
+                />
             </Container>
         </>
     )

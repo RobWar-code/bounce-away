@@ -8,13 +8,17 @@ function MovingBall( {
   newBall, 
   setNewBall, 
   batX, 
-  batY, 
+  batY,
+  isBatDragging,
+  batVectorX,
+  batVectorY, 
   stageWidth, 
   stageHeight,
   currentScore,
   setCurrentScore,
   ballCount,
   setBallCount,
+  ballTraverseTime,
   startGame,
   setStartGame
   } ){
@@ -33,7 +37,8 @@ function MovingBall( {
   useEffect (() => {
 
     if (startGame === 1 || newBall === 1) {
-      let v = Math.sqrt(2) * stageWidth / (60 * GLOBALS.fastBallTraverseTime);
+      console.log("ballTraverseTime:", ballTraverseTime);
+      let v = Math.sqrt(2) * stageWidth / (60 * ballTraverseTime);
       let ratioX = Math.random() * 0.5 + 0.25;
       let startVy = 0;
       Math.random() < 0.5 ? startVy = (-(1 - ratioX) * v) : startVy = ((1 - ratioX) * v);
@@ -43,7 +48,7 @@ function MovingBall( {
       ballRef.current.visible = true;
       setNewBall(0);
     }
-  }, [newBall, stageWidth, setNewBall, startGame, setStartGame, setBallCount]);
+  }, [newBall, stageWidth, setNewBall, startGame, setStartGame, setBallCount, ballTraverseTime]);
 
   useEffect(() => {
     const moveBall = () => {
@@ -105,107 +110,115 @@ function MovingBall( {
       }
 
       // Check for curved corner bounces
-      let [nx, ny] = doCornerBounce(newX, newY);
-      newX = nx;
-      newY = ny;
-      if (bounced) {
-        return [newX, newY];
-      }
-    
-      let newV;
-      // Bat - Top Edge
-      if ((newX >= batX - 0.5 * GLOBALS.batWidth) && 
-        (newX <= batX + 0.5 * GLOBALS.batWidth) && 
-        (newY + ballRadius >= batY - 0.5 * GLOBALS.batHeight) &&
-        (newY + ballRadius <= batY - 1)
-      ) {
-        newV = -vy;
-        setVy(newV);
-        setBounced(1);
-        newY = newY + newV * 2;
-        newX = newX + vx * 2;
-      }
-      // Bottom Edge
-      else if (
-        (newX >= batX - 0.5 * GLOBALS.batWidth) && 
-        (newX <= batX + 0.5 * GLOBALS.batWidth) &&
-        (newY - ballRadius <= batY + 0.5 * GLOBALS.batHeight) &&
-        (newY - ballRadius >= batY + 1)
-      ) {
-        newV = -vy;
-        setVy(newV);
-        setBounced(1);
-        newY = newY + newV * 2;
-        newX = newX + vx * 2;
-      }
-      // Left Edge
-      else if (
-        (newY >= batY - 0.5 * GLOBALS.batHeight) &&
-        (newY <= batY + 0.5 * GLOBALS.batHeight) &&
-        (newX + 0.5 * ballRadius >= batX - 0.5 * GLOBALS.batWidth) &&
-        (newX + 0.5 * ballRadius <= batX - 1)
-      ) {
-        newV = -vx;
-        setVx(newV);
-        setBounced(1);
-        newX = newX + 2 * newV;
-        newY = newY + 2 * vy;
-      }
-      // Right Edge
-      else if (
-        (newY >= batY - 0.5 * GLOBALS.batHeight) &&
-        (newY <= batY + 0.5 * GLOBALS.batHeight) &&
-        (newX - 0.5 * ballRadius <= batX + 0.5 * GLOBALS.batWidth) &&
-        (newX - 0.5 * ballRadius >= batX + 1)
-      ) {
-        setVx(-vx);
-        setBounced(1);
-        newX = newX + 2 * newV;
-        newY = newY + 2 * vy;
-      }
-      // Basket
-      else if (
-        // Left Edge
-        (newY >= 0.5 * stageHeight - 0.5 * GLOBALS.basketHeight) &&
-        (newY <= 0.5 * stageHeight + 0.5 * GLOBALS.basketHeight) &&
-        (newX + ballRadius >= stageWidth - GLOBALS.basketWidth) &&
-        (newX + ballRadius <= stageWidth - 0.5 * GLOBALS.basketWidth) 
-      ){
-        setVx(-vx);
-        setBounced(1);
-        newX = stageWidth - GLOBALS.basketWidth - ballRadius;
-      }
-      else if (
-        (newX >= stageWidth - GLOBALS.basketWidth) &&
-        (newX <= stageWidth) &&
-        (newY - ballRadius <= 0.5 * stageHeight + 0.5 * GLOBALS.basketHeight) &&
-        (newY - ballRadius >= 0.5 * stageHeight + 1)
-      ) {
-        // Bottom Edge
-        setVy(-vy);
-        setBounced(1);
-        newY = 0.5 * stageHeight + GLOBALS.basketHeight + ballRadius;
-      }
-      // Stage Edges
+      let batBounced = false;
+      let [nvx, nvy] = doCornerBounce(newX, newY);
+      let newVx = nvx;
+      let newVy = nvy;
+      if (bounced) batBounced = true;
+
       else {
-        if ((newY - ballRadius) <= 0) { 
-          setVy(-vy);
-          newY = ballRadius;
+        // Bat - Top Edge
+        if ((newX >= batX - 0.5 * GLOBALS.batWidth) && 
+          (newX <= batX + 0.5 * GLOBALS.batWidth) && 
+          (newY + ballRadius >= batY - 0.5 * GLOBALS.batHeight) &&
+          (newY + ballRadius <= batY - 1)
+        ) {
+          newVy = -vy;
+          setBounced(1);
+          batBounced = true;
         }
-        else if ((newY + ballRadius) >= stageHeight - 1) {
-          setVy(-vy);
-          newY = stageHeight - ballRadius;
+        // Bottom Edge
+        else if (
+          (newX >= batX - 0.5 * GLOBALS.batWidth) && 
+          (newX <= batX + 0.5 * GLOBALS.batWidth) &&
+          (newY - ballRadius <= batY + 0.5 * GLOBALS.batHeight) &&
+          (newY - ballRadius >= batY + 1)
+        ) {
+          newVy = -vy;
+          setBounced(1);
+          batBounced = true;
         }
-        else if ((newX - ballRadius) <= 0) {
+        // Left Edge
+        else if (
+          (newY >= batY - 0.5 * GLOBALS.batHeight) &&
+          (newY <= batY + 0.5 * GLOBALS.batHeight) &&
+          (newX + 0.5 * ballRadius >= batX - 0.5 * GLOBALS.batWidth) &&
+          (newX + 0.5 * ballRadius <= batX - 1)
+        ) {
+          newVx = -vx;
+          setBounced(1);
+          batBounced = true;
+        }
+        // Right Edge
+        else if (
+          (newY >= batY - 0.5 * GLOBALS.batHeight) &&
+          (newY <= batY + 0.5 * GLOBALS.batHeight) &&
+          (newX - 0.5 * ballRadius <= batX + 0.5 * GLOBALS.batWidth) &&
+          (newX - 0.5 * ballRadius >= batX + 1)
+        ) {
+          newVx = -vx;
+          setBounced(1);
+          batBounced = true;
+        }
+
+        // Basket
+        else if (
+          // Left Edge
+          (newY >= 0.5 * stageHeight - 0.5 * GLOBALS.basketHeight) &&
+          (newY <= 0.5 * stageHeight + 0.5 * GLOBALS.basketHeight) &&
+          (newX + ballRadius >= stageWidth - GLOBALS.basketWidth) &&
+          (newX + ballRadius <= stageWidth - 0.5 * GLOBALS.basketWidth) 
+        ){
           setVx(-vx);
-          newX = ballRadius;
+          setBounced(1);
+          newX = stageWidth - GLOBALS.basketWidth - ballRadius;
+        }
+        else if (
+          (newX >= stageWidth - GLOBALS.basketWidth) &&
+          (newX <= stageWidth) &&
+          (newY - ballRadius <= 0.5 * stageHeight + 0.5 * GLOBALS.basketHeight) &&
+          (newY - ballRadius >= 0.5 * stageHeight + 1)
+        ) {
+          // Bottom Edge
+          setVy(-vy);
+          setBounced(1);
+          newY = 0.5 * stageHeight + GLOBALS.basketHeight + ballRadius;
+        }
+        // Stage Edges
+        else {
+          if ((newY - ballRadius) <= 0) { 
+            setVy(-vy);
+            newY = ballRadius;
+          }
+          else if ((newY + ballRadius) >= stageHeight - 1) {
+            setVy(-vy);
+            newY = stageHeight - ballRadius;
+          }
+          else if ((newX - ballRadius) <= 0) {
+            setVx(-vx);
+            newX = ballRadius;
+          }
         }
       }
 
+      if (batBounced) {
+        if (isBatDragging) {
+          // Add the bat vector
+          newVx = newVx + batVectorX / 2;
+          newVy = newVy + batVectorY / 2;
+        }
+        newX = newX + 2 * newVx;
+        newY = newY + 2 * newVy;
+        setVx(newVx);
+        setVy(newVy);
+      }
       return [newX, newY];
     }
 
     const doCornerBounce = (newX, newY) => {
+
+      let newVx = vx;
+      let newVy = vy;
 
       setBounced(0);
       const arcRadius = 0.25 * GLOBALS.batHeight;
@@ -250,17 +263,15 @@ function MovingBall( {
         ) {
           console.log("Got corner hit")
             // Calculate the corner bounce
-          let [nx, ny] = calculateReflection(dx, dy, cornerArcX, cornerArcY, arcRadius, newX, newY);
+          let [nvx, nvy] = calculateReflection(dx, dy, cornerArcX, cornerArcY, arcRadius, newX, newY);
+          newVx = nvx;
+          newVy = nvy;
           setBounced(1);
-          newX = nx;
-          newY = ny;
         }
         ++corner;
       }
 
-      let nx = newX;
-      let ny = newY;
-      return [nx, ny];
+      return [newVx, newVy];
     }
 
     const calculateReflection = (dx, dy, cornerArcX, cornerArcY, arcRadius, newX, newY) => {
@@ -281,32 +292,9 @@ function MovingBall( {
       const Ry = by - 2 * dotProduct * Ny;
 
       console.log("New Velocities:", Rx, Ry)
-    
-      setVx(Rx);
-      setVy(Ry);
 
-      // Move the ball to the point of contact
-      let [nx, ny] = adjustBallOnBounce(Rx, Ry, newX, newY);
-      console.log("OldBall position:", newX, newY);
-      console.log("NewBall position:", nx, ny);
-      return [nx, ny];
+      return [Rx, Ry];
     }
-
-    const adjustBallOnBounce = (rvx, rvy, newX, newY) => {
-      let nx = newX + 4 * rvx;
-      let ny = newY + 4 * rvy;
-      return [nx, ny];
-      /*
-      const dx = ax - bx;
-      const dy = ay - by;
-      const dl = Math.sqrt((dx * dx) + (dy * dy));
-      const vectorRatio = (ar + br) / dl;
-      let contactCentreX = bx - dx * vectorRatio;
-      let contactCentreY = by - dy * vectorRatio;
-      return [ contactCentreX, contactCentreY ];
-      */
-    }
-    
     
     app.ticker.add(moveBall);
 
@@ -330,7 +318,10 @@ function MovingBall( {
     vx, 
     vy, 
     batX, 
-    batY, 
+    batY,
+    isBatDragging,
+    batVectorX,
+    batVectorY, 
     stageWidth, 
     stageHeight, 
     setBallMoved,
