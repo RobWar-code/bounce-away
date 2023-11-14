@@ -17,10 +17,10 @@ export default function ScoreTable() {
         <>
         <Row className={["scoreHeading", "scoreTable"]}>
             <Col xs={1} />
-            <Col xs={5}>
+            <Col xs={5} className="col-light">
                 <p>Game Number</p>
             </Col>
-            <Col xs={5}>
+            <Col xs={5} className="col-mid">
                 <p>Score</p>
             </Col>
         </Row>
@@ -28,14 +28,14 @@ export default function ScoreTable() {
             return (
                 <Row className="scoreTable" key={index}>
                     <Col xs={1} />
-                    <Col xs={5}>{index + 1}</Col>
-                    <Col xs={5}>{scoreItem}</Col>
+                    <Col xs={5} className="col-light">{index + 1}</Col>
+                    <Col xs={5} className="col-mid">{scoreItem}</Col>
                     <Col xs={1} />
                 </Row>
             )
         })}
         <Row>
-            <Col className="text-center">
+            <Col className="text-center col-light high-score-col">
                 <p className="scoreTable">High Score: {highScore}</p>
             </Col>
         </Row>

@@ -33,7 +33,6 @@ export default function Bat( {
     // Check for a resize and adjust the position of the bat accordingly
     useEffect(() => {
         if (stageWidthAdjusted) {
-            console.log("Adjusted");
             const bx = batX * stageWidth/oldStageWidth;
             setBatX(bx);
             setStageWidthAdjusted(0);

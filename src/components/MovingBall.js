@@ -19,6 +19,7 @@ function MovingBall( {
   ballCount,
   setBallCount,
   ballTraverseTime,
+  soundEnabled,
   startGame,
   setStartGame
   } ){
@@ -29,6 +30,7 @@ function MovingBall( {
   const [vy, setVy] = useState(0);
   const [ballMoved, setBallMoved] = useState(0);
   const [bounced, setBounced] = useState(0);
+  const [startBallTraverseTime, setStartBallTraverseTime] = useState(GLOBALS.fastBallTraverseTime);
   const ballRef = useRef();
   const ballRadius = GLOBALS.ballDiameter / 2;
 
@@ -37,7 +39,7 @@ function MovingBall( {
   useEffect (() => {
 
     if (startGame === 1 || newBall === 1) {
-      console.log("ballTraverseTime:", ballTraverseTime);
+      setStartBallTraverseTime(ballTraverseTime); // Used to calculate score
       let v = Math.sqrt(2) * stageWidth / (60 * ballTraverseTime);
       let ratioX = Math.random() * 0.5 + 0.25;
       let startVy = 0;
@@ -72,7 +74,20 @@ function MovingBall( {
           (newY <= 0.5 * stageHeight) &&
           vy > 0
         ) {
-          let newScore = currentScore + 10;
+          // Calculate score from ball speed
+          // Get ratio of speeds relative to range of speeds
+          let s = startBallTraverseTime;
+          let g = GLOBALS.fastBallTraverseTime;
+          let lo = g * 0.5;
+          let hi = g + 0.5 * g;
+          let r = hi - lo;
+          let baseS = s - g * 0.5;
+          let ratioS = baseS/r;
+          // Set score
+          let scoreRange = GLOBALS.baseScore;
+          let score = Math.floor((1 - ratioS) * scoreRange + 0.5 * GLOBALS.baseScore);
+
+          let newScore = currentScore + score;
           setCurrentScore(newScore);
           setX(ballRadius + 1);
           setY(stageHeight / 2);
@@ -80,8 +95,10 @@ function MovingBall( {
           setBallCount(bCount);
           setBallMoved(0);
           setNewBall(1);
-          let ding = new Audio(dingSound);
-          ding.play();
+          if (soundEnabled) {
+            let ding = new Audio(dingSound);
+            ding.play();
+          }
         }
 
         // Stop the ticker and hide the ball when it goes off the screen
@@ -261,7 +278,6 @@ function MovingBall( {
             dl <= (GLOBALS.ballRadius + arcRadius) &&
             dl >= (GLOBALS.ballRadius + arcRadius) * 0.9
         ) {
-          console.log("Got corner hit")
             // Calculate the corner bounce
           let [nvx, nvy] = calculateReflection(dx, dy, cornerArcX, cornerArcY, arcRadius, newX, newY);
           newVx = nvx;
@@ -277,7 +293,6 @@ function MovingBall( {
     const calculateReflection = (dx, dy, cornerArcX, cornerArcY, arcRadius, newX, newY) => {
       const bx = vx;
       const by = vy;
-      console.log("Velocities:", bx, by);
 
       // Normalize the normal vector
       const length = Math.sqrt(dx * dx + dy * dy);
@@ -290,8 +305,6 @@ function MovingBall( {
       // Calculate the reflection vector
       const Rx = bx - 2 * dotProduct * Nx;
       const Ry = by - 2 * dotProduct * Ny;
-
-      console.log("New Velocities:", Rx, Ry)
 
       return [Rx, Ry];
     }
@@ -321,7 +334,8 @@ function MovingBall( {
     batY,
     isBatDragging,
     batVectorX,
-    batVectorY, 
+    batVectorY,
+    soundEnabled, 
     stageWidth, 
     stageHeight, 
     setBallMoved,
@@ -330,7 +344,9 @@ function MovingBall( {
     ballCount,
     setBallCount,
     startGame,
-    setStartGame
+    setStartGame,
+    startBallTraverseTime,
+    setStartBallTraverseTime
   ]);
 
   return <Sprite ref={ballRef} x={x} y={y} image={ball} anchor={{x:0.5, y:0.5}}/>;

@@ -30,22 +30,36 @@ function ScoreBar( {
     return (
         <Container>
             <Row>
-                <Col className="text-center">
-                    { justLaunched ? (
-                        <p className="currentScore">
-                            Bounce Away! &emsp;&emsp;
-                            <Button variant="success" onClick={handleJustLaunched}>Start Game</Button>
-                        </p>
-                    ) :
-                    !gameOver ? (
-                        <p className="currentScore">Balls Remaining: {ballCount} Current-Score: {currentScore}</p>
-                    ) :
-                    ( 
-                        <p className="currentScore">Game Over! --- Final Score: {currentScore} &emsp; &emsp;
-                          <Button variant="success" onClick={handleStartGame}>Start Game</Button>
-                        </p>
-                    )}
-                </Col>
+                { justLaunched ? (
+                    <>
+                    <Col sm={12} md={6} className="text-center currentScore col-light">
+                        Bounce Away!
+                    </Col>
+                    <Col sm={12} md={6} className="text-center currentScore">
+                        <Button variant="success" onClick={handleJustLaunched}>Start Game</Button>
+                    </Col>
+                    </>
+                ) :
+                !gameOver ? (
+                    <>
+                    <Col sm={12} md={6} className="text-center currentScore col-light">
+                        Balls Remaining: {ballCount}
+                    </Col> 
+                    <Col sm={12} md={6} className="text-center currentScore">
+                        Current-Score: {currentScore}
+                    </Col>
+                    </>
+                ) :
+                ( 
+                    <>
+                    <Col sm={12} md={6} className="currentScore text-center col-light">
+                        Game Over! --- Final Score: {currentScore}
+                    </Col>
+                    <Col sm={12} md={6} className="currentScore text-center">
+                        <Button variant="success" onClick={handleStartGame}>Start Game</Button>
+                    </Col>
+                    </>
+                )}
             </Row>
         </Container>
     )

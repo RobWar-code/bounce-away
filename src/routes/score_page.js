@@ -6,7 +6,7 @@ export default function ScorePage( {scoreTable}) {
         <Container>
             <Row>
                 {/* Note the use of camel case for css styles */}
-                <Col style={ {textAlign: 'center'} }>
+                <Col className="score-page-title col-light" style={ {textAlign: 'center'} }>
                     <h1>Score Page</h1>
                 </Col>
             </Row>

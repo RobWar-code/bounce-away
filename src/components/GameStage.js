@@ -16,7 +16,8 @@ function GameStage( {
     stageWidth,
     setStageWidth,
     batMoved,
-    setBatMoved
+    setBatMoved,
+    soundEnabled
 } ) {
     const maxStageWidth = 1200;
     const stageHeight = 400;
@@ -38,7 +39,7 @@ function GameStage( {
             setOldStageWidth(stageWidth);
             setStageWidthAdjusted(1);
             if (innerWidth < 1400) {
-                let newWidth = (innerWidth/1400) * maxStageWidth;
+                let newWidth = document.getElementById("stageCol").offsetWidth - 4;
                 setStageWidth(newWidth);
             }
             else {
@@ -68,6 +69,7 @@ function GameStage( {
     
     return (
         <Stage 
+            className="gameStage"
             width={stageWidth} 
             height={stageHeight} 
             options={{backgroundColor: 0xd0d060}} 
@@ -106,6 +108,7 @@ function GameStage( {
                 isBatDragging={isBatDragging}
                 batVectorX={batVectorX}
                 batVectorY={batVectorY}
+                soundEnabled={soundEnabled}
                 stageWidth={stageWidth} 
                 stageHeight={stageHeight} 
                 currentScore={currentScore}

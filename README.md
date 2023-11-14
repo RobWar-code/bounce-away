@@ -89,7 +89,37 @@ Development Times (man-days):
 | Scoring                       | 2.0              |   1.0  |
 | Game Scores Page              | 2.0              |   1.0  |
 | TOTALS                        | 26.7             |   14.7 |
-Completion Date: Monday 6th November.
+Completion Date: Monday 6th Nov 2023
 
 Documentation:   Est. 2.0
 Systems Testing: Est. 3.0
+
+#### Devleopments Phase 1A
+
+| Item                              | Actual Time |
+| --------------------------------- | ----------- |
+| On bat bounce clear by 2 * vector | 1.0         |
+| Check bat in basket               | 0.2         |
+| Click position check edges/basket | 0.5         |
+| Check for bat moving on bounce    | 1.0         |
+| Resize stage, adjust bat position | 0.2         |
+| Fast/Slow ball speed control      | 0.5         |
+| Set width of stage to 100% of Col | 0.1         |
+| Adjust scoring for ball speed     | 0.3         |
+| Tidy-up Tool and Header layout    | 0.2         |
+| Put border around stage           | 0.1         |
+| Clear console logs                | 0.1         |
+| Tidy-up score table               | 0.1         |
+| TOTALS                            | 4.3         |
+Completion Date: Tuesday 14th Nov 2023
+
+#### Phase 1 Release Phases
+
+| Item                              | Actual Time |
+| --------------------------------- | ----------- |
+| Build Production Model            |   
+| Release to Heroku                 |
+| Test on Mobile Device             |
+| Make Necessary Modifications      |
+| Add Link in Narayana-Art          |
+| TOTALS                            |

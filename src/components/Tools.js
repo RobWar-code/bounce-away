@@ -2,7 +2,12 @@ import {Row, Col, Form} from 'react-bootstrap';
 import SoundToggle from './SoundToggle';
 import GLOBALS from '../constants';
 
-export default function Tools({ballTraverseTime, setBallTraverseTime}) {
+export default function Tools({
+    soundEnabled, 
+    setSoundEnabled, 
+    ballTraverseTime, 
+    setBallTraverseTime
+}) {
 
     function sliderChange(event) {
         const percent = event.target.value;
@@ -13,17 +18,17 @@ export default function Tools({ballTraverseTime, setBallTraverseTime}) {
 
     return (
         <Row>
-            <Col sm={2} style={{textAlign: 'right'}}>
-                <SoundToggle />
+            <Col sm={12} md={4} className="text-center col-mid">
+                <SoundToggle soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled}/>
             </Col>
-            <Col sm={5} style={{textAlign: 'center'}}>
+            <Col sm={12} md={4} className="text-center col-light">
                 Click the stage to move the bat to the cursor or drag and drop to move the bat
             </Col>
-            <Col sm={5} style={{textAlign: 'center'}}>
-                <p>Ball Start Speed</p>
-                <span className="sliderText">Slow</span>
+            <Col sm={12} md={4} className="text-center col-mid">
+                <p className="sliderHead">Ball Start Speed</p>
+                <span className="sliderText">Slow&emsp;</span>
                 <Form.Range className="speedSlider" defaultValue={50} onChange={sliderChange}/>
-                <span className="sliderText">Fast</span>
+                <span className="sliderText">&emsp;Fast</span>
             </Col>
         </Row>
     )

@@ -1,19 +1,16 @@
-import {useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import {Button} from 'react-bootstrap';
 import dingSound from '../assets/sounds/ding.mp3';
 
-export default function SoundToggle() {
-    const [soundEnabled, setSoundEnabled] = useState(
-        JSON.parse(localStorage.getItem('soundEnabled')) || false
-    )
-
+export default function SoundToggle({soundEnabled, setSoundEnabled}) {
     useEffect( () => {
         localStorage.setItem('soundEnabled', soundEnabled);
     }, [soundEnabled])
 
     const toggleSound = () => {
-        setSoundEnabled(!soundEnabled);
-        if (soundEnabled) {
+        let newSound = !soundEnabled;
+        setSoundEnabled(newSound);
+        if (newSound) {
             playSound();
         }
     }
@@ -24,6 +21,6 @@ export default function SoundToggle() {
     }
 
     return (
-        <Button variant="success" onClick={toggleSound}>{soundEnabled ? 'Disable Sound' : 'Enable Sound'}</Button>
+        <Button variant="success" className="tool-button" onClick={toggleSound}>{soundEnabled ? 'Disable Sound' : 'Enable Sound'}</Button>
     )
 }

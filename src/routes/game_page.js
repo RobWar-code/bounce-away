@@ -16,6 +16,9 @@ export default function GamePage() {
     const [stageWidth, setStageWidth] = useState(1200);
     const [, setScoreTable] = useOutletContext();
     const [ballTraverseTime, setBallTraverseTime] = useState(GLOBALS.fastBallTraverseTime);
+    const [soundEnabled, setSoundEnabled] = useState(
+        JSON.parse(localStorage.getItem('soundEnabled')) || false
+    );
 
     useEffect ( () => {
         if (ballCount <= 0 && !gameOver && !justLaunched) {
@@ -41,7 +44,7 @@ export default function GamePage() {
             <Container>
                 <Row>
                     {/* Note the use of camel case for css styles */}
-                    <Col style={ {textAlign: 'center'} }>
+                    <Col id="stageCol" style={ {textAlign: 'center'} }>
                         <GameStage
                             currentScore={currentScore}
                             setCurrentScore={setCurrentScore}
@@ -54,10 +57,13 @@ export default function GamePage() {
                             batMoved={batMoved}
                             setBatMoved={setBatMoved}
                             ballTraverseTime={ballTraverseTime}
+                            soundEnabled={soundEnabled}
                         />
                     </Col>
                 </Row>
                 <Tools 
+                    soundEnabled={soundEnabled}
+                    setSoundEnabled={setSoundEnabled}
                     ballTraverseTime={ballTraverseTime}
                     setBallTraverseTime={setBallTraverseTime}
                 />
