@@ -35,8 +35,8 @@ function ScoreBar( {
                     <Col sm={12} md={6} className="text-center currentScore col-light">
                         Bounce Away!
                     </Col>
-                    <Col sm={12} md={6} className="text-center currentScore">
-                        <Button variant="success" onClick={handleJustLaunched}>Start Game</Button>
+                    <Col sm={12} md={6} className="text-center currentScore col-exlight">
+                        <Button variant="success" className="start-button" onClick={handleJustLaunched}>Start Game</Button>
                     </Col>
                     </>
                 ) :
@@ -45,7 +45,7 @@ function ScoreBar( {
                     <Col sm={12} md={6} className="text-center currentScore col-light">
                         Balls Remaining: {ballCount}
                     </Col> 
-                    <Col sm={12} md={6} className="text-center currentScore">
+                    <Col sm={12} md={6} className="text-center currentScore col-exlight">
                         Current-Score: {currentScore}
                     </Col>
                     </>
@@ -55,8 +55,8 @@ function ScoreBar( {
                     <Col sm={12} md={6} className="currentScore text-center col-light">
                         Game Over! --- Final Score: {currentScore}
                     </Col>
-                    <Col sm={12} md={6} className="currentScore text-center">
-                        <Button variant="success" onClick={handleStartGame}>Start Game</Button>
+                    <Col sm={12} md={6} className="currentScore text-center col-exlight">
+                        <Button variant="success" className="start-button" onClick={handleStartGame}>Start Game</Button>
                     </Col>
                     </>
                 )}

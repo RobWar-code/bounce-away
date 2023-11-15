@@ -179,7 +179,6 @@ export default function Bat( {
           eventMode={'dynamic'}
           pointerdown={onDragStart}
           pointerup={onDragEnd}
-          pointerupoutside={onDragEnd}
           pointermove={onDragMove}
         />
     )

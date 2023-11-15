@@ -94,11 +94,12 @@ Completion Date: Monday 6th Nov 2023
 Documentation:   Est. 2.0
 Systems Testing: Est. 3.0
 
-#### Devleopments Phase 1A
+#### Developments Phase 1A
 
 | Item                              | Actual Time |
 | --------------------------------- | ----------- |
-| On bat bounce clear by 2 * vector | 1.0         |
+| On bat bounce clear by 2 * vector | 2.0         |
+| Corner bounces                    | 2.0         |
 | Check bat in basket               | 0.2         |
 | Click position check edges/basket | 0.5         |
 | Check for bat moving on bounce    | 1.0         |
@@ -110,7 +111,7 @@ Systems Testing: Est. 3.0
 | Put border around stage           | 0.1         |
 | Clear console logs                | 0.1         |
 | Tidy-up score table               | 0.1         |
-| TOTALS                            | 4.3         |
+| TOTALS                            | 7.3         |
 Completion Date: Tuesday 14th Nov 2023
 
 #### Phase 1 Release Phases
