@@ -118,9 +118,19 @@ Completion Date: Tuesday 14th Nov 2023
 
 | Item                              | Actual Time |
 | --------------------------------- | ----------- |
-| Build Production Model            |   
-| Release to Heroku                 |
+| Build Production Model            |             |
+| Release to Heroku                 | 0.1         |
 | Test on Mobile Device             |
 | Make Necessary Modifications      |
-| Add Link in Narayana-Art          |
+| Add Link in Narayana-Art          | 1.5
 | TOTALS                            |
+
+Heroku App Name: https://bounce-away-0573028c80c3.herokuapp.com
+
+#### Phase 1B - Tasks Arisng
+
+| Item                              | Actual Time |
+| --------------------------------- | ----------- |
+| Favicon Icon                      |
+| Title                             |
+| Link To Zing Games                |
