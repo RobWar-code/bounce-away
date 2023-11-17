@@ -118,7 +118,7 @@ Completion Date: Tuesday 14th Nov 2023
 
 | Item                              | Actual Time |
 | --------------------------------- | ----------- |
-| Build Production Model            |             |
+| Build Production Model            | 0           |
 | Release to Heroku                 | 0.1         |
 | Test on Mobile Device             |
 | Make Necessary Modifications      |
@@ -131,6 +131,9 @@ Heroku App Name: https://bounce-away-0573028c80c3.herokuapp.com
 
 | Item                              | Actual Time |
 | --------------------------------- | ----------- |
-| Favicon Icon                      |
-| Title                             |
-| Link To Zing Games                |
+| Favicon Icon                      | 0.1
+| Title                             | 0
+| Link To Zing Games                | 0
+| Update to Heroku                  | 0.1
+| TOTAL                             | 0.2
+
