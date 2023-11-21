@@ -19,6 +19,7 @@ export default function GamePage() {
     const [soundEnabled, setSoundEnabled] = useState(
         JSON.parse(localStorage.getItem('soundEnabled')) || false
     );
+    const [traceOn, setTraceOn] = useState(1);
 
     useEffect ( () => {
         if (ballCount <= 0 && !gameOver && !justLaunched) {
@@ -58,12 +59,15 @@ export default function GamePage() {
                             setBatMoved={setBatMoved}
                             ballTraverseTime={ballTraverseTime}
                             soundEnabled={soundEnabled}
+                            traceOn={traceOn}
                         />
                     </Col>
                 </Row>
                 <Tools 
                     soundEnabled={soundEnabled}
                     setSoundEnabled={setSoundEnabled}
+                    traceOn={traceOn}
+                    setTraceOn={setTraceOn}
                     ballTraverseTime={ballTraverseTime}
                     setBallTraverseTime={setBallTraverseTime}
                 />

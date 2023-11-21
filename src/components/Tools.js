@@ -1,10 +1,13 @@
 import {Row, Col, Form} from 'react-bootstrap';
 import SoundToggle from './SoundToggle';
+import TraceToggle from './TraceToggle';
 import GLOBALS from '../constants';
 
 export default function Tools({
     soundEnabled, 
     setSoundEnabled, 
+    traceOn,
+    setTraceOn,
     ballTraverseTime, 
     setBallTraverseTime
 }) {
@@ -20,6 +23,7 @@ export default function Tools({
         <Row>
             <Col sm={12} md={4} className="text-center col-mid">
                 <SoundToggle soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled}/>
+                <TraceToggle traceOn={traceOn} setTraceOn={setTraceOn} />
             </Col>
             <Col sm={12} md={4} className="text-center col-light">
                 Click the stage to move the bat to the cursor or drag and drop to move the bat

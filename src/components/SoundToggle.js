@@ -1,6 +1,8 @@
 import {useEffect} from 'react';
 import {Button} from 'react-bootstrap';
 import dingSound from '../assets/sounds/ding.mp3';
+import soundOn from '../assets/images/soundOn.png';
+import soundOff from '../assets/images/soundOff.png';
 
 export default function SoundToggle({soundEnabled, setSoundEnabled}) {
     useEffect( () => {
@@ -21,6 +23,10 @@ export default function SoundToggle({soundEnabled, setSoundEnabled}) {
     }
 
     return (
-        <Button variant="success" className="tool-button" onClick={toggleSound}>{soundEnabled ? 'Disable Sound' : 'Enable Sound'}</Button>
+        <Button variant="success" className="tool-button" onClick={toggleSound}>{
+            soundEnabled ? 
+                <img src={soundOn} alt="Sound On" title="Sound Off" width="60" height="60" /> : 
+                <img src={soundOff} alt="Sound Off" title="Sound On" width="60" height="60" />
+        }</Button>
     )
 }

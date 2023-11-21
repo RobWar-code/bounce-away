@@ -120,10 +120,12 @@ Completion Date: Tuesday 14th Nov 2023
 | --------------------------------- | ----------- |
 | Build Production Model            | 0           |
 | Release to Heroku                 | 0.1         |
-| Test on Mobile Device             |
-| Make Necessary Modifications      |
-| Add Link in Narayana-Art          | 1.5
-| TOTALS                            |
+| Test on Mobile Device             | 2.0         |
+| Make Necessary Modifications      |             |
+| Add Link in Narayana-Art          | 1.5         |
+| TOTALS                            | 3.6         |
+
+Critique arising: Game too hard with bat controls.
 
 Heroku App Name: https://bounce-away-0573028c80c3.herokuapp.com
 
@@ -131,9 +133,25 @@ Heroku App Name: https://bounce-away-0573028c80c3.herokuapp.com
 
 | Item                              | Actual Time |
 | --------------------------------- | ----------- |
-| Favicon Icon                      | 0.1
-| Title                             | 0
-| Link To Zing Games                | 0
-| Update to Heroku                  | 0.1
-| TOTAL                             | 0.2
+| Favicon Icon                      | 0.1         |
+| Title                             | 0           |
+| Link To Zing Games                | 0           |
+| Update to Heroku                  | 0.1         |
+| TOTAL                             | 0.2         |
 
+#### Phase 1C - Tasks Arising
+
+Because the basic game seems to hard, I have decided to include an 
+optional ball path predictor, and double the scores if it is
+turned off. The feature can be turned off by clicking the relevant
+feature button.
+
+In harmony with this feature, change the Sound Enable/Disable button
+to a speaker graphic.
+
+| Item                              | Actual Time |
+| --------------------------------- | ----------- |
+| Graphic for Sound                 |  
+| Graphic for Path Trace            |
+| Code for Path Trace               |
+| TOTAL                             |
