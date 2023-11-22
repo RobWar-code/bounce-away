@@ -37,9 +37,9 @@ function MovingBall( {
 
   const doBounce = useCallback( (newX, newY, startVx, startVy) => {
 
-    const calculateReflection = (dx, dy, cornerArcX, cornerArcY, arcRadius, newX, newY) => {
-      const bx = vx;
-      const by = vy;
+    const calculateReflection = (dx, dy, startVx, startVy) => {
+      const bx = startVx;
+      const by = startVy;
   
       // Normalize the normal vector
       const length = Math.sqrt(dx * dx + dy * dy);
@@ -56,10 +56,10 @@ function MovingBall( {
       return [Rx, Ry];
     }
 
-    const doCornerBounce = (newX, newY) => {
+    const doCornerBounce = (newX, newY, startVx, startVy) => {
   
-      let newVx = vx;
-      let newVy = vy;
+      let newVx = startVx;
+      let newVy = startVy;
       let nx = newX;
       let ny = newY;
       let didBounce = false;
@@ -102,10 +102,10 @@ function MovingBall( {
         // Check whether there is a point of contact
         if (
             dl <= (GLOBALS.ballRadius + arcRadius) &&
-            dl >= (GLOBALS.ballRadius + arcRadius) * 0.9
+            dl >= (GLOBALS.ballRadius + arcRadius) * 0.2
         ) {
             // Calculate the corner bounce
-          let [nvx, nvy] = calculateReflection(dx, dy, cornerArcX, cornerArcY, arcRadius, newX, newY);
+          let [nvx, nvy] = calculateReflection(dx, dy, newVx, newVy);
           newVx = nvx;
           newVy = nvy;
           // Position on edge of corner
@@ -178,11 +178,13 @@ function MovingBall( {
       }
       return bounceEdge;
     }
+//  ----------------------------------------------------------------------------------------
+// Main doBounce Function
 
     let bounced = false;
     // Check for curved corner bounces
     let batBounced = false;
-    let [nvx, nvy, nx, ny, didBounce] = doCornerBounce(newX, newY);
+    let [nvx, nvy, nx, ny, didBounce] = doCornerBounce(newX, newY, startVx, startVy);
     let newVx = nvx;
     let newVy = nvy;
     if (didBounce) {
@@ -206,7 +208,7 @@ function MovingBall( {
         (newX + ballRadius >= stageWidth - GLOBALS.basketWidth) &&
         (newX + ballRadius <= stageWidth - 0.5 * GLOBALS.basketWidth) 
       ){
-        setVx(-vx);
+        newVx = -newVx;
         newX = stageWidth - GLOBALS.basketWidth - ballRadius;
       }
       else if (
@@ -216,21 +218,21 @@ function MovingBall( {
         (newY - ballRadius >= 0.5 * stageHeight + 1)
       ) {
         // Bottom Edge
-        setVy(-vy);
+        newVy = -newVy;
         newY = 0.5 * stageHeight + GLOBALS.basketHeight + ballRadius;
       }
       // Stage Edges
       else {
         if ((newY - ballRadius) <= 0) { 
-          setVy(-vy);
+          newVy = -newVy;
           newY = ballRadius + 1;
         }
         else if ((newY + ballRadius) >= stageHeight) {
-          setVy(-vy);
+          newVy = -newVy;
           newY = stageHeight - ballRadius - 1;
         }
         else if ((newX - ballRadius) <= 0) {
-          setVx(-vx);
+          newVx = -newVx;
           newX = ballRadius;
         }
       }
@@ -244,8 +246,6 @@ function MovingBall( {
       }
       newX = newX + 2 * newVx;
       newY = newY + 2 * newVy;
-      setVx(newVx);
-      setVy(newVy);
     }
     
     return [newX, newY, newVx, newVy, bounced];
@@ -260,9 +260,7 @@ function MovingBall( {
     stageHeight,
     stageWidth,
     vx,
-    vy,
-    setVx,
-    setVy
+    vy
   ]);
 
   // Determine velocity and initial position (pixels per 60th/second - ticker)
@@ -299,6 +297,8 @@ function MovingBall( {
 
         setX(endX);
         setY(endY);
+        setVx(newVx);
+        setVy(newVy);
 
         // Check for ball in basket
         if (
