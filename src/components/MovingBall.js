@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback} from 'react';
-import { Sprite, useApp } from '@pixi/react';
+import { Sprite, Graphics, useApp } from '@pixi/react';
 import dingSound from '../assets/sounds/ding.mp3';
 import GLOBALS from "../constants";
 import ball from '../assets/images/fastball.png';
@@ -34,8 +34,11 @@ function MovingBall( {
   const ballRef = useRef();
   const ballRadius = GLOBALS.ballDiameter / 2;
 
+// Helper Functions
 
   const doBounce = useCallback( (newX, newY, startVx, startVy) => {
+
+    // Helper Functions
 
     const calculateReflection = (dx, dy, startVx, startVy) => {
       const bx = startVx;
@@ -99,34 +102,115 @@ function MovingBall( {
         const dx = cornerArcX - newX;
         const dy = cornerArcY - newY;
         const dl = Math.sqrt((dx * dx) + (dy * dy));
+        let cornerBounce = false;
         // Check whether there is a point of contact
         if (
             dl <= (GLOBALS.ballRadius + arcRadius) &&
             dl >= (GLOBALS.ballRadius + arcRadius) * 0.2
         ) {
+          // Check whether the contact distance is valid (or if its an overshoot)
+          switch (corner) {
+            case 0:
+              if (dx > 0 && dy > 0) cornerBounce = true;
+              break;
+            case 1:
+              if (dx < 0 && dy > 0) cornerBounce = true;
+              break;
+            case 2:
+              if (dx < 0 && dy < 0) cornerBounce = true;
+              break;
+            case 3:
+              if (dx > 0 && dy < 0) cornerBounce = true;
+              break;
+            default:
+              console.log("Error in corner number");
+              break;
+          }
+        }
+        
+        if (cornerBounce) {
             // Calculate the corner bounce
           let [nvx, nvy] = calculateReflection(dx, dy, newVx, newVy);
           newVx = nvx;
           newVy = nvy;
-          // Position on edge of corner
-          let rx = Math.abs(dx/dl) * (ballRadius + 0.25 * GLOBALS.batHeight);
-          let ry = Math.abs(dx/dl) * (ballRadius + 0.25 * GLOBALS.batHeight);
+          let deX, deY;
+          // Calculate the slope
+          let gx = newVy/newVx;
+          let gy = newVx/newVy;
+          // Position on edge of bat
+          // Find nearest edge
           switch (corner) {
+            // Top Left
             case 0:
-              nx = cornerArcX - rx;
-              ny = cornerArcY - ry;
+              deX = newX - (batX - 0.5 * GLOBALS.batWidth) - ballRadius;
+              deY = newY - (batY - 0.5 * GLOBALS.batHeight) - ballRadius;
+              if (newVx > 0 && newVy > 0) {
+                newVx = -newVx;
+                gx = newVy/newVx;
+                gy = newVx/newVy;
+              }
+              if (newVx <= 0) {
+                nx = newX - deX - 1;
+                ny = newY + gx * deX;
+              }
+              else {
+                ny = newY - deY - 1;
+                nx = newX + gy * deY;
+              }
               break;
+            // Top Right
             case 1:
-              nx = cornerArcX + rx;
-              ny = cornerArcY - ry;
+              deX = ballRadius + (batX + 0.5 * GLOBALS.batWidth) - newX;
+              deY = newY - (batY - 0.5 * GLOBALS.batHeight) - ballRadius;
+              if (newVx < 0 && newVy > 0) {
+                newVx = -newVx;
+                gx = newVy / newVx;
+                gy = newVx / newVy;
+              }
+              if (newVx >= 0) {
+                nx = newX + deX + 1;
+                ny = newY + gx * deX;
+              }
+              else {
+                ny = newY - deY - 1;
+                nx = newX + gy * deY;
+              }
               break;
+            // Bottom Right
             case 2:
-              nx = cornerArcX + rx;
-              ny = cornerArcY + ry;
+              deX = ballRadius + (batX + 0.5 * GLOBALS.batWidth) - newX;
+              deY = ballRadius + (batY + 0.5 * GLOBALS.batHeight) - newY;
+              if (newVx < 0 && newVy < 0) {
+                newVx = -newVx;
+                gx = newVy/newVx;
+                gy = newVx/newVy;
+              }
+              if (newVx >= 0) {
+                nx = newX + deX + 1;
+                ny = newY + gx * deX;
+              }
+              else {
+                ny = newY + deY + 1;
+                nx = newX + gy * deY;
+              }
               break
+            // Bottom Left
             case 3:
-              nx = cornerArcX - rx;
-              ny = cornerArcY + ry;
+              deX = newX - (batX - 0.5 * GLOBALS.batWidth) - ballRadius;
+              deY = ballRadius + (batY + 0.5 * GLOBALS.batHeight) - newY;
+              if (newVx > 0 && newVy < 0) {
+                newVx = -newVx;
+                gx = newVy/newVx;
+                gy = newVx/newVy;
+              }
+              if (newVx <= 0) {
+                nx = newX - deX - 1;
+                ny = newY + gx * deX;
+              }
+              else {
+                ny = newY + deY + 1;
+                nx = newX + gy * deY;
+              }
               break;
             default:
               console.log("Corner Adjustment - bad corner");
@@ -188,6 +272,7 @@ function MovingBall( {
     let newVx = nvx;
     let newVy = nvy;
     if (didBounce) {
+      bounced = true;
       batBounced = true;
       newX = nx;
       newY = ny;
@@ -195,12 +280,13 @@ function MovingBall( {
     else {
       let bounceEdge = isInBatEdge(newX, newY, batX, batY);
       if (bounceEdge) {
+        bounced = true;
         batBounced = true;
         if (bounceEdge === 1 || bounceEdge === 3) newVy = -vy;
         else newVx = -vx;
       }
 
-      // Basket
+      // Basket Bounce
       else if (
         // Left Edge
         (newY >= 0.5 * stageHeight - 0.5 * GLOBALS.basketHeight) &&
@@ -208,6 +294,7 @@ function MovingBall( {
         (newX + ballRadius >= stageWidth - GLOBALS.basketWidth) &&
         (newX + ballRadius <= stageWidth - 0.5 * GLOBALS.basketWidth) 
       ){
+        bounced = true;
         newVx = -newVx;
         newX = stageWidth - GLOBALS.basketWidth - ballRadius;
       }
@@ -218,20 +305,24 @@ function MovingBall( {
         (newY - ballRadius >= 0.5 * stageHeight + 1)
       ) {
         // Bottom Edge
+        bounced = true;
         newVy = -newVy;
-        newY = 0.5 * stageHeight + GLOBALS.basketHeight + ballRadius;
+        newY = 0.5 * stageHeight + GLOBALS.basketHeight * 0.5 + ballRadius;
       }
       // Stage Edges
       else {
         if ((newY - ballRadius) <= 0) { 
+          bounced = true;
           newVy = -newVy;
           newY = ballRadius + 1;
         }
         else if ((newY + ballRadius) >= stageHeight) {
+          bounced = true;
           newVy = -newVy;
           newY = stageHeight - ballRadius - 1;
         }
         else if ((newX - ballRadius) <= 0) {
+          bounced = true;
           newVx = -newVx;
           newX = ballRadius;
         }
@@ -244,8 +335,8 @@ function MovingBall( {
         newVx = newVx + batVectorX / 2;
         newVy = newVy + batVectorY / 2;
       }
-      newX = newX + 2 * newVx;
-      newY = newY + 2 * newVy;
+      newX = newX + newVx;
+      newY = newY + newVy;
     }
     
     return [newX, newY, newVx, newVy, bounced];
@@ -289,8 +380,6 @@ function MovingBall( {
         let newY = y + vy;
         let startVx = vx;
         let startVy = vy;
-
-        // if (traceOn) doPathTrace(newX, newY, startVx, startVy);
 
         // Check for bounces
         let [endX, endY, newVx, newVy, bounced] = doBounce(newX, newY, startVx, startVy);
@@ -395,13 +484,51 @@ function MovingBall( {
     setStartBallTraverseTime
   ]);
 
+  const drawTrace = useCallback((g) => {
+    g.clear();
+    g.lineStyle(3, 0x50a050, 1);
 
+    let startX = x;
+    let startY = y;
+    let startVx = vx;
+    let startVy = vy;
 
+    let moveCount = 0;
+    let endTrace = false;
+    // Skip alternate traces
+    while (moveCount < GLOBALS.numTraceMoves && !endTrace) {
+      let newX = startX + startVx;
+      let newY = startY + startVy;
+      let [endX, endY, newVx, newVy, bounced] = doBounce(newX, newY, startVx, startVy);
+      if (!bounced && moveCount % 2 === 0) {
+        g.moveTo(startX, startY);
+        g.lineTo(endX, endY);
+      }
+      // Check for in basket
+      if (
+        newVy > 0 &&
+        endX >= stageWidth - GLOBALS.basketWidth &&
+        endY >= GLOBALS.stageHeight * 0.5 - GLOBALS.basketHeight * 0.5 &&
+        endY <= GLOBALS.stageHeight * 0.5
+      ) {
+        endTrace = true;
+      }
+      // Check for beyond stage right
+      else if (endX >= stageWidth) {
+        endTrace = true;
+      }
+      startX = endX;
+      startY = endY;
+      startVx = newVx;
+      startVy = newVy;
+      ++moveCount;
+    }
+  }, [x, y, vx, vy, stageWidth, doBounce])
 
   return (
     <>
     <Sprite ref={ballRef} x={x} y={y} image={ball} anchor={{x:0.5, y:0.5}}/>
-    {/* <Graphics draw={drawTrace} /> */}
+    { traceOn === 1 && <Graphics draw={drawTrace} />}
     </>
   )
 }

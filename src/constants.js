@@ -10,7 +10,8 @@ const GLOBALS = {
     basketHeight: 70,
     ballDiameter: 30,
     ballRadius: 15,
-    ballsPerGame: 15
+    ballsPerGame: 15,
+    numTraceMoves: 300
 };
 
 export default GLOBALS;
