@@ -1,0 +1,85 @@
+Bat Intersect Algorithms
+
+	Contents
+
+		Straight Edges
+
+
+<h1>Straight Edges
+
+	// Determine the relative vectors of the bat and the ball
+	dvx = vx - batvx
+	dvy = vy - batvy
+
+	// We have to allow for the ball travelling rapidly and possibly passing through two sides
+	// so that unless we know its prior position we cannot distinguish between a ball bounced
+	// from the second side and the one passing through the first. So we must test the prior
+	// position
+
+	
+
+	let bounced = false
+	dy = ballY - batTopEdgeY
+	if (dvy > 0 && (oldBallY + ballRadius + dvy < batTopEdgeY) && dy >= -ballRadius && dy < batHeight &&
+		ballX >= leftBatTopEdge && ballX <= rightBatTopEdge) {
+		bounced = true
+		// Determine the ball centre intersect
+		ix = ballX + dvx/dvy * (-dy) // Allowing for whether approaching or retreating from the edge
+		// Determine the ball edge intersect
+		px = ix - dvx/dvy * r
+		// Set the ball on the px point
+		ballX = px
+		ballY = batTopEdgeY - r
+		// Set the new ball vector (assuming no x vector is imparted)
+		vy = -vy + batvy
+		
+	}
+	else {
+		// Bottom Edge
+		dy = ballY - batBottomEdgeY
+		if (dvy < 0 && (oldBallY - ballRadius - dvy > batBottomEdgeY) && dy <= ballRadius && dy > -batHeight && 
+			ballX >= leftBatBottomEdge && ballX <= rightBatBottomEdge) {
+			bounced = true
+			// Determine the ball centre intersect
+			ix = ballX + dvx/dvy * dy
+			// Determine the ball edge intersect
+			px = ix - dvx/dvy * r
+			// Set the ball on the px point
+			ballX = px
+			ballY = batBottomEdgeY + r
+			// Set the new ball vector
+			vy = -vy + batvy
+		}
+		else {
+			dx = ballX - batRightEdgeX
+			if (dvx < 0 && (oldBallX - ballRadius - dvx > batRightEdgeX) && dx <= ballRadius && dx > -batWidth &&
+				ballY >= topBatRightEdge && ballY < bottomBatRightEdge) {
+				bounced = true
+				// Determine the ball intersect
+				iy = ballY + dvy/dvx * dx
+				// Determine the ball edge intersect
+				py = iy - dvy/dvx * r
+				// Set the ball on the py point
+				ballY = py
+				ballX = batRightEdgeX + r
+			}
+				
+			else {
+				// Left Edge
+				dx = ballX - batLeftEdgeX
+				if (dvx > 0 && (oldBallX + ballRadius + dvx < batLeftEdgeX) && dx >= -ballRadius && dx < batWidth &&
+					ballY >= topBatLeftEdge && ballY <= bottomBatLeftEdge) {
+					bounced = true;
+					// Determine the ball intersect
+					iy = ballY + dvy/dvx * dx
+					// Determine the ball edge intersect
+					py = iy - dvy/dvx * r
+					// Set the ball on the py point
+					ballY = py
+					ballX = batLeftEdgeX - r
+					// Set the vector
+					vx = -vx + batvx
+				}
+			}
+		}
+	}

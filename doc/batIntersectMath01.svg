@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   sodipodi:docname="batIntersectMath01.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.57905443"
+     inkscape:cx="307.3977"
+     inkscape:cy="785.76378"
+     inkscape:window-width="1600"
+     inkscape:window-height="832"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="40.690056"
+       y="10.644001"
+       id="text2564"><tspan
+         sodipodi:role="line"
+         id="tspan2562"
+         style="stroke-width:0.264583"
+         x="40.690056"
+         y="10.644001">Bounce-Away Geometric/Dynamic Problems</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="12.943886"
+       y="29.335974"
+       id="text6894"><tspan
+         sodipodi:role="line"
+         id="tspan6892"
+         style="stroke-width:0.264583"
+         x="12.943886"
+         y="29.335974">The intersection of a circular &quot;ball&quot; with a linear edge.</tspan></text>
+    <ellipse
+       style="fill:none;stroke:#0d0000;stroke-width:0.264583"
+       id="path18036"
+       cx="23.539669"
+       cy="53.866844"
+       rx="14.553086"
+       ry="15.431267" />
+    <ellipse
+       style="fill:none;stroke:#0d0000;stroke-width:0.264583"
+       id="path18060"
+       cx="23.483067"
+       cy="53.457584"
+       rx="1.4925995"
+       ry="1.3798817" />
+    <path
+       style="fill:#ff0000;stroke:#f70000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 23.439367,52.904212 54.12589,32.026852"
+       id="path18208" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 34.954614,85.094267 140.317246,0.01048"
+       id="path18379" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458299;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:0.26458299,0.26458299;stroke-dashoffset:0"
+       d="m 23.439367,52.904212 46.496942,-1.015966 v 0"
+       id="path18607" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="40.327576"
+       y="59.845444"
+       id="text21351"><tspan
+         sodipodi:role="line"
+         id="tspan21349"
+         style="stroke-width:0.264583"
+         x="40.327576"
+         y="59.845444">vx/vy</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="29.791975"
+       y="52.141624"
+       id="text35631"><tspan
+         sodipodi:role="line"
+         id="tspan35629"
+         style="stroke-width:0.264583"
+         x="29.791975"
+         y="52.141624">r</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="71.863869"
+       y="78.820724"
+       id="text45199"><tspan
+         sodipodi:role="line"
+         id="tspan45197"
+         style="stroke-width:0.264583"
+         x="71.863869"
+         y="78.820724">L</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="19.477001"
+       y="102.74564"
+       id="text46853"><tspan
+         sodipodi:role="line"
+         id="tspan46851"
+         style="stroke-width:0.264583"
+         x="19.477001"
+         y="102.74564">The ball travels along the vector L (of gradient vx/vy) to </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="19.477001"
+         y="110.68314"
+         id="tspan46855">the point where its edge is in contact P with the linear edge</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="19.477001"
+         y="118.62064"
+         id="tspan46857">E</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="175.27185"
+       y="85.104744"
+       id="text59695"><tspan
+         sodipodi:role="line"
+         id="tspan59693"
+         style="stroke-width:0.264583"
+         x="175.27185"
+         y="85.104744">E</tspan></text>
+    <ellipse
+       style="fill:none;stroke:#0d0000;stroke-width:0.264583"
+       id="path18036-3"
+       cx="50.796173"
+       cy="70.064758"
+       rx="14.553086"
+       ry="15.431267" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="49.795052"
+       y="88.008759"
+       id="text66494"><tspan
+         sodipodi:role="line"
+         id="tspan66492"
+         style="stroke-width:0.264583"
+         x="49.795052"
+         y="88.008759">P</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="95.311935"
+       y="127.42209"
+       id="text71294"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         id="tspan71296"
+         x="95.311935"
+         y="127.42209" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="18.756548"
+       y="127.64178"
+       id="text79210"><tspan
+         sodipodi:role="line"
+         id="tspan79208"
+         style="stroke-width:0.264583"
+         x="18.756548"
+         y="127.64178">G iven that E is horizontal and that we know that Pc2 = r, </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.756548"
+         y="135.57927"
+         id="tspan104110">then we can determine the length of PI using the gradient</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.756548"
+         y="143.51677"
+         id="tspan123116">vx/vy, ie:</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.756548"
+         y="151.45427"
+         id="tspan123118">PI = r * vx/vy</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.756548"
+         y="159.39177"
+         id="tspan123120" /><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.756548"
+         y="167.32927"
+         id="tspan123122">The position of I can be determined from the y</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.756548"
+         y="175.26677"
+         id="tspan124600">displacement of c1 from E, ie:</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.756548"
+         y="183.20427"
+         id="tspan130002">Ix - c1x = (Ey - c1y) * vx/vy</tspan></text>
+    <ellipse
+       style="fill:#ff0000;stroke:#f70000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:0.264583, 0.264583;stroke-dashoffset:0;stroke-opacity:1"
+       id="path89106"
+       cx="52.095936"
+       cy="70.155052"
+       rx="2.1154444"
+       ry="1.4674164" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="52.067467"
+       y="68.77964"
+       id="text90838"><tspan
+         sodipodi:role="line"
+         id="tspan90836"
+         style="stroke-width:0.264583"
+         x="52.067467"
+         y="68.77964">c2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="16.929565"
+       y="50.053463"
+       id="text96992"><tspan
+         sodipodi:role="line"
+         id="tspan96990"
+         style="stroke-width:0.264583"
+         x="16.929565"
+         y="50.053463">c1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="77.565262"
+       y="84.931061"
+       id="text113160"><tspan
+         sodipodi:role="line"
+         id="tspan113158"
+         style="stroke-width:0.264583"
+         x="77.565262"
+         y="84.931061">I</tspan></text>
+  </g>
+</svg>

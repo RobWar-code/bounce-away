@@ -141,6 +141,8 @@ export default function Bat( {
     // End dragging
     function onDragEnd() {
         setIsBatDragging(0);
+        setBatVectorX(0);
+        setBatVectorY(0);
         const sprite = spriteRef.current;
         if (sprite) {
         sprite.dragging = false;

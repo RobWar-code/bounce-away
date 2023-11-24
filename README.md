@@ -151,7 +151,8 @@ to a speaker graphic.
 
 | Item                              | Actual Time |
 | --------------------------------- | ----------- |
-| Graphic for Sound                 |  
-| Graphic for Path Trace            |
-| Code for Path Trace               |
+| Graphic for Sound                 | 0.1         |
+| Graphic for Path Trace            | 0.1         |
+| Code for Path Trace               | 1.5         |
+| Rework bat bounces                |
 | TOTAL                             |

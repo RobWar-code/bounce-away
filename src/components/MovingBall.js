@@ -36,7 +36,7 @@ function MovingBall( {
 
 // Helper Functions
 
-  const doBounce = useCallback( (newX, newY, startVx, startVy) => {
+  const doBounce = useCallback( (oldBallX, oldBallY, newX, newY, startVx, startVy) => {
 
     // Helper Functions
 
@@ -57,6 +57,113 @@ function MovingBall( {
       const Ry = by - 2 * dotProduct * Ny;
   
       return [Rx, Ry];
+    }
+
+    const doBatEdgeBounce = (oldBallX, oldBallY, batX, batY, ballVx, ballVy, batVx, batVy) => {
+      let newBallX = oldBallX + ballVx;
+      let newBallY = oldBallY + ballVy;
+
+      // Determine the relative vectors of the bat and the ball
+      let dvx = ballVx - batVx;
+      let dvy = ballVy - batVy;
+
+      let newBallVy = ballVy;
+      let newBallVx = ballVx;
+
+      // We have to allow for the ball travelling rapidly and possibly passing through two sides
+      // so that unless we know its prior position we cannot distinguish between a ball bounced
+      // from the second side and the one passing through the first. So we must test the prior
+      // position
+
+      const ballRadius = GLOBALS.ballRadius;
+      const batHeight = GLOBALS.batHeight;
+      const batWidth = GLOBALS.batWidth;
+
+
+      const batTopEdgeY = batY - batHeight / 2;
+      const leftBatTopEdge = batX - batWidth / 2 + batHeight / 4;
+      const rightBatTopEdge = batX + batWidth / 2 - batHeight / 4;
+      const batBottomEdgeY =  batY + batHeight / 2;
+      const leftBatBottomEdge = batX - batWidth / 2 + batHeight / 4;
+      const rightBatBottomEdge = batX + batWidth / 2 - batHeight / 4;
+      const batLeftEdgeX = batX - batWidth / 2;
+      const topBatLeftEdge = batY - batHeight / 2 + batHeight / 4;
+      const bottomBatLeftEdge = batY + batHeight / 2 - batHeight / 4;
+      const batRightEdgeX = batX + batWidth / 2;
+      const topBatRightEdge = batY - batHeight / 2 + batHeight / 4;
+      const bottomBatRightEdge = batY + batHeight / 2 - batHeight / 4;
+      const r = ballRadius;
+
+      let bounced = false;
+      let dx, ix, iy, px, py;
+      let dy = newBallY - batTopEdgeY;
+      if (dvy > 0 && (oldBallY + ballRadius < batTopEdgeY) && dy >= -ballRadius && dy < 100 &&
+        newBallX >= leftBatTopEdge && newBallX <= rightBatTopEdge) {
+        bounced = true;
+        console.log("Got top edge bounce", dvy);
+        // Determine the ball centre intersect
+        ix = newBallX + dvx/dvy * (-dy); // Allowing for whether approaching or retreating from the edge
+        // Determine the ball edge intersect
+        px = ix - dvx/dvy * r;
+        // Set the ball on the px point
+        newBallX = px;
+        newBallY = batTopEdgeY - r - 1;
+        // Set the new ball vector (assuming no x vector is imparted)
+        newBallVy = -ballVy + batVy;
+        
+      }
+      else {
+        // Bottom Edge
+        let dy = newBallY - batBottomEdgeY;
+        if (dvy < 0 && (oldBallY - ballRadius > batBottomEdgeY) && dy <= ballRadius && dy > -batHeight && 
+          newBallX >= leftBatBottomEdge && newBallX <= rightBatBottomEdge) {
+          bounced = true;
+          // Determine the ball centre intersect
+          ix = newBallX + dvx/dvy * dy;
+          // Determine the ball edge intersect
+          px = ix - dvx/dvy * r;
+          // Set the ball on the px point
+          newBallX = px;
+          newBallY = batBottomEdgeY + r + 1;
+          // Set the new ball vector
+          newBallVy = -ballVy + batVy;
+        }
+        else {
+          dx = newBallX - batRightEdgeX;
+          if (dvx < 0 && (oldBallX - ballRadius > batRightEdgeX) && dx <= ballRadius && dx > -batWidth &&
+            newBallY >= topBatRightEdge && newBallY < bottomBatRightEdge) {
+            bounced = true;
+            // Determine the ball intersect
+            iy = newBallY + dvy/dvx * (-dx);
+            // Determine the ball edge intersect
+            py = iy - dvy/dvx * r;
+            // Set the ball on the py point
+            newBallY = py;
+            newBallX = batRightEdgeX + r;
+            // Set the new vector
+            newBallVx = -ballVx + batVx;
+          }
+            
+          else {
+            // Left Edge
+            dx = newBallX - batLeftEdgeX;
+            if (dvx > 0 && (oldBallX + ballRadius < batLeftEdgeX) && dx >= -ballRadius && dx < batWidth &&
+              newBallY >= topBatLeftEdge && newBallY <= bottomBatLeftEdge) {
+              bounced = true;
+              // Determine the ball intersect
+              iy = newBallY + dvy/dvx * dx;
+              // Determine the ball edge intersect
+              py = iy - dvy/dvx * r;
+              // Set the ball on the py point
+              newBallY = py;
+              newBallX = batLeftEdgeX - r;
+              // Set the vector
+              newBallVx = -ballVx + batVx;
+            }
+          }
+        }
+      }
+      return [newBallX, newBallY, newBallVx, newBallVy, bounced];
     }
 
     const doCornerBounce = (newX, newY, startVx, startVy) => {
@@ -222,46 +329,6 @@ function MovingBall( {
       return [newVx, newVy, nx, ny, didBounce];
     }
 
-    const isInBatEdge = (newX, newY, batX, batY) => {
-      let bounceEdge = 0;
-  
-        // Bat - Top Edge
-      if ((newX >= batX - 0.5 * GLOBALS.batWidth) && 
-        (newX <= batX + 0.5 * GLOBALS.batWidth) && 
-        (newY + ballRadius >= batY - 0.5 * GLOBALS.batHeight) &&
-        (newY + ballRadius <= batY - 1)
-      ) {
-        bounceEdge = 1;
-      }
-      // Bottom Edge
-      else if (
-        (newX >= batX - 0.5 * GLOBALS.batWidth) && 
-        (newX <= batX + 0.5 * GLOBALS.batWidth) &&
-        (newY - ballRadius <= batY + 0.5 * GLOBALS.batHeight) &&
-        (newY - ballRadius >= batY + 1)
-      ) {
-        bounceEdge = 3;
-      }
-      // Left Edge
-      else if (
-        (newY >= batY - 0.5 * GLOBALS.batHeight) &&
-        (newY <= batY + 0.5 * GLOBALS.batHeight) &&
-        (newX + 0.5 * ballRadius >= batX - 0.5 * GLOBALS.batWidth) &&
-        (newX + 0.5 * ballRadius <= batX - 1)
-      ) {
-        bounceEdge = 4;
-      }
-      // Right Edge
-      else if (
-        (newY >= batY - 0.5 * GLOBALS.batHeight) &&
-        (newY <= batY + 0.5 * GLOBALS.batHeight) &&
-        (newX - 0.5 * ballRadius <= batX + 0.5 * GLOBALS.batWidth) &&
-        (newX - 0.5 * ballRadius >= batX + 1)
-      ) {
-        bounceEdge = 2;
-      }
-      return bounceEdge;
-    }
 //  ----------------------------------------------------------------------------------------
 // Main doBounce Function
 
@@ -278,14 +345,12 @@ function MovingBall( {
       newY = ny;
     }
     else {
-      let bounceEdge = isInBatEdge(newX, newY, batX, batY);
-      if (bounceEdge) {
-        bounced = true;
-        batBounced = true;
-        if (bounceEdge === 1 || bounceEdge === 3) newVy = -vy;
-        else newVx = -vx;
-      }
+      [newX, newY, newVx, newVy, bounced] = doBatEdgeBounce(oldBallX, 
+        oldBallY, batX, batY, startVx, startVy, batVectorX, batVectorY);
 
+      if (bounced) {
+        batBounced = true;
+      }
       // Basket Bounce
       else if (
         // Left Edge
@@ -330,11 +395,13 @@ function MovingBall( {
     }
 
     if (batBounced) {
+      /*
       if (isBatDragging) {
         // Add the bat vector
         newVx = newVx + batVectorX / 2;
         newVy = newVy + batVectorY / 2;
       }
+      */
       newX = newX + newVx;
       newY = newY + newVy;
     }
@@ -347,11 +414,8 @@ function MovingBall( {
     batVectorY,
     batX,
     batY,
-    isBatDragging,
     stageHeight,
-    stageWidth,
-    vx,
-    vy
+    stageWidth
   ]);
 
   // Determine velocity and initial position (pixels per 60th/second - ticker)
@@ -382,7 +446,7 @@ function MovingBall( {
         let startVy = vy;
 
         // Check for bounces
-        let [endX, endY, newVx, newVy, bounced] = doBounce(newX, newY, startVx, startVy);
+        let [endX, endY, newVx, newVy, bounced] = doBounce(x, y, newX, newY, startVx, startVy);
 
         setX(endX);
         setY(endY);
@@ -499,7 +563,7 @@ function MovingBall( {
     while (moveCount < GLOBALS.numTraceMoves && !endTrace) {
       let newX = startX + startVx;
       let newY = startY + startVy;
-      let [endX, endY, newVx, newVy, bounced] = doBounce(newX, newY, startVx, startVy);
+      let [endX, endY, newVx, newVy, bounced] = doBounce(startX, startY, newX, newY, startVx, startVy);
       if (!bounced && moveCount % 2 === 0) {
         g.moveTo(startX, startY);
         g.lineTo(endX, endY);
