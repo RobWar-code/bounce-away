@@ -20,7 +20,7 @@ Bat Intersect Algorithms
 
 	let bounced = false
 	dy = ballY - batTopEdgeY
-	if (dvy > 0 && (oldBallY + ballRadius + dvy < batTopEdgeY) && dy >= -ballRadius && dy < batHeight &&
+	if (dvy > 0 && (oldBallY + ballRadius < batTopEdgeY) && dy >= -ballRadius && dy < batHeight &&
 		ballX >= leftBatTopEdge && ballX <= rightBatTopEdge) {
 		bounced = true
 		// Determine the ball centre intersect
@@ -37,7 +37,7 @@ Bat Intersect Algorithms
 	else {
 		// Bottom Edge
 		dy = ballY - batBottomEdgeY
-		if (dvy < 0 && (oldBallY - ballRadius - dvy > batBottomEdgeY) && dy <= ballRadius && dy > -batHeight && 
+		if (dvy < 0 && (oldBallY - ballRadius > batBottomEdgeY) && dy <= ballRadius && dy > -batHeight && 
 			ballX >= leftBatBottomEdge && ballX <= rightBatBottomEdge) {
 			bounced = true
 			// Determine the ball centre intersect
@@ -52,7 +52,7 @@ Bat Intersect Algorithms
 		}
 		else {
 			dx = ballX - batRightEdgeX
-			if (dvx < 0 && (oldBallX - ballRadius - dvx > batRightEdgeX) && dx <= ballRadius && dx > -batWidth &&
+			if (dvx < 0 && (oldBallX - ballRadius > batRightEdgeX) && dx <= ballRadius && dx > -batWidth &&
 				ballY >= topBatRightEdge && ballY < bottomBatRightEdge) {
 				bounced = true
 				// Determine the ball intersect
@@ -67,7 +67,7 @@ Bat Intersect Algorithms
 			else {
 				// Left Edge
 				dx = ballX - batLeftEdgeX
-				if (dvx > 0 && (oldBallX + ballRadius + dvx < batLeftEdgeX) && dx >= -ballRadius && dx < batWidth &&
+				if (dvx > 0 && (oldBallX + ballRadius < batLeftEdgeX) && dx >= -ballRadius && dx < batWidth &&
 					ballY >= topBatLeftEdge && ballY <= bottomBatLeftEdge) {
 					bounced = true;
 					// Determine the ball intersect

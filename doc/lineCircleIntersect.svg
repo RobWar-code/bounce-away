@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg159224"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   sodipodi:docname="lineCircleIntersect.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview159226"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.57905443"
+     inkscape:cx="309.12465"
+     inkscape:cy="568.16766"
+     inkscape:window-width="1600"
+     inkscape:window-height="832"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs159221" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="58.608177"
+       y="9.0573902"
+       id="text166899"><tspan
+         sodipodi:role="line"
+         id="tspan166897"
+         style="stroke-width:0.264583"
+         x="58.608177"
+         y="9.0573902">Intersection of line and circle</tspan></text>
+    <ellipse
+       style="fill:none;fill-rule:evenodd;stroke-width:0.264583;stroke:#000000;stroke-opacity:1"
+       id="path184237"
+       cx="107.99928"
+       cy="54.681187"
+       rx="26.97168"
+       ry="26.406971" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 41.938965,63.068031 166.5201,23.538866"
+       id="path184316"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="34.890015"
+       y="70.187202"
+       id="text188137"><tspan
+         sodipodi:role="line"
+         id="tspan188135"
+         style="stroke-width:0.264583"
+         x="34.890015"
+         y="70.187202">A</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="166.5201"
+       y="23.538864"
+       id="text192181"><tspan
+         sodipodi:role="line"
+         id="tspan192179"
+         style="stroke-width:0.264583"
+         x="166.5201"
+         y="23.538864">B</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 81.743882,51.17353 27.288858,2.435532"
+       id="path197034" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="95.409691"
+       y="56.695019"
+       id="text200110"><tspan
+         sodipodi:role="line"
+         id="tspan200108"
+         style="stroke-width:0.264583"
+         x="95.409691"
+         y="56.695019">r</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="109.03274"
+       y="53.609062"
+       id="text201742"><tspan
+         sodipodi:role="line"
+         id="tspan201740"
+         style="stroke-width:0.264583"
+         x="109.03274"
+         y="53.609062">C</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="18.336939"
+       y="100.77318"
+       id="text206564"><tspan
+         sodipodi:role="line"
+         id="tspan206562"
+         style="stroke-width:0.264583"
+         x="18.336939"
+         y="100.77318">Question: What are the points of intersection of the line</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.336939"
+         y="108.71068"
+         id="tspan206566">AB with circle of radius r centred at C - if any.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.336939"
+         y="116.64818"
+         id="tspan206568" /><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.336939"
+         y="124.58568"
+         id="tspan206570">let m = (By - Ay)/(Bx - Ax)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.336939"
+         y="132.52318"
+         id="tspan223506">then the point of intersect (along y) at b will be given by</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.336939"
+         y="140.46068"
+         id="tspan249260">b = Ay - mx</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.336939"
+         y="148.39818"
+         id="tspan265462">This is convergent with the points of the circle at</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.336939"
+         y="156.33568"
+         id="tspan270576">r^2 = (x^2 + y^2)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.336939"
+         y="164.27318"
+         id="tspan297894" /><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.336939"
+         y="172.21068"
+         id="tspan239644" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="70.641884"
+       y="135.4666"
+       id="text218748"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         id="tspan218750"
+         x="70.641884"
+         y="135.4666" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="18.21282"
+       y="165.58029"
+       id="text424014"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="165.58029"
+         id="tspan436350">Let us then put:</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="173.51779"
+         id="tspan436352">y = Ay - mx</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="181.45529"
+         id="tspan438854">(y - Cy)^2 = r^2 - (x - Cx)^2</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="189.39279"
+         id="tspan617367">(Ay - m(x - Ax) - Cy)^2 = r^2 - (x - Cx)^2</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="197.33029"
+         id="tspan629279">(Ay - m(x - Ax) - Cy)^2 + (x - Cx) ^ 2 - r^2 = 0</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="205.26779"
+         id="tspan689461">(Ay - mx + mAx - Cy)^2 + (x - Cx)^2 - r^2 = 0</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="213.20529"
+         id="tspan711375">Ay^2 - 2mx.Ay + 2Ay.mAx</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="221.14279"
+         id="tspan547459" /><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="229.08029"
+         id="tspan450592" /></text>
+  </g>
+</svg>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   sodipodi:docname="corner-intersectA.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:snap-global="false"
+     inkscape:zoom="0.57905443"
+     inkscape:cx="321.21333"
+     inkscape:cy="545.71726"
+     inkscape:window-width="1600"
+     inkscape:window-height="832"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter118243"
+       x="-0.29846207"
+       y="-0.40210937"
+       width="1.5914833"
+       height="1.7971716">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="2.9710487"
+         id="feGaussianBlur118245" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="49.527168"
+       y="12.882155"
+       id="text13718"><tspan
+         sodipodi:role="line"
+         id="tspan13716"
+         style="stroke-width:0.264583"
+         x="49.527168"
+         y="12.882155">Intersection of Moving Circles A</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="6.0647445"
+       y="29.104206"
+       id="text16728"><tspan
+         sodipodi:role="line"
+         id="tspan16726"
+         style="stroke-width:0.264583"
+         x="6.0647445"
+         y="29.104206">The corners of the bat are semi-circles of radius 1/4 of the</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="6.0647445"
+         y="37.041706"
+         id="tspan16730">bat height. The ball is circular and may approach these, so </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="6.0647445"
+         y="44.979206"
+         id="tspan20230">that it is bounced back at the same angle as the vector</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="6.0647445"
+         y="52.916706"
+         id="tspan20232">opposite the normal of the point of intersect.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="32.935246"
+       y="66.519348"
+       id="text41078"><tspan
+         sodipodi:role="line"
+         id="tspan41076"
+         style="stroke-width:0.264583"
+         x="32.935246"
+         y="66.519348">Determining the point of intersect (if any)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="7.5338063"
+       y="75.874344"
+       id="text51066"><tspan
+         sodipodi:role="line"
+         id="tspan51064"
+         style="stroke-width:0.264583"
+         x="7.5338063"
+         y="75.874344">Considering the top left corner:</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 76.777272,168.32707 -0.248319,-24.13484 c -1.679984,-1.18286 3.510436,-9.14353 5.36352,-11.26291 l 9.088177,-6.70414 12.46521,-2.19 c 31.07129,-0.17739 62.24975,-0.41231 91.72605,0.44695"
+       id="path54543"
+       sodipodi:nodetypes="cccccc" />
+    <ellipse
+       style="fill:#ff0000;stroke:#f70000;stroke-width:0.264583;stroke-dasharray:0.264583, 0.264583"
+       id="path55757"
+       cx="150.89809"
+       cy="101.93391"
+       rx="9.5599661"
+       ry="9.4081211" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 150.92291,101.6434 54.4293,125.10782"
+       id="path55872"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 76.926278,142.181 25.377352,0.17878 0.0993,-18.01175"
+       id="path56148"
+       sodipodi:nodetypes="ccc" />
+    <ellipse
+       style="fill:#ff0000;stroke:#f70000;stroke-width:0.264583;stroke-dasharray:0.264583, 0.264583"
+       id="path56427"
+       cx="54.081676"
+       cy="177.66812"
+       rx="7.8962855"
+       ry="7.8214684" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 54.081686,177.22119 79.806687,104.59321"
+       id="path56462"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="12.812407"
+       y="192.14905"
+       id="text79027"><tspan
+         sodipodi:role="line"
+         id="tspan79025"
+         style="stroke-width:0.264583"
+         x="12.812407"
+         y="192.14905">In this diagram we see the limits for the range of incoming</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="12.812407"
+         y="200.08655"
+         id="tspan81691">vectors.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="12.812407"
+         y="208.02405"
+         id="tspan151033">If the ball is at less than EFy and vy is positive OR the ball</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="12.812407"
+         y="215.96155"
+         id="tspan151041">is at less than DEx and vx is positive, check whether the</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="12.812407"
+         y="223.89905"
+         id="tspan151043">intersect lies within DE or EF</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="104.3398"
+       y="125.55477"
+       id="text91353"><tspan
+         sodipodi:role="line"
+         id="tspan91351"
+         style="stroke-width:0.264583"
+         x="104.3398"
+         y="125.55477">A</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="77.720886"
+       y="147.32082"
+       id="text98177"><tspan
+         sodipodi:role="line"
+         id="tspan98175"
+         style="stroke-width:0.264583"
+         x="77.720886"
+         y="147.32082">B</tspan></text>
+    <ellipse
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-opacity:1"
+       id="path99871"
+       cx="101.78603"
+       cy="113.74265"
+       rx="9.2619934"
+       ry="9.720973" />
+    <ellipse
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-opacity:1"
+       id="path100298"
+       cx="67.664276"
+       cy="141.08598"
+       rx="7.9707823"
+       ry="7.6650491" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="133.12282"
+       y="128.50612"
+       id="text109136"><tspan
+         sodipodi:role="line"
+         id="tspan109134"
+         style="stroke-width:0.264583"
+         x="133.12282"
+         y="128.50612">L1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="76.885841"
+       y="158.95895"
+       id="text110988"><tspan
+         sodipodi:role="line"
+         id="tspan110986"
+         style="stroke-width:0.264583"
+         x="76.885841"
+         y="158.95895">L2</tspan></text>
+    <path
+       style="mix-blend-mode:normal;fill:none;stroke:#000000;stroke-width:0.265;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.795, 0.795;stroke-dashoffset:0.053;stroke-opacity:1;filter:url(#filter118243)"
+       d="m 77.174596,142.22569 c 0.743648,-21.03295 5.012438,-18.05903 24.334474,-17.74357"
+       id="path118129"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458299;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1.05833194,0.26458299;stroke-dashoffset:0"
+       d="m 76.677961,142.35977 0.794594,-18.27989 24.831105,-0.53635"
+       id="path118885"
+       sodipodi:nodetypes="ccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="81.048233"
+       y="121.21944"
+       id="text122498"><tspan
+         sodipodi:role="line"
+         id="tspan122496"
+         style="stroke-width:0.264583"
+         x="81.048233"
+         y="121.21944">C</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 101.16997,122.15758 0.49664,-9.16231 -35.856078,-0.26816 0.496608,28.78301 9.485477,-0.53631"
+       id="path129136"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="60.937389"
+       y="143.243"
+       id="text134477"><tspan
+         sodipodi:role="line"
+         id="tspan134475"
+         style="stroke-width:0.264583"
+         x="60.937389"
+         y="143.243">D</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="60.522839"
+       y="110.07926"
+       id="text137267"><tspan
+         sodipodi:role="line"
+         id="tspan137265"
+         style="stroke-width:0.264583"
+         x="60.522839"
+         y="110.07926">E</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="99.891068"
+       y="111.12906"
+       id="text142083"><tspan
+         sodipodi:role="line"
+         id="tspan142081"
+         style="stroke-width:0.264583"
+         x="99.891068"
+         y="111.12906">F</tspan></text>
+  </g>
+</svg>
