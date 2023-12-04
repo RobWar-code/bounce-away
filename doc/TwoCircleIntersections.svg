@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg236600"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   sodipodi:docname="TwoCircleIntersections.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview236602"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.57905443"
+     inkscape:cx="169.24143"
+     inkscape:cy="561.25984"
+     inkscape:window-width="1600"
+     inkscape:window-height="832"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs236597" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="65.577011"
+       y="13.094184"
+       id="text240403"><tspan
+         sodipodi:role="line"
+         id="tspan240401"
+         style="stroke-width:0.264583"
+         x="65.577011"
+         y="13.094184">Intersection of Circles</tspan></text>
+    <ellipse
+       style="fill:none;stroke:#0c0000;stroke-width:0.264583;stroke-dasharray:0.264583, 0.264583"
+       id="path242817"
+       cx="67.366325"
+       cy="58.133671"
+       rx="33.695786"
+       ry="33.185398" />
+    <ellipse
+       style="fill:none;stroke:#0c0000;stroke-width:0.264583;stroke-dasharray:0.264583, 0.264583"
+       id="path242819"
+       cx="110.44826"
+       cy="99.542793"
+       rx="42.163189"
+       ry="38.481651" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="62.699314"
+       y="58.762707"
+       id="text250185"><tspan
+         sodipodi:role="line"
+         id="tspan250183"
+         style="stroke-width:0.264583"
+         x="62.699314"
+         y="58.762707">C1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="108.4752"
+       y="105.94189"
+       id="text259111"><tspan
+         sodipodi:role="line"
+         id="tspan259109"
+         style="stroke-width:0.264583"
+         x="108.4752"
+         y="105.94189">C2</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 66.646207,60.30133 94.854317,39.920801"
+       id="path260942" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 107.9155,100.39197 140.44422,72.726305"
+       id="path260944" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="77.075264"
+       y="46.937778"
+       id="text265076"><tspan
+         sodipodi:role="line"
+         id="tspan265074"
+         style="stroke-width:0.264583"
+         x="77.075264"
+         y="46.937778">r1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="115.84447"
+       y="86.104614"
+       id="text271152"><tspan
+         sodipodi:role="line"
+         id="tspan271150"
+         style="stroke-width:0.264583"
+         x="115.84447"
+         y="86.104614">r2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="62.668419"
+       y="87.445801"
+       id="text278218"><tspan
+         sodipodi:role="line"
+         id="tspan278216"
+         style="stroke-width:0.264583"
+         x="62.668419"
+         y="87.445801">P1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="97.434357"
+       y="58.711147"
+       id="text281414"><tspan
+         sodipodi:role="line"
+         id="tspan281412"
+         style="stroke-width:0.264583"
+         x="97.434357"
+         y="58.711147">P2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="14.280951"
+       y="155.06593"
+       id="text284762"><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="14.280951"
+         y="155.06593"
+         id="tspan284764">The intersections of the two circles are at p1 and p2</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="14.280951"
+         y="163.00343"
+         id="tspan300316">(p1y - c1y)^2 = r1^2 - (p1x - c1x)^2 </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="14.280951"
+         y="170.94093"
+         id="tspan312696">(p1y - c2y)^2 = r2^2 - (p1x - c2x)^2</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="14.280951"
+         y="178.87843"
+         id="tspan347744" /><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="14.280951"
+         y="186.81593"
+         id="tspan362450" /></text>
+  </g>
+</svg>

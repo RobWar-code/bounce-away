@@ -25,7 +25,7 @@
      showgrid="false"
      inkscape:zoom="0.57905443"
      inkscape:cx="309.12465"
-     inkscape:cy="568.16766"
+     inkscape:cy="882.47317"
      inkscape:window-width="1600"
      inkscape:window-height="832"
      inkscape:window-x="0"
@@ -216,16 +216,61 @@
          style="stroke-width:0.264583"
          x="18.21282"
          y="213.20529"
-         id="tspan711375">Ay^2 - 2mx.Ay + 2Ay.mAx</tspan><tspan
+         id="tspan711375">Ay^2 - 2mx.Ay + 2Ay.mAx - 2Ay.Cy + m^2.x^2 - </tspan><tspan
          sodipodi:role="line"
          style="stroke-width:0.264583"
          x="18.21282"
          y="221.14279"
-         id="tspan547459" /><tspan
+         id="tspan25427">    2m^2.x.Ax + 2mxCy + m^2.Ax^2 - 2m.Ax.Cy - Cy^2 +</tspan><tspan
          sodipodi:role="line"
          style="stroke-width:0.264583"
          x="18.21282"
          y="229.08029"
+         id="tspan27361">     x^2 - 2xCx + Cx^2 - r^2 = 0</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="237.01779"
+         id="tspan55031">(m^2 + 1)x^2 - 2(m(Ay + mAx - Cy) + Cx)x + </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="244.95529"
+         id="tspan102441">   (Ay + mAx - Cy)^2 + Cx^2 - r^2</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="252.89279"
+         id="tspan6453"> </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="260.83029"
+         id="tspan103499">So the terms of the quadratic ax^2 + bx + c = 0 are:</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="268.76779"
+         id="tspan103501">a = m^2 + 1</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="276.70529"
+         id="tspan103503">b = -2Cx + 2m(Ay - mAx - Cy)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="284.64279"
+         id="tspan138347">c = (Ay - mAx - Cy)^2 + Cx^2 - r^2</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="292.58029"
+         id="tspan547459" /><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="18.21282"
+         y="300.51779"
          id="tspan450592" /></text>
   </g>
 </svg>

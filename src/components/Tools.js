@@ -1,6 +1,7 @@
-import {Row, Col, Form} from 'react-bootstrap';
+import {Row, Col, Form, Button} from 'react-bootstrap';
 import SoundToggle from './SoundToggle';
 import TraceToggle from './TraceToggle';
+import BallStepToggle from './BallStepToggle';
 import GLOBALS from '../constants';
 
 export default function Tools({
@@ -8,6 +9,10 @@ export default function Tools({
     setSoundEnabled, 
     traceOn,
     setTraceOn,
+    ballStepOn,
+    setBallStepOn,
+    ballStepClicked,
+    setBallStepClicked,
     ballTraverseTime, 
     setBallTraverseTime
 }) {
@@ -19,11 +24,17 @@ export default function Tools({
         setBallTraverseTime(traverseTime);
     }
 
+    const handleBallStepClicked = () => {
+        setBallStepClicked(1);
+    }
+
     return (
         <Row>
             <Col sm={12} md={4} className="text-center col-mid">
                 <SoundToggle soundEnabled={soundEnabled} setSoundEnabled={setSoundEnabled}/>
                 <TraceToggle traceOn={traceOn} setTraceOn={setTraceOn} />
+                <BallStepToggle ballStepOn={ballStepOn} setBallStepOn={setBallStepOn} />
+                <Button variant="success" onClick={handleBallStepClicked} title="Let the ball move">Move Ball</Button>
             </Col>
             <Col sm={12} md={4} className="text-center col-light">
                 Click the stage to move the bat to the cursor or drag and drop to move the bat

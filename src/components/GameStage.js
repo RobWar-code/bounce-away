@@ -18,7 +18,10 @@ function GameStage( {
     batMoved,
     setBatMoved,
     soundEnabled,
-    traceOn
+    traceOn,
+    ballStepOn,
+    ballStepClicked,
+    setBallStepClicked
 } ) {
     const maxStageWidth = 1200;
     const stageHeight = 400;
@@ -111,6 +114,9 @@ function GameStage( {
                 batVectorY={batVectorY}
                 soundEnabled={soundEnabled}
                 traceOn={traceOn}
+                ballStepOn={ballStepOn}
+                ballStepClicked={ballStepClicked}
+                setBallStepClicked={setBallStepClicked}
                 stageWidth={stageWidth} 
                 stageHeight={stageHeight} 
                 currentScore={currentScore}

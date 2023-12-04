@@ -1,0 +1,68 @@
+Corner Intersect
+
+	Contents
+		Introduction
+
+<h1>Introduction
+	This document describes the algorithm for working-out corner
+	bounces / intersections for the bat.
+
+<h1>Procedure
+	Check each corner in turn to whether the path of the last ball
+	position to the current (check the upper and lower radial points
+	perpendicular to the vector of motion as well as the centre of 
+	the circle) intersects the corner.
+
+	The right angles of the vector is dx/-dy, also -dx/dy
+	normalise ody,odx to 1, ie: dy = ody / (ody^2 + odx^2) dx = odx / (ody^2 + odx^2)
+	see function radialVectorPoints.
+
+	Take the radial vectors of both ball positions and check whether they intersect
+	the given corner. (see function lineCircleIntersects)
+
+	If the corner arc is intersected:
+
+		Determine the nearest point of intersection to the first position of the
+		ball.
+
+		The problem is then to determine the position of a circle such that it has
+		the same tangent as the radial vector and intersects the corner arc at
+		the same point as the radial vector.
+
+		Phrasing this more clearly:
+
+		I have two positions of a circle C1 of radius r whose centres (c1x, c1y), (c2x, c2y) 
+		are travelling along a vector vx, vy such that on the way, the circle intersects 
+		another circle C3 of radius r3 whose centre is at (c3x, c3y). The fact of the 
+		intersection is established by finding the tangent of C1 (at radial point R1 (r1x, r1y) 
+		of C1) that is parallel to vx, vy such that it crosses the C2 at the point i1x, i1y. 
+		What is the position c4x, c4y of C1 such that the radial point lies on the intersect
+		I1.
+
+		We can workout c4x, c4y as follows:
+
+			Take the vector parallel and opposite to the radial vector that gives rise to
+			vector the C1 - R (C4 - I1) ie:
+			dx/dy = -rdx/-rdy
+			c4x = i1x + rdy/rdx * r
+			c4y = i1y + rdx/rdy * r
+
+		We now take the centres of C4 and C3 and measure the vector between in order to
+		establish the translation along this of C4 to C5, at which point C5 is tangent
+		(at the point of contact) between C3 and C5.
+
+			dx = c4x - c3x
+			dy = c4y - c3y
+			dr = sqrt(dx^2 + dy^2)
+			sr = r + r3 - dr
+
+			We move along this vector for the distance sr from the centre c4.
+			c5x = c4x + dy/dx * sr
+			c5y = c4y + dx/dy * sr
+
+			The bounce is then the vector produced by the vector vx, vy and this
+			normal (dx,dy).
+
+		These things are written as a function: movingCircleToCircleContactPosition()
+
+

@@ -20,6 +20,8 @@ export default function GamePage() {
         JSON.parse(localStorage.getItem('soundEnabled')) || false
     );
     const [traceOn, setTraceOn] = useState(1);
+    const [ballStepOn, setBallStepOn] = useState(0);
+    const [ballStepClicked, setBallStepClicked] = useState(0);
 
     useEffect ( () => {
         if (ballCount <= 0 && !gameOver && !justLaunched) {
@@ -60,6 +62,9 @@ export default function GamePage() {
                             ballTraverseTime={ballTraverseTime}
                             soundEnabled={soundEnabled}
                             traceOn={traceOn}
+                            ballStepOn={ballStepOn}
+                            ballStepClicked={ballStepClicked}
+                            setBallStepClicked={setBallStepClicked}
                         />
                     </Col>
                 </Row>
@@ -68,6 +73,9 @@ export default function GamePage() {
                     setSoundEnabled={setSoundEnabled}
                     traceOn={traceOn}
                     setTraceOn={setTraceOn}
+                    ballStepOn={ballStepOn}
+                    setBallStepOn={setBallStepOn}
+                    setBallStepClicked={setBallStepClicked}
                     ballTraverseTime={ballTraverseTime}
                     setBallTraverseTime={setBallTraverseTime}
                 />

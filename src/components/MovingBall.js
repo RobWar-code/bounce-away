@@ -22,7 +22,10 @@ function MovingBall( {
   soundEnabled,
   traceOn,
   startGame,
-  setStartGame
+  setStartGame,
+  ballStepOn,
+  ballStepClicked,
+  setBallStepClicked
   } ){
   const app = useApp();
   const [x, setX] = useState(GLOBALS.ballDiameter / 2 + 1);
@@ -39,7 +42,266 @@ function MovingBall( {
   const doBounce = useCallback( (oldBallX, oldBallY, newX, newY, startVx, startVy) => {
 
     // Helper Functions
+    const lineCircleIntersects = (lineSpec, radius, centreX, centreY) => {
+      const ax = lineSpec[0].x;
+      const ay = lineSpec[0].y;
+      const bx = lineSpec[1].x;
+      const by = lineSpec[1].y;
+      const r = radius;
+      const cx = centreX;
+      const cy = centreY;
+  
+      // Get the gradient of the line
+      const m = (by - ay)/(bx - ax)
+      const baseY = ay - m * ax;
+      // Derive the factors of the quadratic
+      const a = m ** 2 + 1;
+      const b = -2 * cx + 2 * m * (ay - m * ax - cy);
+      const c = (ay - m * ax - cy) ** 2 + cx ** 2 - r ** 2;
+  
+      // Derive the values of x for ax^2 + bx + c
+      // Calculate discriminant
+      const discriminant = b * b - 4 * a * c;
+  
+      if (discriminant < 0) {
+          // No intersection
+          return [];
+      }
+      
+      // Find x coordinates of intersections
+      const x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+      const x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+      
+      // Find y coordinates of intersections
+      const y1 = m * x1 + baseY;
+      const y2 = m * x2 + baseY;
+      
+      // Determine whether the intersect is within the line segment
+      let do1 = false;
+      if (
+          ((ax <= bx && x1 >= ax && x1 <= bx) ||
+          (ax > bx && x1 <= ax && x1 >= bx)) &&
+          ((ay <= by && y1 >= ay && y1 <= by) ||
+          (ay > by && y1 <= ay && y1 >= by))
+      ) {
+          do1 = true;
+      }
+      let do2 = false;
+      if (discriminant > 0) {
+          if (
+              ((ax <= bx && x2 >= ax && x2 <= bx) ||
+              (ax > bx && x2 <= ax && x2 >= bx)) &&
+              ((ay <= by && y2 >= ay && y2 <= by) ||
+              (ay > by && y2 <= ay && y2 >= by))
+          ) {
+              do2 = true;
+          }
+      }
+      if (discriminant === 0 && do1) {
+          // One intersection
+          return [{ x: x1, y: y1 }];
+      }
+  
+      // Two intersections
+      if (do2 && do1) {
+          return [{ x: x1, y: y1 }, { x: x2, y: y2 }];
+      }
+      else if (do1) {
+          return [{x: x1, y: y1}];
+      }
+      else if (do2) {
+          return [{x: x2, y: y2}];
+      }
+      else return [];
+    }
+  
+    const radialVectorPoints = (cx, cy, r, dx, dy) => {
 
+      // derive the first vector at right angles to dx,dy
+      const dx1 = dy;
+      const dy1 = -dx;
+      // normalise the vectors and adjust for r
+      let x1 = r * dx1 / Math.sqrt(dx1 ** 2 + dy1 ** 2);
+      let y1 = r * dy1 / Math.sqrt(dx1 ** 2 + dy1 ** 2);
+      x1 = x1 + cx;
+      y1 = y1 + cy;
+  
+      // The second point
+      const dx2 = -dy
+      const dy2 = dx
+      // normalise the vectors and adjust for r
+      let x2 = r * dx2 / Math.sqrt(dx2 ** 2 + dy2 ** 2);
+      let y2 = r * dy2 / Math.sqrt(dx2 ** 2 + dy2 ** 2);
+      x2 = x2 + cx;
+      y2 = y2 + cy;
+  
+      return [{x: x1, y: y1}, {x: x2, y: y2}]
+    }
+  
+    const findNearestLineCircleIntersectToPoint = (lineSpec, c3x, c3y, r3, c1x, c1y, corner)  => {
+      let found = 0;
+      let p1x, p1y;
+      let i1 = lineCircleIntersects(lineSpec, r3, c3x, c3y);
+      if (i1.length !== 0) {
+          // Get the range for corner
+          let a1x,a2y;
+          switch (corner) {
+              case 0:
+                  a1x = c3x - r3;
+                  a2y = c3y - r3;
+                  break;
+              case 1:
+                  a1x = c3x + r3;
+                  a2y = c3y - r3;
+                  break;
+              case 2:
+                  a1x = c3x + r3;
+                  a2y = c3y + r3;
+                  break;
+              case 3:
+                  a1x = c3x - r3;
+                  a2y = c3y + r3;
+                  break;
+              default:
+                  console.log("erroneous corner number", corner);
+                  break;
+          }
+          // Determine whether either of the intersects lie on the arc and is nearest to c1
+          let i1x, i1y;
+          for (let j = 0; j < i1.length; j++) {
+              i1x = i1[j].x;
+              i1y = i1[j].y;
+              console.log("i1x, i1y:", i1x, i1y);
+              if ((corner === 0 && i1x >= a1x && i1x <= c3x && i1y <= c3y && i1y >= a2y) ||
+                  (corner === 1 && i1x <= a1x && i1x >= c3x && i1y <= c3y && i1y >= a2y) ||
+                  (corner === 2 && i1x <= a1x && i1x >= c3x && i1y >= c3y && i1y <= a2y) ||
+                  (corner === 3 && i1x >= a1x && i1x <= c3x && i1y >= c3y && i1y <= a2y)
+              ){
+                  if (i1.length === 0 || j === 0 || (j === 1 && found === 0)) {
+                      found = 1;
+                      p1x = i1x;
+                      p1y = i1y;
+                      console.log("p1x, p1y in test loop", p1x, p1y);
+                  }
+                  else {
+                      ++found;
+                  }
+                  
+              }
+          }
+          if (found === 2) {
+              // Find the nearest intersect to c1
+              let dc1x = p1x - c1x;
+              let dc1y = p1y - c1y;
+              let dc1 = dc1x ** 2 + dc1y ** 2;
+              let dc2x = i1x - c1x;
+              let dc2y = i1y - c1y;
+              let dc2 = dc2x ** 2 + dc2y ** 2;
+              if (dc2 < dc1) {
+                  p1x = i1x;
+                  p1y = i1y;
+              }
+          }
+      }
+      console.log("found, p1x, p1y", found, p1x, p1y);
+      return [found, p1x, p1y];
+    }
+
+    const movingCircleToArcContactPosition = (c1x, c1y, r, c2x, c2y, c3x, c3y, r3, corner)  => {
+      // Get the vector between C1, C2
+      const d1x = c2x - c1x;
+      const d1y = c2y - c1y;
+      // normalise
+      const v1x = d1x / Math.sqrt(d1x ** 2 + d1y ** 2);
+      const v1y = d1y / Math.sqrt(d1y ** 2 + d1x ** 2);
+  
+      // Get radial vector points
+      let rs = [];
+      rs[0] = radialVectorPoints(c1x, c1y, r, v1x, v1y);
+      rs[1] = radialVectorPoints(c2x, c2y, r, v1x, v1y);
+  
+      // Determine the trajectories and their intersects of C3
+      let found = 0;
+      let i1x, i1y, p1y, p1x, v1;
+      let rp = [];
+      for(let i = 0; i < 2; i++) {
+          let l1 = [{}, {}];
+          l1[0].x = rs[0][i].x;
+          l1[0].y = rs[0][i].y;
+          l1[1].x = rs[1][i].x;
+          l1[1].y = rs[1][i].y;
+  
+          let [gotPoint, p1x, p1y] = findNearestLineCircleIntersectToPoint(l1, c3x, c3y, r3, c1x, c1y, corner);
+          if (gotPoint) {
+              let h = {};
+              h.p1x = p1x;
+              h.p1y = p1y;
+              h.v1 = i;
+              rp.push(h);
+              ++found;
+          }
+      }
+      if (found === 2) {
+          i1x = rp[0].p1x;
+          i1y = rp[0].p1x;
+          p1x = rp[1].p1x;
+          p1y = rp[1].p1y;
+          // Find the nearest of the two points to c1
+          let dc1x = i1x - c1x;
+          let dc1y = i1y - c1y;
+          let dc1 = dc1x ** 2 + dc1y ** 2;
+          let dc2x = p1x - c1x;
+          let dc2y = p1y - c1y;
+          let dc2 = dc2x ** 2 + dc2y ** 2;
+          if (dc1 < dc2) {
+              p1x = i1x;
+              p1y = i1y;
+              v1 = rp[0].v1;
+          }
+          else {
+              v1 = rp[1].v1;
+          }
+      }
+      else if (found === 1) {
+          p1x = rp[0].p1x;
+          p1y = rp[0].p1y;
+          v1 = rp[0].v1;
+      }
+      if (found) {
+  
+          // Find the position of the circle that intersects p1 and on the same vector as p1 from c1
+          // since the centres of the circles and their radial points form a parallelogram we can simply
+          // adjust the coordinates of the centre accordingly.
+          const c4x = c1x + (p1x - rs[0][v1].x);
+          const c4y = c1y + (p1y - rs[0][v1].y);
+  
+          // Adjust position of c4 along the normal from c3 to yield c5
+          // get the normal
+          let n1x = c4x - c3x;
+          let n1y = c4y - c3y;
+          let rd = Math.sqrt(n1x ** 2 + n1y ** 2)
+          let overlap = r + r3 - rd;
+          let c5x = c4x + overlap * n1x/rd;
+          let c5y = c4y + overlap * n1y/rd;
+          let p5x = c5x - r * n1x/rd;
+          let p5y = c5y - r * n1y/rd;
+          // Check whether the point of contact is within the arc
+          if (
+              (corner === 0 && p5x >= c3x - r3 && p5x <= c3x && p5y <= c3y && p5y >= c3y - r3) ||
+              (corner === 1 && p5x >= c3x && p5x < c3x + r3 && p5y <= c3y && p5y >= c3y - r3) ||
+              (corner === 2 && p5x >= c3x && p5x < c3x + r3 && p5y >= c3y && p5y <= c3y + r3) ||
+              (corner === 3 && p5x >= c3x - r3 && p5x <= c3x && p5y >= c3y && p5y <= c3y + r3))
+          {
+              let hit = true;
+              return [hit, c5x, c5y, p5x, p5y];
+          }
+          else {
+              return [false, c5x, c5y, p5x, p5y];
+          }
+      }
+      else return [false, 0, 0, 0, 0];
+    }
+  
     const calculateReflection = (dx, dy, startVx, startVy) => {
       const bx = startVx;
       const by = startVy;
@@ -166,7 +428,7 @@ function MovingBall( {
       return [newBallX, newBallY, newBallVx, newBallVy, bounced];
     }
 
-    const doCornerBounce = (newX, newY, startVx, startVy) => {
+    const doCornerBounce = (oldX, oldY, newX, newY, startVx, startVy) => {
   
       let newVx = startVx;
       let newVy = startVy;
@@ -204,124 +466,21 @@ function MovingBall( {
           default:
             break;
         }
-  
-        // Get distance between centres of ball and arc
-        const dx = cornerArcX - newX;
-        const dy = cornerArcY - newY;
-        const dl = Math.sqrt((dx * dx) + (dy * dy));
-        let cornerBounce = false;
-        // Check whether there is a point of contact
-        if (
-            dl <= (GLOBALS.ballRadius + arcRadius) &&
-            dl >= (GLOBALS.ballRadius + arcRadius) * 0.2
-        ) {
-          // Check whether the contact distance is valid (or if its an overshoot)
-          switch (corner) {
-            case 0:
-              if (dx > 0 && dy > 0) cornerBounce = true;
-              break;
-            case 1:
-              if (dx < 0 && dy > 0) cornerBounce = true;
-              break;
-            case 2:
-              if (dx < 0 && dy < 0) cornerBounce = true;
-              break;
-            case 3:
-              if (dx > 0 && dy < 0) cornerBounce = true;
-              break;
-            default:
-              console.log("Error in corner number");
-              break;
-          }
-        }
+
+        let [cornerBounce, px, py, hx, hy] = movingCircleToArcContactPosition(oldX, oldY, GLOBALS.ballRadius, newX, newY, cornerArcX, cornerArcY, arcRadius, corner);
+        console.log("OldX, OldY: ", oldX, oldY);
+        console.log("CornerBounce", cornerBounce, px, py, hx, hy);
         
         if (cornerBounce) {
+          // Get distance between centres of ball and arc
+          const dx = px - cornerArcX;
+          const dy = py - cornerArcY;
             // Calculate the corner bounce
           let [nvx, nvy] = calculateReflection(dx, dy, newVx, newVy);
           newVx = nvx;
           newVy = nvy;
-          let deX, deY;
-          // Calculate the slope
-          let gx = newVy/newVx;
-          let gy = newVx/newVy;
-          // Position on edge of bat
-          // Find nearest edge
-          switch (corner) {
-            // Top Left
-            case 0:
-              deX = newX - (batX - 0.5 * GLOBALS.batWidth) - ballRadius;
-              deY = newY - (batY - 0.5 * GLOBALS.batHeight) - ballRadius;
-              if (newVx > 0 && newVy > 0) {
-                newVx = -newVx;
-                gx = newVy/newVx;
-                gy = newVx/newVy;
-              }
-              if (newVx <= 0) {
-                nx = newX - deX - 1;
-                ny = newY + gx * deX;
-              }
-              else {
-                ny = newY - deY - 1;
-                nx = newX + gy * deY;
-              }
-              break;
-            // Top Right
-            case 1:
-              deX = ballRadius + (batX + 0.5 * GLOBALS.batWidth) - newX;
-              deY = newY - (batY - 0.5 * GLOBALS.batHeight) - ballRadius;
-              if (newVx < 0 && newVy > 0) {
-                newVx = -newVx;
-                gx = newVy / newVx;
-                gy = newVx / newVy;
-              }
-              if (newVx >= 0) {
-                nx = newX + deX + 1;
-                ny = newY + gx * deX;
-              }
-              else {
-                ny = newY - deY - 1;
-                nx = newX + gy * deY;
-              }
-              break;
-            // Bottom Right
-            case 2:
-              deX = ballRadius + (batX + 0.5 * GLOBALS.batWidth) - newX;
-              deY = ballRadius + (batY + 0.5 * GLOBALS.batHeight) - newY;
-              if (newVx < 0 && newVy < 0) {
-                newVx = -newVx;
-                gx = newVy/newVx;
-                gy = newVx/newVy;
-              }
-              if (newVx >= 0) {
-                nx = newX + deX + 1;
-                ny = newY + gx * deX;
-              }
-              else {
-                ny = newY + deY + 1;
-                nx = newX + gy * deY;
-              }
-              break
-            // Bottom Left
-            case 3:
-              deX = newX - (batX - 0.5 * GLOBALS.batWidth) - ballRadius;
-              deY = ballRadius + (batY + 0.5 * GLOBALS.batHeight) - newY;
-              if (newVx > 0 && newVy < 0) {
-                newVx = -newVx;
-                gx = newVy/newVx;
-                gy = newVx/newVy;
-              }
-              if (newVx <= 0) {
-                nx = newX - deX - 1;
-                ny = newY + gx * deX;
-              }
-              else {
-                ny = newY + deY + 1;
-                nx = newX + gy * deY;
-              }
-              break;
-            default:
-              console.log("Corner Adjustment - bad corner");
-          }
+          nx = px;
+          ny = py;
           didBounce = true;
         }
         ++corner;
@@ -329,13 +488,14 @@ function MovingBall( {
       return [newVx, newVy, nx, ny, didBounce];
     }
 
+// End Helper Functions
 //  ----------------------------------------------------------------------------------------
-// Main doBounce Function
-
+// Main movingBall Function
     let bounced = false;
+
     // Check for curved corner bounces
     let batBounced = false;
-    let [nvx, nvy, nx, ny, didBounce] = doCornerBounce(newX, newY, startVx, startVy);
+    let [nvx, nvy, nx, ny, didBounce] = doCornerBounce(oldBallX, oldBallY, newX, newY, startVx, startVy);
     let newVx = nvx;
     let newVy = nvy;
     if (didBounce) {
@@ -437,6 +597,11 @@ function MovingBall( {
 
   useEffect(() => {
     const moveBall = () => {
+      console.log("Ball Step On:", ballStepOn, ballStepClicked);
+      if (ballStepOn && !ballStepClicked) {
+        return;
+      }
+      setBallStepClicked(0);
 
       if (ballRef.current.visible) {
         if (startGame) setStartGame(0);
@@ -529,6 +694,9 @@ function MovingBall( {
     vy, 
     doBounce,
     traceOn,
+    ballStepOn,
+    ballStepClicked,
+    setBallStepClicked,
     batX, 
     batY,
     isBatDragging,

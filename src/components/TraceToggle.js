@@ -3,7 +3,7 @@ import traceOnImg from '../assets/images/pathTraceOn.png';
 import traceOffImg from '../assets/images/pathTraceOff.png';
 
 
-export default function TraceTggle({traceOn, setTraceOn}) {
+export default function TraceToggle({traceOn, setTraceOn}) {
 
     function handleToggle() {
         traceOn ? setTraceOn(0) : setTraceOn(1);
