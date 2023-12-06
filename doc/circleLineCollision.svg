@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   sodipodi:docname="circleLineCollision.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:snap-global="false"
+     inkscape:zoom="0.57905443"
+     inkscape:cx="398.92623"
+     inkscape:cy="561.25984"
+     inkscape:window-width="1600"
+     inkscape:window-height="832"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="58.148636"
+       y="11.28632"
+       id="text2498"><tspan
+         sodipodi:role="line"
+         id="tspan2496"
+         style="stroke-width:0.264583"
+         x="58.148636"
+         y="11.28632">Circle to Line Collision</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 63.546611,68.212194 189.14225,67.363008"
+       id="path5187" />
+    <ellipse
+       style="fill:none;stroke:#0c0000;stroke-width:0.264583;stroke-dasharray:0.264583, 0.264583"
+       id="path5291"
+       cx="51.975311"
+       cy="31.518305"
+       rx="13.557771"
+       ry="13.050687" />
+    <ellipse
+       style="fill:none;stroke:#0c0000;stroke-width:0.264583;stroke-dasharray:0.264583, 0.264583"
+       id="path5291-3"
+       cx="161.17558"
+       cy="88.97052"
+       rx="13.557771"
+       ry="13.050687" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 52.074645,30.26688 162.22535,88.682106"
+       id="path5433"
+       sodipodi:nodetypes="cc" />
+    <ellipse
+       style="fill:none;stroke:#0c0000;stroke-width:0.264583;stroke-dasharray:0.264583, 0.264583"
+       id="path5291-6"
+       cx="95.591354"
+       cy="54.377266"
+       rx="13.557771"
+       ry="13.050687" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="45.966202"
+       y="29.194223"
+       id="text13373"><tspan
+         sodipodi:role="line"
+         id="tspan13371"
+         style="stroke-width:0.264583"
+         x="45.966202"
+         y="29.194223">c1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="162.07634"
+       y="92.570518"
+       id="text19565"><tspan
+         sodipodi:role="line"
+         id="tspan19563"
+         style="stroke-width:0.264583"
+         x="162.07634"
+         y="92.570518">c2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="94.982773"
+       y="48.680855"
+       id="text25281"><tspan
+         sodipodi:role="line"
+         id="tspan25279"
+         style="stroke-width:0.264583"
+         x="94.982773"
+         y="48.680855">c3</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 95.52905,53.731292 0.297957,14.61499"
+       id="path30071" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="90.612503"
+       y="63.161747"
+       id="text57821"><tspan
+         sodipodi:role="line"
+         id="tspan57819"
+         style="stroke-width:0.264583"
+         x="90.612503"
+         y="63.161747">r</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="185.92406"
+       y="61.527958"
+       id="text61169"><tspan
+         sodipodi:role="line"
+         id="tspan61167"
+         style="stroke-width:0.264583"
+         x="185.92406"
+         y="61.527958">L</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="13.374928"
+       y="114.93334"
+       id="text69411"><tspan
+         sodipodi:role="line"
+         id="tspan69409"
+         style="stroke-width:0.264583"
+         x="13.374928"
+         y="114.93334">1) Determine the intersect I of the vector from c1 to c2 and</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="13.374928"
+         y="122.87084"
+         id="tspan69413">the line L.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="13.374928"
+         y="130.80833"
+         id="tspan69415" /><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="13.374928"
+         y="138.74583"
+         id="tspan69417">2) We have the vector of c1c2 through c3 we can put:</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="13.374928"
+         y="146.68333"
+         id="tspan87737">dx/dr = vx/vy hence dx = dr * vx/vy</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="123.65877"
+       y="63.106636"
+       id="text75189"><tspan
+         sodipodi:role="line"
+         id="tspan75187"
+         style="stroke-width:0.264583"
+         x="123.65877"
+         y="63.106636">i</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="104.65061"
+       y="73.820984"
+       id="text81713"><tspan
+         sodipodi:role="line"
+         id="tspan81711"
+         style="stroke-width:0.264583"
+         x="104.65061"
+         y="73.820984">dx</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="74.960793"
+       y="40.343826"
+       id="text92441"><tspan
+         sodipodi:role="line"
+         id="tspan92439"
+         style="stroke-width:0.264583"
+         x="74.960793"
+         y="40.343826">v</tspan></text>
+  </g>
+</svg>

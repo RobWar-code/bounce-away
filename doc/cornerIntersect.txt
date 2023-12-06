@@ -8,7 +8,46 @@ Corner Intersect
 	bounces / intersections for the bat.
 
 <h1>Procedure
-	Check each corner in turn to whether the path of the last ball
+	The first step is to establish whether a vector of the ball
+	from some point oldX,oldY to newX,newY would (or has) intersected
+	the arc. In other words are there one or more points P along the vector
+	where the distance between testX, testY and arcX, arcY is less than
+	or equal to ballR + arcR, we could say what is the MINIMUM distance
+	between testX, testY and arcX, arcY on the vector?
+
+	Check with chatGPT:
+
+function findClosestPointAndDistance(ax, ay, lax, lay, lbx, lby) {
+    // Direction vector of the line
+    const dx = lbx - lax;
+    const dy = lby - lay;
+
+    // Vector from A to P (lax, lay)
+    const APx = ax - lax;
+    const APy = ay - lay;
+
+    // Projection of AP onto d
+    const t = (APx * dx + APy * dy) / (dx * dx + dy * dy);
+
+    // Closest point (cx, cy) on the line to (ax, ay)
+    const cx = lax + t * dx;
+    const cy = lay + t * dy;
+
+    // Calculate the distance
+    const distance = Math.sqrt((ax - cx) ** 2 + (ay - cy) ** 2);
+
+    return { closestPoint: { x: cx, y: cy }, distance };
+}
+
+
+
+<h2>Procedure - Abandonned.
+
+	This procedure relies on the radial vectors intersecting the arc. In 
+	practice the ball may be wider than the arc, so this will not necessarily
+	detect the intersection.
+
+	Check each corner in turn to check whether the path of the last ball
 	position to the current (check the upper and lower radial points
 	perpendicular to the vector of motion as well as the centre of 
 	the circle) intersects the corner.

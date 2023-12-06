@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   sodipodi:docname="circleCollision.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.57905443"
+     inkscape:cx="386.83755"
+     inkscape:cy="556.07898"
+     inkscape:window-width="1600"
+     inkscape:window-height="832"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <ellipse
+       style="fill:none;stroke:#0c0000;stroke-width:0.235216;stroke-dasharray:0.235216, 0.235216"
+       id="path846"
+       cx="99.174957"
+       cy="86.894318"
+       rx="32.791725"
+       ry="33.490555" />
+    <ellipse
+       style="fill:none;stroke:#0c0000;stroke-width:0.264583;stroke-dasharray:0.264583, 0.264583"
+       id="path950"
+       cx="148.117"
+       cy="34.177605"
+       rx="20.187666"
+       ry="18.391638" />
+    <ellipse
+       style="fill:none;stroke:#0c0000;stroke-width:0.210552;stroke-dasharray:0.210552, 0.210552"
+       id="path974"
+       cx="31.907513"
+       cy="116.83941"
+       rx="19.122122"
+       ry="18.932627" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 31.286751,116.52657 148.29083,32.948519"
+       id="path1089"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="27.214449"
+       y="122.47088"
+       id="text22952"><tspan
+         sodipodi:role="line"
+         id="tspan22950"
+         style="stroke-width:0.264583"
+         x="27.214449"
+         y="122.47088">c1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="148.4398"
+       y="33.171989"
+       id="text32870"><tspan
+         sodipodi:role="line"
+         id="tspan32868"
+         style="stroke-width:0.264583"
+         x="148.4398"
+         y="33.171989">c2</tspan></text>
+    <ellipse
+       style="fill:none;stroke:#0c0000;stroke-width:0.264583;stroke-dasharray:0.264583, 0.264583"
+       id="path37814"
+       cx="91.601463"
+       cy="73.173241"
+       rx="19.442747"
+       ry="17.877655" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="86.461426"
+       y="72.011185"
+       id="text44536"><tspan
+         sodipodi:role="line"
+         id="tspan44534"
+         style="stroke-width:0.264583"
+         x="86.461426"
+         y="72.011185">c3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="101.16142"
+       y="90.246407"
+       id="text52496"><tspan
+         sodipodi:role="line"
+         id="tspan52494"
+         style="stroke-width:0.264583"
+         x="101.16142"
+         y="90.246407">c4</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 91.079988,73.933046 9.833132,12.603747"
+       id="path54176" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="96.791161"
+       y="79.609192"
+       id="text69264"><tspan
+         sodipodi:role="line"
+         id="tspan69262"
+         style="stroke-width:0.264583"
+         x="96.791161"
+         y="79.609192">m</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="55.819847"
+       y="95.073364"
+       id="text90804"><tspan
+         sodipodi:role="line"
+         id="tspan90802"
+         style="stroke-width:0.264583"
+         x="55.819847"
+         y="95.073364">v</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="7.945509"
+       y="150.80696"
+       id="text107992"><tspan
+         sodipodi:role="line"
+         id="tspan107990"
+         style="stroke-width:0.264583"
+         x="7.945509"
+         y="150.80696">We have a circle c1 travelling along vector v to the position</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="7.945509"
+         y="158.74446"
+         id="tspan107994">c2 adjacent to a point c4 which the centre of circle. The </tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="7.945509"
+         y="166.68196"
+         id="tspan121916">position c3 is such that line beween c3 and c4 (m) is the</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="7.945509"
+         y="174.61946"
+         id="tspan126190">minimum (right-angle to v). See the notes for the algorithm</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="7.945509"
+         y="182.55696"
+         id="tspan134146">for this.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="113.04063"
+       y="184.4799"
+       id="text129974"><tspan
+         sodipodi:role="line"
+         id="tspan129972"
+         style="stroke-width:0.264583"
+         x="113.04063"
+         y="184.4799"> </tspan></text>
+    <ellipse
+       style="fill:none;stroke:#0c0000;stroke-width:0.210552;stroke-dasharray:0.210552, 0.210552"
+       id="path974-3"
+       cx="49.951832"
+       cy="103.3663"
+       rx="19.122122"
+       ry="18.932627" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 50.646188,104.73059 100.91312,86.536793"
+       id="path154316"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="46.658958"
+       y="105.35256"
+       id="text171186"><tspan
+         sodipodi:role="line"
+         id="tspan171184"
+         style="stroke-width:0.264583"
+         x="46.658958"
+         y="105.35256">c5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="79.930252"
+       y="100.49837"
+       id="text176506"><tspan
+         sodipodi:role="line"
+         id="tspan176504"
+         style="stroke-width:0.264583"
+         x="79.930252"
+         y="100.49837">R</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:6.35px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="7.522037"
+       y="191.56834"
+       id="text189580"><tspan
+         sodipodi:role="line"
+         id="tspan189578"
+         style="stroke-width:0.264583"
+         x="7.522037"
+         y="191.56834">We produce the circle with the centre at c5 on the vector v</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="7.522037"
+         y="199.50584"
+         id="tspan196640">such the distance R between c4 and c5 is radius r1 + radius r4.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="7.522037"
+         y="207.44334"
+         id="tspan206734">This is c5y = c3y - (R^2 - m^2) * sgn(v). This is then position</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="7.522037"
+         y="215.38084"
+         id="tspan219081">in which c1 collides with c4.</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="7.522037"
+         y="223.31834"
+         id="tspan193428" /></text>
+  </g>
+</svg>
