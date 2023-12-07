@@ -64,6 +64,9 @@ function MovingBall( {
     }
 
     const doBatEdgeBounce = (oldBallX, oldBallY, batX, batY, ballVx, ballVy, batVx, batVy) => {
+      let newBallX = oldBallX + ballVx;
+      let newBallY = oldBallY + ballVy;
+
       // Check whether the ball is in range of the bat
       if (
         (oldBallX + ballVx < batX - GLOBALS.batWidth / 2) ||
@@ -71,11 +74,8 @@ function MovingBall( {
         (oldBallX + ballVx > batX + GLOBALS.batWidth / 2) ||
         (oldBallY + ballVy > batY + GLOBALS.batHeight / 2)
       ) {
-        return [0,0,0,0,false];
+        return [newBallX, newBallY, ballVx, ballVy, false];
       }
-
-      let newBallX = oldBallX + ballVx;
-      let newBallY = oldBallY + ballVy;
 
       // Determine the relative vectors of the bat and the ball
       let dvx = ballVx - batVx;
@@ -88,20 +88,19 @@ function MovingBall( {
       const batHeight = GLOBALS.batHeight;
       const batWidth = GLOBALS.batWidth;
 
-
+      // Allow for an overlap with the corner arc
       const batTopEdgeY = batY - batHeight / 2;
-      const leftBatTopEdge = batX - batWidth / 2 + batHeight / 4;
-      const rightBatTopEdge = batX + batWidth / 2 - batHeight / 4;
+      const leftBatTopEdge = batX - batWidth / 2;
+      const rightBatTopEdge = batX + batWidth / 2;
       const batBottomEdgeY =  batY + batHeight / 2;
-      const leftBatBottomEdge = batX - batWidth / 2 + batHeight / 4;
-      const rightBatBottomEdge = batX + batWidth / 2 - batHeight / 4;
+      const leftBatBottomEdge = batX - batWidth / 2;
+      const rightBatBottomEdge = batX + batWidth / 2;
       const batLeftEdgeX = batX - batWidth / 2;
-      const topBatLeftEdge = batY - batHeight / 2 + batHeight / 4;
-      const bottomBatLeftEdge = batY + batHeight / 2 - batHeight / 4;
+      const topBatLeftEdge = batY - batHeight / 2;
+      const bottomBatLeftEdge = batY + batHeight / 2;
       const batRightEdgeX = batX + batWidth / 2;
-      const topBatRightEdge = batY - batHeight / 2 + batHeight / 4;
-      const bottomBatRightEdge = batY + batHeight / 2 - batHeight / 4;
-      const r = ballRadius;
+      const topBatRightEdge = batY - batHeight / 2;
+      const bottomBatRightEdge = batY + batHeight / 2;
 
       let bounced = false;
       let c3x, c3y, px, py;
@@ -119,7 +118,7 @@ function MovingBall( {
       else if (dvy < 0 && oldBallY > batBottomEdgeY && newBallY <= batBottomEdgeY) {
         [bounced, c3x, c3y, px, py] = circleToEdgeContact(oldBallX, 
           oldBallY, GLOBALS.ballRadius, newBallX, newBallY, 
-          leftBatBottomEdge, batBottomEdgeY, leftBatBottomEdge, batBottomEdgeY, 3);
+          leftBatBottomEdge, batBottomEdgeY, rightBatBottomEdge, batBottomEdgeY, 3);
         if (bounced) {
           newBallX = c3x;
           newBallY = c3y;
@@ -130,7 +129,7 @@ function MovingBall( {
       else if (dvx < 0 && oldBallX > batRightEdgeX && newBallX <= batRightEdgeX) {
         [bounced, c3x, c3y, px, py] = circleToEdgeContact(oldBallX, 
           oldBallY, GLOBALS.ballRadius, newBallX, newBallY, 
-          batRightEdgeX, bottomBatRightEdge, batRightEdgeX, bottomBatRightEdge, 2);
+          batRightEdgeX, topBatRightEdge, batRightEdgeX, bottomBatRightEdge, 2);
         if (bounced) {
           newBallX = c3x;
           newBallY = c3y;
@@ -225,30 +224,32 @@ function MovingBall( {
 
 // End Helper Functions
 //  ----------------------------------------------------------------------------------------
-// Main movingBall Function
+// Main doBounce Function
     let batBounced = false;
     let newVx, newVy;
     let bounced = false;
 
-    // Check for bat edge bounce
-    [newX, newY, newVx, newVy, bounced] = doBatEdgeBounce(oldBallX, 
-      oldBallY, batX, batY, startVx, startVy, batVectorX, batVectorY);
-
-    if (bounced) {
+    // Check for curved corner bounces
+    let [nvx, nvy, nx, ny, didBounce] = doCornerBounce(oldBallX, oldBallY, newX, newY, startVx, startVy);
+    newVx = nvx;
+    newVy = nvy;
+    if (didBounce) {
+      bounced = true;
       batBounced = true;
+      newX = nx;
+      newY = ny;
     }
+
     else {
 
-      // Check for curved corner bounces
-      let [nvx, nvy, nx, ny, didBounce] = doCornerBounce(oldBallX, oldBallY, newX, newY, startVx, startVy);
-      newVx = nvx;
-      newVy = nvy;
-      if (didBounce) {
-        bounced = true;
+      // Check for bat edge bounce
+      [newX, newY, newVx, newVy, bounced] = doBatEdgeBounce(oldBallX, 
+        oldBallY, batX, batY, startVx, startVy, batVectorX, batVectorY);
+
+      if (bounced) {
         batBounced = true;
-        newX = nx;
-        newY = ny;
       }
+
       // Basket Bounce
       else if (
         // Left Edge
