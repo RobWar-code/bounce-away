@@ -373,10 +373,10 @@ export function circleToEdgeContact(c1x, c1y, r, c2x, c2y, lax, lay, lbx, lby, e
     }
 
     if (
-        ((lax <= lbx && px >= lax && px <= lbx) ||
-        (lax > lbx && px <= lax && px >= lbx)) &&
-        ((lay <= lby && py >= lay && py <= lby) ||
-        (lay > lby && py <= lay && py >= lby))
+        (lax <= lbx && ((px >= lax && px <= lbx) || (ix >= lax && ix <= lbx))) ||
+        (lax > lbx && ((px <= lax && px >= lbx) || (ix <= lax && ix >= lbx))) ||
+        (lay <= lby && ((py >= lay && py <= lby) || (iy >= lay && iy <= lby))) ||
+        (lay > lby && ((py <= lay && py >= lby) || (iy <= lay && iy >= lby)))
     ) {
       found = true;  
     }

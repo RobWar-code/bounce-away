@@ -107,7 +107,7 @@ function MovingBall( {
 
       let bounced = false;
       let c3x, c3y, px, py;
-      if (dvy > 0 && oldBallY <= batTopEdgeY && newBallY > batTopEdgeY) {
+      if (dvy > 0 && oldBallY <= batTopEdgeY && newBallY >= batTopEdgeY) {
         [bounced, c3x, c3y, px, py] = circleToEdgeContact(oldBallX, 
           oldBallY, GLOBALS.ballRadius, newBallX, newBallY, 
           leftBatTopEdge, batTopEdgeY, rightBatTopEdge, batTopEdgeY, 1);
