@@ -25,8 +25,11 @@ function MovingBall( {
   startGame,
   setStartGame,
   ballStepOn,
+  ballStepUsed,
+  setBallStepUsed,
   ballStepClicked,
-  setBallStepClicked
+  setBallStepClicked,
+  setLastBallScore
   } ){
   const app = useApp();
   const [x, setX] = useState(GLOBALS.ballDiameter / 2 + 1);
@@ -200,11 +203,6 @@ function MovingBall( {
         }
 
         let [cornerBounce, px, py, hx, hy] = movingCircleToArcContactPosition(oldX, oldY, GLOBALS.ballRadius, newX, newY, cornerArcX, cornerArcY, arcRadius, corner);
-        console.log("CornerBounce", cornerBounce, px, py, hx, hy);
-        console.log("OldX, OldY: ", oldX, oldY);
-        console.log("newX, newY:", newX, newY);
-        console.log("newVx, newVy", newVx, newVy);
-        
         if (cornerBounce) {
           // Get distance between centres of ball and arc
           const dx = px - cornerArcX;
@@ -336,7 +334,6 @@ function MovingBall( {
 
   useEffect(() => {
     const moveBall = () => {
-      console.log("Ball Step On:", ballStepOn, ballStepClicked);
       if (ballStepOn && !ballStepClicked) {
         return;
       }
@@ -379,8 +376,16 @@ function MovingBall( {
           let score = Math.floor((1 - ratioS) * scoreRange + 0.5 * GLOBALS.baseScore);
           // Multiply for features
           if (!traceOn) score = score * 2
+          if (ballStepUsed) {
+            score = Math.floor(score / 4);
+            if (score < 1) score = 1;
+            if (!ballStepOn) {
+              setBallStepUsed(0);
+            }
+          }
 
           let newScore = currentScore + score;
+          setLastBallScore(score);
           setCurrentScore(newScore);
           setX(ballRadius + 1);
           setY(stageHeight / 2);
@@ -434,6 +439,8 @@ function MovingBall( {
     doBounce,
     traceOn,
     ballStepOn,
+    ballStepUsed,
+    setBallStepUsed,
     ballStepClicked,
     setBallStepClicked,
     batX, 
@@ -445,6 +452,7 @@ function MovingBall( {
     stageWidth, 
     stageHeight, 
     setBallMoved,
+    setLastBallScore,
     currentScore,
     setCurrentScore,
     ballCount,

@@ -20,8 +20,11 @@ function GameStage( {
     soundEnabled,
     traceOn,
     ballStepOn,
+    ballStepUsed,
+    setBallStepUsed,
     ballStepClicked,
-    setBallStepClicked
+    setBallStepClicked,
+    setLastBallScore
 } ) {
     const maxStageWidth = 1200;
     const stageHeight = 400;
@@ -115,10 +118,13 @@ function GameStage( {
                 soundEnabled={soundEnabled}
                 traceOn={traceOn}
                 ballStepOn={ballStepOn}
+                ballStepUsed={ballStepUsed}
+                setBallStepUsed={setBallStepUsed}
                 ballStepClicked={ballStepClicked}
                 setBallStepClicked={setBallStepClicked}
                 stageWidth={stageWidth} 
                 stageHeight={stageHeight} 
+                setLastBallScore={setLastBallScore}
                 currentScore={currentScore}
                 setCurrentScore={setCurrentScore}
                 ballCount={ballCount}

@@ -10,7 +10,7 @@ export default function TraceToggle({traceOn, setTraceOn}) {
     }
 
     return (
-        <Button variant="success" onClick={handleToggle}>
+        <Button variant="success" className="tool-button" onClick={handleToggle}>
             { traceOn ?
                 <img src={traceOnImg} alt="Trace On" title="Trace Off" width="60" height="60" /> :
                 <img src={traceOffImg} alt="Trace Off" title="Trace On" width="60" height="60" /> 

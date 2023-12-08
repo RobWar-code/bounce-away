@@ -1,15 +1,24 @@
 import {Button} from 'react-bootstrap';
+import ballStep from '../assets/images/ballStep.png';
+import ballStepOff from '../assets/images/ballStepOff.png';
 
-export default function BallStepToggle({ballStepOn, setBallStepOn}) {
+export default function BallStepToggle({ballStepOn, setBallStepOn, setBallStepUsed}) {
 
     function handleToggle() {
-        ballStepOn ? setBallStepOn(0) : setBallStepOn(1);
+        if (ballStepOn) {
+            setBallStepOn(0);
+        }
+        else {
+            setBallStepOn(1);
+            setBallStepUsed(1);
+        }
     }
 
     return (
-        <Button variant="success" onClick={handleToggle}>
+        <Button variant="success" className="tool-button" onClick={handleToggle}>
             { ballStepOn ?
-                "BALL STEP ON" : "BALL STEP OFF"
+                <img src={ballStep} alt="Ball Step On" title="Ball Step Mode On" width="60" height="60" />:
+                <img src={ballStepOff} alt="Ball Step Off" title="Ball Step Mode Off" width="60" height="60" />
             }
         </Button>
     )

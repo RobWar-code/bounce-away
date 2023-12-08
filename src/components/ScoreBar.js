@@ -5,7 +5,8 @@ function ScoreBar( {
     justLaunched, 
     setJustLaunched, 
     currentScore, 
-    setCurrentScore, 
+    setCurrentScore,
+    lastBallScore,
     ballCount, 
     setBallCount,
     gameOver, 
@@ -42,10 +43,13 @@ function ScoreBar( {
                 ) :
                 !gameOver ? (
                     <>
-                    <Col sm={12} md={6} className="text-center currentScore col-light">
+                    <Col sm={12} md={4} className="text-center currentScore col-light">
                         Balls Remaining: {ballCount}
                     </Col> 
-                    <Col sm={12} md={6} className="text-center currentScore col-exlight">
+                    <Col sm={12} md={4} className="text-center currentScore col-exlight">
+                        Last Ball Score: {lastBallScore}
+                    </Col>
+                    <Col sm={12} md={4} className="text-center currentScore col-light">
                         Current-Score: {currentScore}
                     </Col>
                     </>

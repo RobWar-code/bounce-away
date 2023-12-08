@@ -22,6 +22,8 @@ export default function GamePage() {
     const [traceOn, setTraceOn] = useState(1);
     const [ballStepOn, setBallStepOn] = useState(0);
     const [ballStepClicked, setBallStepClicked] = useState(0);
+    const [ballStepUsed, setBallStepUsed] = useState(0);
+    const [lastBallScore, setLastBallScore] = useState(0);
 
     useEffect ( () => {
         if (ballCount <= 0 && !gameOver && !justLaunched) {
@@ -35,6 +37,7 @@ export default function GamePage() {
             <ScoreBar
                 currentScore={currentScore} 
                 setCurrentScore={setCurrentScore}
+                lastBallScore={lastBallScore}
                 ballCount={ballCount} 
                 setBallCount={setBallCount}
                 gameOver={gameOver} 
@@ -64,7 +67,10 @@ export default function GamePage() {
                             traceOn={traceOn}
                             ballStepOn={ballStepOn}
                             ballStepClicked={ballStepClicked}
+                            ballStepUsed={ballStepUsed}
+                            setBallStepUsed={setBallStepUsed}
                             setBallStepClicked={setBallStepClicked}
+                            setLastBallScore={setLastBallScore}
                         />
                     </Col>
                 </Row>
@@ -75,6 +81,7 @@ export default function GamePage() {
                     setTraceOn={setTraceOn}
                     ballStepOn={ballStepOn}
                     setBallStepOn={setBallStepOn}
+                    setBallStepUsed={setBallStepUsed}
                     setBallStepClicked={setBallStepClicked}
                     ballTraverseTime={ballTraverseTime}
                     setBallTraverseTime={setBallTraverseTime}
