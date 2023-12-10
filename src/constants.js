@@ -8,6 +8,7 @@ const GLOBALS = {
     batWidth: 70,
     basketWidth: 70,
     basketHeight: 70,
+    flashHeight: 50,
     ballDiameter: 30,
     ballRadius: 15,
     ballsPerGame: 15,

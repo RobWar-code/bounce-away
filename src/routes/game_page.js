@@ -5,8 +5,10 @@ import GLOBALS from '../constants';
 import ScoreBar from '../components/ScoreBar';
 import GameStage from '../components/GameStage';
 import Tools from '../components/Tools';
+import IntroModal from '../components/IntroModal';
 
 export default function GamePage() {
+    const [introDue, setIntroDue] = useState(1);
     const [justLaunched, setJustLaunched] = useState(1);
     const [currentScore, setCurrentScore] = useState(0);
     const [ballCount, setBallCount] = useState(0);
@@ -86,6 +88,7 @@ export default function GamePage() {
                     ballTraverseTime={ballTraverseTime}
                     setBallTraverseTime={setBallTraverseTime}
                 />
+                {Boolean(introDue) && <IntroModal setIntroDue={setIntroDue} />}
             </Container>
         </>
     )

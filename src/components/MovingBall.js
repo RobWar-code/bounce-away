@@ -17,6 +17,7 @@ function MovingBall( {
   stageHeight,
   currentScore,
   setCurrentScore,
+  setGoalFlashOn,
   ballCount,
   setBallCount,
   ballTraverseTime,
@@ -397,6 +398,9 @@ function MovingBall( {
             let ding = new Audio(dingSound);
             ding.play();
           }
+          // Show Flash
+          setGoalFlashOn(1);
+          setTimeout(() => {setGoalFlashOn(0)}, 2000);
         }
 
         // Stop the ticker and hide the ball when it goes off the screen
@@ -460,7 +464,8 @@ function MovingBall( {
     startGame,
     setStartGame,
     startBallTraverseTime,
-    setStartBallTraverseTime
+    setStartBallTraverseTime,
+    setGoalFlashOn
   ]);
 
   const drawTrace = useCallback((g) => {

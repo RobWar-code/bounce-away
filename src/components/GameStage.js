@@ -4,6 +4,8 @@ import {useState, useEffect} from 'react';
 import MovingBall from './MovingBall'
 import Basket from '../assets/images/basket.png';
 import Bat from './Bat';
+import GoalFlash from '../assets/images/goalFlash.png';
+import GLOBALS from '../constants.js';
 
 function GameStage( {
     currentScore, 
@@ -39,6 +41,7 @@ function GameStage( {
     const [batVectorY, setBatVectorY] = useState(0);
     const [oldStageWidth, setOldStageWidth] = useState(1200);
     const [stageWidthAdjusted, setStageWidthAdjusted] = useState(0);
+    const [goalFlashOn, setGoalFlashOn] = useState(0);
 
     useEffect(() => {
         const handleResize = () => {
@@ -83,6 +86,9 @@ function GameStage( {
             onMouseDown={stageClicked}
         >
             <BasketSprite stageWidth={stageWidth} stageHeight={stageHeight} />
+            {Boolean(goalFlashOn) &&
+                <GoalFlashSprite stageWidth={stageWidth} stageHeight={stageHeight} />
+            }
             <Bat 
                 stageWidth={stageWidth} 
                 stageHeight={stageHeight}
@@ -127,6 +133,7 @@ function GameStage( {
                 setLastBallScore={setLastBallScore}
                 currentScore={currentScore}
                 setCurrentScore={setCurrentScore}
+                setGoalFlashOn={setGoalFlashOn}
                 ballCount={ballCount}
                 setBallCount={setBallCount}
                 ballTraverseTime={ballTraverseTime}
@@ -138,17 +145,37 @@ function GameStage( {
 }
 
 const BasketSprite = ({stageWidth, stageHeight}) => {
-    const basketWidth = 70;
-    const basketHeight = 70;
+    const basketWidth = GLOBALS.basketWidth;
+    const basketHeight = GLOBALS.basketHeight;
 
-    const basketRight = stageWidth - basketWidth;
+    const basketLeft = stageWidth - basketWidth;
     const basketTop = stageHeight/2 - basketHeight/2;
 
     return (
         <Sprite
             image={Basket}
-            x={basketRight}
+            x={basketLeft}
             y={basketTop}
+            anchor={{x:0, y:0}}
+        />
+    )
+}
+
+const GoalFlashSprite = ({stageWidth, stageHeight}) => {
+    const basketWidth = GLOBALS.basketWidth;
+    const basketHeight = GLOBALS.basketHeight;
+
+    const basketLeft = stageWidth - basketWidth;
+    const basketTop = stageHeight/2 - basketHeight/2;
+
+    const flashLeft = basketLeft;
+    const flashTop = basketTop - GLOBALS.flashHeight;
+
+    return (
+        <Sprite
+            image={GoalFlash}
+            x={flashLeft}
+            y={flashTop}
             anchor={{x:0, y:0}}
         />
     )
